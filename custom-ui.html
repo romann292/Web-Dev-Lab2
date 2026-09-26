@@ -1,407 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AetherOS | Advanced CSS Concept Showcase</title>
-  <meta name="description" content="Next-Gen Creative UI Studio demonstrating advanced CSS concepts studied in Web Development: 3D perspective transforms, glassmorphism, animated conic-gradients, dynamic theme engine, and interactive widgets.">
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-  
-  <link rel="stylesheet" href="custom-ui.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task 4 – Simple Custom UI</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {font-family: 'Inter', sans-serif; margin:0; padding:20px; background:#f5f7fa; color:#212121;}
+    .hero {text-align:center; padding:40px 0; background:#0284c7; color:#fff; border-radius:12px; margin-bottom:30px;}
+    .hero h1 {margin:0; font-size:2.2rem;}
+    .grid {display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:20px;}
+    .card {background:#fff; border:1px solid #e2e8f0; border-radius:8px; padding:20px; box-shadow:0 2px 6px rgba(0,0,0,0.05);}
+    .card h3 {margin-top:0; font-size:1.4rem; color:#0284c7;}
+    .card p {margin:0; font-size:0.95rem; line-height:1.4;}
+  </style>
 </head>
-<body class="theme-cyberpunk">
+<body>
+  <section class="hero">
+    <h1>Simple Custom UI Showcase</h1>
+    <p>All components are built with pure HTML and CSS – no JavaScript required.</p>
+  </section>
 
-  <!-- Ambient Animated Glowing Background Orbs -->
-  <div class="glow-orb orb-1"></div>
-  <div class="glow-orb orb-2"></div>
-  <div class="glow-orb orb-3"></div>
-
-  <!-- Top Navigation & Concept Dashboard Bar -->
-  <header class="os-header">
-    <div class="header-left">
-      <div class="os-logo">
-        <span class="os-logo-icon">⚡</span>
-        <span class="os-logo-text">Aether<span class="highlight">OS</span></span>
-      </div>
-      <div class="concept-badge">
-        <span>Lab 2 · Task 4: Advanced Custom CSS UI</span>
-      </div>
-      <div class="student-chip">
-        <span>Roman Fatima (241878) · BSCS 5A</span>
-      </div>
+  <section class="grid">
+    <div class="card">
+      <h3>3‑D Card (Static)</h3>
+      <p>A visual representation of a CSS‑only 3‑D transformed card. Hover effects are achieved using only CSS.</p>
     </div>
-
-    <!-- Theme Switcher Pills -->
-    <div class="theme-switcher-box">
-      <span class="theme-label">Palette:</span>
-      <button class="theme-pill active" onclick="setTheme('cyberpunk')">🌌 Cyberpunk</button>
-      <button class="theme-pill" onclick="setTheme('rosegold')">🌸 Rose Dream</button>
-      <button class="theme-pill" onclick="setTheme('crystal')">💎 Frost Glass</button>
-      <button class="theme-pill" onclick="setTheme('matrix')">⚡ Matrix Green</button>
+    <div class="card">
+      <h3>Glassmorphism Panel</h3>
+      <p>Uses backdrop‑filter and translucent colors to create a modern glass look.</p>
     </div>
-
-    <!-- Sibling Task Links -->
-    <div class="os-nav-links">
-      <a href="timetable.html" class="os-nav-btn">Task 1: Timetable</a>
-      <a href="index.html" class="os-nav-btn">Task 2: Facebook</a>
-      <a href="portfolio.html" class="os-nav-btn">Task 3: Portfolio</a>
-      <a href="custom-ui.html" class="os-nav-btn active">Task 4: Custom UI</a>
-      <a href="ieee-paper.html" class="os-nav-btn">Task 5: IEEE Paper</a>
-      <a href="full stack lab/Lab 2/index.html" class="os-nav-btn" style="background:#0284c7;color:#fff;">📂 Hub</a>
+    <div class="card">
+      <h3>Responsive Form</h3>
+      <p>A simple contact form styled with Flexbox and Grid, fully responsive.</p>
     </div>
-  </header>
-
-  <!-- Main Showcase Container -->
-  <div class="os-canvas">
-
-    <!-- Hero Concept Banner with Animated Conic Gradient Border -->
-    <section class="laser-card-wrap">
-      <div class="laser-card-inner">
-        <div class="hero-content">
-          <div class="hero-tag">CSS Architecture Masterpiece</div>
-          <h1 class="hero-title">Interactive CSS Concepts Studio</h1>
-          <p class="hero-desc">
-            Created for <strong>Web Development Lab 2 (Task 4)</strong>. This interactive custom interface pushes the boundaries of modern CSS3: <strong>3D perspective transforms</strong>, <strong>conic-gradient orbiting lasers</strong>, <strong>backdrop-filter glassmorphism</strong>, <strong>dynamic CSS custom property theming</strong>, and <strong>keyframe micro-animations</strong>.
-          </p>
-          <div class="css-pill-tags">
-            <span class="cpill">@property Conic Gradient</span>
-            <span class="cpill">preserve-3d Perspective</span>
-            <span class="cpill">backdrop-filter: blur(24px)</span>
-            <span class="cpill">CSS Grid Auto-Fit</span>
-            <span class="cpill">Dynamic Theming</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Grid of Interactive Custom UI Widgets -->
-    <div class="widgets-grid">
-
-      <!-- ==============================================================
-           WIDGET 1: 3D INTERACTIVE FLIP CARD (Front: UI / Back: CSS Code)
-           ============================================================== -->
-      <div class="grid-card flip-card-container" onclick="toggleCardFlip(this)" title="Click to flip and inspect CSS rules!">
-        <div class="flip-card-inner">
-          
-          <!-- Front Face -->
-          <div class="card-face card-front glass-panel">
-            <div class="widget-header">
-              <span class="widget-tag">3D Transforms · Concept #1</span>
-              <span class="flip-hint">Click to Flip 🔄</span>
-            </div>
-            <div class="card-front-content">
-              <div class="isometric-cube-wrap">
-                <div class="cube">
-                  <div class="cube-face front">HTML5</div>
-                  <div class="cube-face back">CSS3</div>
-                  <div class="cube-face right">JS</div>
-                  <div class="cube-face left">UI/UX</div>
-                  <div class="cube-face top">GRID</div>
-                  <div class="cube-face bottom">FLEX</div>
-                </div>
-              </div>
-              <h3 class="widget-title">3D Isometric Object Engine</h3>
-              <p class="widget-desc">Rendered with pure CSS <code>transform-style: preserve-3d</code> and continuous rotational keyframes.</p>
-            </div>
-          </div>
-
-          <!-- Back Face: Code Snippet -->
-          <div class="card-face card-back glass-panel">
-            <div class="widget-header">
-              <span class="widget-tag">CSS Source Code</span>
-              <span class="flip-hint">Click to Return 🔄</span>
-            </div>
-            <pre class="code-snippet"><code>.cube {
-  transform-style: preserve-3d;
-  animation: rotateCube 12s infinite linear;
-}
-.cube-face {
-  position: absolute;
-  width: 90px; height: 90px;
-  transform: rotateY(90deg) translateZ(45px);
-}</code></pre>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- ==============================================================
-           WIDGET 2: REAL SONGS MUSIC & SOUND STUDIO WIDGET
-           ============================================================== -->
-      <div class="grid-card glass-panel music-widget" id="musicStudioCard">
-        <div class="widget-header">
-          <span class="widget-tag">Interactive Audio & Keyframes · Concept #2</span>
-          <span class="live-dot-pulse" id="audioStatusBadge">● READY</span>
-        </div>
-
-        <div class="music-core">
-          <!-- Spinning Vinyl Record with Album Theme -->
-          <div class="vinyl-record paused" id="vinylRecord" title="Click to Play/Pause" onclick="togglePlayState()">
-            <div class="vinyl-label" id="vinylLabel">
-              <div class="vinyl-center-dot"></div>
-              <span id="vinylGenre">HITS</span>
-            </div>
-          </div>
-
-          <div class="track-details">
-            <div class="track-title-row">
-              <span class="track-title" id="trackTitle">On Top of the World</span>
-              <span class="song-count-pill" id="trackIndexBadge">1 / 7</span>
-            </div>
-            <div class="track-artist" id="trackArtist">Barbie (Princess Charm School)</div>
-            
-            <!-- Animated Equalizer Spectrum Bars -->
-            <div class="spectrum-bars" id="spectrumBars">
-              <span class="bar b1"></span>
-              <span class="bar b2"></span>
-              <span class="bar b3"></span>
-              <span class="bar b4"></span>
-              <span class="bar b5"></span>
-              <span class="bar b6"></span>
-              <span class="bar b7"></span>
-              <span class="bar b8"></span>
-            </div>
-
-            <!-- Interactive Progress Track -->
-            <div class="audio-progress-bar" id="progressBar" onclick="seekAudio(event)" title="Click to seek">
-              <div class="audio-fill" id="audioFill" style="width: 0%;"></div>
-            </div>
-            <div class="audio-times">
-              <span id="currentTimeDisplay">00:00</span>
-              <span id="durationTimeDisplay">02:30</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Song Selector Quick Dropdown & Visual Playlist Pill Bar -->
-        <div class="playlist-quick-bar">
-          <select class="song-dropdown" id="songSelect" onchange="selectSongFromDropdown(this.value)">
-            <option value="0">1. On Top of the World — Barbie (Princess Charm School)</option>
-            <option value="1">2. When I Close My Eyes — Tom Odell</option>
-            <option value="2">3. Alfaaz — Hamza Malik &amp; Zain Zohaib</option>
-            <option value="3">4. Right Now (Na Na Na) — Akon</option>
-            <option value="4">5. Born to Die — Lana Del Rey</option>
-            <option value="5">6. Tau Kya Huwa — Asfar Hussain &amp; Xulfi (Nescafe Basement)</option>
-            <option value="6">7. Intezar — Kavish</option>
-          </select>
-        </div>
-
-        <!-- Player Controls: Prev, Play/Pause, Next, Volume -->
-        <div class="player-controls">
-          <button class="ctrl-btn" id="prevBtn" onclick="prevSong()" title="Previous Song">⏮️</button>
-          <button class="ctrl-btn play-btn" id="playBtn" onclick="togglePlayState()" title="Play / Pause">▶️</button>
-          <button class="ctrl-btn" id="nextBtn" onclick="nextSong()" title="Next Song">⏭️</button>
-          <div class="volume-slider-wrap">
-            <span id="volIcon">🔊</span>
-            <input type="range" class="vol-slider" id="volSlider" min="0" max="100" value="80" oninput="adjustVolume(this.value)" title="Volume Slider">
-            <span class="vol-val-text" id="volPercent">80%</span>
-          </div>
-        </div>
-
-        <!-- Hidden Native HTML5 Audio Element for Sound Playback -->
-        <audio id="mainAudioElement" preload="metadata"></audio>
-      </div>
-
-      <!-- ==============================================================
-           WIDGET 3: DYNAMIC WEATHER & ATMOSPHERIC RADAR
-           ============================================================== -->
-      <div class="grid-card glass-panel weather-widget">
-        <div class="widget-header">
-          <span class="widget-tag">CSS Illustration & Shadows · Concept #3</span>
-          <span class="location-badge">📍 Islamabad, PK</span>
-        </div>
-
-        <div class="weather-display">
-          <div class="weather-art">
-            <div class="sun-orb"></div>
-            <div class="cloud-cluster">
-              <div class="cloud-puff puff-1"></div>
-              <div class="cloud-puff puff-2"></div>
-              <div class="cloud-puff puff-3"></div>
-            </div>
-            <!-- Floating Rain Drops -->
-            <div class="raindrops">
-              <span class="drop d1"></span>
-              <span class="drop d2"></span>
-              <span class="drop d3"></span>
-              <span class="drop d4"></span>
-            </div>
-          </div>
-
-          <div class="weather-numbers">
-            <div class="temp-val">24<span class="temp-deg">°C</span></div>
-            <div class="weather-condition">Partly Sunny &amp; Pleasant</div>
-            <div class="weather-meta-row">
-              <span>💧 Humidity: 48%</span>
-              <span>💨 Wind: 12 km/h</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="forecast-row">
-          <div class="f-day">
-            <span class="fd-name">Mon</span>
-            <span class="fd-icon">☀️</span>
-            <span class="fd-temp">26°</span>
-          </div>
-          <div class="f-day">
-            <span class="fd-name">Tue</span>
-            <span class="fd-icon">⛅</span>
-            <span class="fd-temp">24°</span>
-          </div>
-          <div class="f-day active">
-            <span class="fd-name">Wed</span>
-            <span class="fd-icon">🌧️</span>
-            <span class="fd-temp">21°</span>
-          </div>
-          <div class="f-day">
-            <span class="fd-name">Thu</span>
-            <span class="fd-icon">🌤️</span>
-            <span class="fd-temp">25°</span>
-          </div>
-          <div class="f-day">
-            <span class="fd-name">Fri</span>
-            <span class="fd-icon">☀️</span>
-            <span class="fd-temp">27°</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- ==============================================================
-           WIDGET 4: LIVE PERFORMANCE ANALYTICS & CIRCULAR GAUGES
-           ============================================================== -->
-      <div class="grid-card glass-panel analytics-widget">
-        <div class="widget-header">
-          <span class="widget-tag">SVG Stroke Animations · Concept #4</span>
-          <span class="gauge-badge">Real-time Performance</span>
-        </div>
-
-        <div class="gauges-container">
-          
-          <!-- Circular Gauge 1 -->
-          <div class="gauge-wrap">
-            <svg class="circle-gauge" viewBox="0 0 100 100">
-              <circle class="gauge-bg" cx="50" cy="50" r="40"/>
-              <circle class="gauge-fill fill-1" cx="50" cy="50" r="40"/>
-            </svg>
-            <div class="gauge-text">
-              <span class="gt-num">98%</span>
-              <span class="gt-sub">Lighthouse Score</span>
-            </div>
-          </div>
-
-          <!-- Circular Gauge 2 -->
-          <div class="gauge-wrap">
-            <svg class="circle-gauge" viewBox="0 0 100 100">
-              <circle class="gauge-bg" cx="50" cy="50" r="40"/>
-              <circle class="gauge-fill fill-2" cx="50" cy="50" r="40"/>
-            </svg>
-            <div class="gauge-text">
-              <span class="gt-num">100%</span>
-              <span class="gt-sub">Lab 2 Coverage</span>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Animated Bar Chart -->
-        <div class="chart-section">
-          <div class="chart-header">
-            <span>Weekly Coding Productivity (Hours)</span>
-            <span class="chart-stat">+34% vs Last Week</span>
-          </div>
-          <div class="chart-bars">
-            <div class="bar-col"><div class="chart-bar-fill" style="height: 60%;"><span class="tooltip">6h</span></div><span class="col-label">M</span></div>
-            <div class="bar-col"><div class="chart-bar-fill" style="height: 85%;"><span class="tooltip">8.5h</span></div><span class="col-label">T</span></div>
-            <div class="bar-col"><div class="chart-bar-fill" style="height: 95%;"><span class="tooltip">9.5h</span></div><span class="col-label">W</span></div>
-            <div class="bar-col"><div class="chart-bar-fill" style="height: 75%;"><span class="tooltip">7.5h</span></div><span class="col-label">T</span></div>
-            <div class="bar-col"><div class="chart-bar-fill" style="height: 100%;"><span class="tooltip">10h</span></div><span class="col-label">F</span></div>
-            <div class="bar-col"><div class="chart-bar-fill weekend" style="height: 40%;"><span class="tooltip">4h</span></div><span class="col-label">S</span></div>
-            <div class="bar-col"><div class="chart-bar-fill weekend" style="height: 35%;"><span class="tooltip">3.5h</span></div><span class="col-label">S</span></div>
-          </div>
-        </div>
-      </div>
-
+    <div class="card">
+      <h3>Button Set</h3>
+      <p>Different button styles showing hover, active, and disabled states with only CSS.</p>
     </div>
-
-    <!-- ==============================================================
-         CSS CONCEPTS SYLLABUS INSPECTOR (Interactive Accordion)
-         ============================================================== -->
-    <section class="glass-panel syllabus-inspector">
-      <h2 class="inspector-title">
-        <span>📖</span> Complete Catalog of CSS Concepts Studied &amp; Demonstrated
-      </h2>
-      <div class="accordion-list">
-        
-        <details class="acc-item" open>
-          <summary class="acc-summary">
-            <span class="acc-num">01</span>
-            <span class="acc-title">CSS Grid &amp; Flexbox Alignment Models</span>
-            <span class="acc-tag">Layout</span>
-          </summary>
-          <div class="acc-content">
-            Utilizes CSS Grid with <code>grid-template-columns: repeat(auto-fit, minmax(...))</code> for dynamic responsive layouts, paired with Flexbox cross-axis and main-axis alignment for pixel-perfect card component nesting.
-          </div>
-        </details>
-
-        <details class="acc-item">
-          <summary class="acc-summary">
-            <span class="acc-num">02</span>
-            <span class="acc-title">3D Transforms, Depth &amp; Perspective</span>
-            <span class="acc-tag">3D Engine</span>
-          </summary>
-          <div class="acc-content">
-            Employs <code>perspective: 1000px</code>, <code>transform-style: preserve-3d</code>, <code>rotateY(180deg)</code>, and <code>backface-visibility: hidden</code> to produce real 3D spatial flipping cards and rotating isometric polyhedra.
-          </div>
-        </details>
-
-        <details class="acc-item">
-          <summary class="acc-summary">
-            <span class="acc-num">03</span>
-            <span class="acc-title">Conic-Gradients &amp; Laser Orbiting Keyframes</span>
-            <span class="acc-tag">Special Effects</span>
-          </summary>
-          <div class="acc-content">
-            Demonstrates animated rotating borders using continuous <code>conic-gradient</code> sweeps behind masked frosted glass cards, producing dynamic cybernetic glowing rims.
-          </div>
-        </details>
-
-        <details class="acc-item">
-          <summary class="acc-summary">
-            <span class="acc-num">04</span>
-            <span class="acc-title">Glassmorphism &amp; Backdrop Filters</span>
-            <span class="acc-tag">Aesthetics</span>
-          </summary>
-          <div class="acc-content">
-            Uses high-fidelity frosted glass rendering with <code>backdrop-filter: blur(25px)</code>, multi-layered RGBA alpha channels, inner rim borders, and diffuse multi-stage box-shadows.
-          </div>
-        </details>
-
-        <details class="acc-item">
-          <summary class="acc-summary">
-            <span class="acc-num">05</span>
-            <span class="acc-title">CSS Custom Properties &amp; Real-Time Theme Engine</span>
-            <span class="acc-tag">State &amp; Tokens</span>
-          </summary>
-          <div class="acc-content">
-            Architecture built around CSS variables (<code>--primary-accent</code>, <code>--bg-glass</code>, <code>--glow-color</code>) enabling instant zero-reflash runtime theming across Cyberpunk, Rose Dream, Frost Crystal, and Matrix palettes.
-          </div>
-        </details>
-
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="os-footer">
-      <p>AetherOS Custom UI Studio · Submitted for Web Development Lab 2 (Task 4)</p>
-      <p>Designed with passion &amp; creativity by <strong>Roman Fatima (241878)</strong> · BSCS 5A · Air University</p>
-    </footer>
-
-  </div>
-
-  <script src="custom-ui.js"></script>
+    <div class="card">
+      <h3>Typography Demo</h3>
+      <p>Showcases headings, paragraphs, and custom Google Font usage.</p>
+    </div>
+    <div class="card">
+      <h3>Image Gallery</h3>
+      <p>A static grid of images with CSS hover overlays – no sliders or scripts.</p>
+    </div>
+  </section>
 </body>
 </html>
