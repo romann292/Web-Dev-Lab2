@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 2 Hub | Full Stack Web Development</title>
+  <meta name="description" content="Lab 2 Hub - Full Stack Web Development. All 5 tasks by Roman Fatima (241878) BSCS 5A, Air University.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0f0f1a;
+      color: #f1f5f9;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 60px 24px;
+    }
+
+    .hub-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .hub-badge {
+      display: inline-block;
+      padding: 6px 18px;
+      border-radius: 20px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #a855f7;
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      background: rgba(168, 85, 247, 0.08);
+      margin-bottom: 16px;
+    }
+
+    .hub-title {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, #a855f7, #06b6d4, #f472b6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+
+    .hub-subtitle {
+      font-size: 1rem;
+      color: rgba(241, 245, 249, 0.5);
+    }
+
+    .hub-subtitle strong {
+      color: rgba(241, 245, 249, 0.8);
+    }
+
+    .tasks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      max-width: 1100px;
+      width: 100%;
+      margin-bottom: 48px;
+    }
+
+    .task-card {
+      background: rgba(20, 20, 45, 0.6);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(168, 85, 247, 0.15);
+      border-radius: 20px;
+      padding: 28px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .task-card:hover {
+      border-color: var(--card-accent, #a855f7);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 40px var(--card-glow, rgba(168, 85, 247, 0.25));
+    }
+
+    .task-card:nth-child(1) { --card-accent: #06b6d4; --card-glow: rgba(6, 182, 212, 0.2); }
+    .task-card:nth-child(2) { --card-accent: #3b82f6; --card-glow: rgba(59, 130, 246, 0.2); }
+    .task-card:nth-child(3) { --card-accent: #f472b6; --card-glow: rgba(244, 114, 182, 0.2); }
+    .task-card:nth-child(4) { --card-accent: #a855f7; --card-glow: rgba(168, 85, 247, 0.2); }
+    .task-card:nth-child(5) { --card-accent: #22c55e; --card-glow: rgba(34, 197, 94, 0.2); }
+
+    .task-num {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--card-accent, #a855f7);
+    }
+
+    .task-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .task-desc {
+      font-size: 0.82rem;
+      color: rgba(241, 245, 249, 0.45);
+      line-height: 1.5;
+    }
+
+    .task-tech {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: auto;
+    }
+
+    .tech-tag {
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+      color: rgba(241, 245, 249, 0.5);
+    }
+
+    .hub-footer {
+      text-align: center;
+      font-size: 0.78rem;
+      color: rgba(241, 245, 249, 0.3);
+      line-height: 1.7;
+    }
+
+    .hub-footer strong {
+      color: #a855f7;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hub-header">
+    <div class="hub-badge">Full Stack Web Development</div>
+    <h1 class="hub-title">Lab 2 — Task Hub</h1>
+    <p class="hub-subtitle"><strong>Roman Fatima (241878)</strong> · BSCS 5A · Air University</p>
+  </header>
+
+  <div class="tasks-grid">
+
+    <a href="task1-timetable/index.html" class="task-card">
+      <span class="task-num">Task 1</span>
+      <h2 class="task-name">Class Timetable</h2>
+      <p class="task-desc">Design your class timetable using HTML + CSS.</p>
+      <div class="task-tech">
+        <span class="tech-tag">HTML</span>
+        <span class="tech-tag">CSS</span>
+        <span class="tech-tag">Tables</span>
+      </div>
+    </a>
+
+    <a href="task2-facebook/index.html" class="task-card">
+      <span class="task-num">Task 2</span>
+      <h2 class="task-name">Facebook Home Page</h2>
+      <p class="task-desc">Design home page of Facebook using HTML + CSS only.</p>
+      <div class="task-tech">
+        <span class="tech-tag">HTML</span>
+        <span class="tech-tag">CSS</span>
+        <span class="tech-tag">Layout</span>
+      </div>
+    </a>
+
+    <a href="task3-portfolio/index.html" class="task-card">
+      <span class="task-num">Task 3</span>
+      <h2 class="task-name">Portfolio</h2>
+      <p class="task-desc">Design your portfolio using HTML + CSS (2 column format).</p>
+      <div class="task-tech">
+        <span class="tech-tag">HTML</span>
+        <span class="tech-tag">CSS</span>
+        <span class="tech-tag">2-Column</span>
+      </div>
+    </a>
+
+    <a href="task4-custom-ui/index.html" class="task-card">
+      <span class="task-num">Task 4</span>
+      <h2 class="task-name">Custom UI Showcase</h2>
+      <p class="task-desc">Design a custom UI using the CSS concepts studied. The more interesting the UI, the more marks you get.</p>
+      <div class="task-tech">
+        <span class="tech-tag">3D Transforms</span>
+        <span class="tech-tag">Glassmorphism</span>
+        <span class="tech-tag">Animations</span>
+      </div>
+    </a>
+
+    <a href="task5-ieee-paper/index.html" class="task-card">
+      <span class="task-num">Task 5</span>
+      <h2 class="task-name">IEEE Paper Template</h2>
+      <p class="task-desc">Design an IEEE paper template using HTML + CSS.</p>
+      <div class="task-tech">
+        <span class="tech-tag">HTML</span>
+        <span class="tech-tag">CSS</span>
+        <span class="tech-tag">Semantic</span>
+      </div>
+    </a>
+
+  </div>
+
+  <footer class="hub-footer">
+    <p>Lab 2 · Full Stack Web Development · Due: September 25, 2026 at 11:59 PM</p>
+    <p>Submitted by <strong>Roman Fatima (241878)</strong> · BSCS 5A · Air University</p>
+  </footer>
+
+</body>
+</html>

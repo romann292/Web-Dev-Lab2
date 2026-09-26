@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IEEE Conference Paper Template | Web Development Lab 2 – Task 5</title>
+  <meta name="description" content="IEEE Conference Paper Template recreated in semantic HTML and CSS for Web Development Lab 2 Task 5 by Roman Fatima (241878) BSCS 5A, Air University.">
+  <link rel="stylesheet" href="ieee-paper.css">
+</head>
+<body>
+
+  <!-- Sleek Lab 2 Navigation Banner -->
+  <aside class="lab-nav-top" aria-label="Lab Navigation">
+    <div class="lab-nav-left">
+      <span class="lab-nav-badge">Lab 2 · Task 5</span>
+      <span class="lab-nav-title">IEEE Conference Template · <strong>Roman Fatima (241878)</strong> · BSCS 5A</span>
+    </div>
+    <div class="lab-nav-links">
+      <a href="timetable.html" class="nav-btn">Task 1: Timetable</a>
+      <a href="index.html" class="nav-btn">Task 2: Facebook</a>
+      <a href="portfolio.html" class="nav-btn">Task 3: Portfolio</a>
+      <a href="custom-ui.html" class="nav-btn">Task 4: Custom UI</a>
+      <a href="ieee-paper.html" class="nav-btn active">Task 5: IEEE Paper</a>
+      <a href="full stack lab/Lab 2/index.html" class="nav-btn" style="background:#0284c7;color:#fff;">📂 Hub</a>
+    </div>
+  </aside>
+
+  <article class="ieee-paper">
+
+    <!-- Real Research Paper Title -->
+    <header class="paper-header">
+      <h1 class="paper-title">Attention Is All You Need</h1>
+      <p class="paper-subtitle-note">Seminal Transformer Architecture Research Paper · Advances in Neural Information Processing Systems (NeurIPS / IEEE Xplore format)</p>
+    </header>
+
+    <!-- Real Authors Block (6 Primary Authors from Google Brain / Google Research / Univ. of Toronto) -->
+    <div class="authors-block">
+
+      <div class="author-col">
+        <p class="author-line"><strong>Ashish Vaswani</strong>*</p>
+        <p class="author-affil"><em>Google Brain</em></p>
+        <p class="author-detail">Mountain View, CA, USA</p>
+        <p class="author-detail">avaswani@google.com</p>
+      </div>
+
+      <div class="author-col">
+        <p class="author-line"><strong>Noam Shazeer</strong>*</p>
+        <p class="author-affil"><em>Google Brain</em></p>
+        <p class="author-detail">Mountain View, CA, USA</p>
+        <p class="author-detail">noam@google.com</p>
+      </div>
+
+      <div class="author-col">
+        <p class="author-line"><strong>Niki Parmar</strong>*</p>
+        <p class="author-affil"><em>Google Research</em></p>
+        <p class="author-detail">Mountain View, CA, USA</p>
+        <p class="author-detail">nikip@google.com</p>
+      </div>
+
+      <div class="author-col">
+        <p class="author-line"><strong>Jakob Uszkoreit</strong>*</p>
+        <p class="author-affil"><em>Google Research</em></p>
+        <p class="author-detail">Mountain View, CA, USA</p>
+        <p class="author-detail">usz@google.com</p>
+      </div>
+
+      <div class="author-col">
+        <p class="author-line"><strong>Llion Jones</strong>*</p>
+        <p class="author-affil"><em>Google Research</em></p>
+        <p class="author-detail">Tokyo, Japan</p>
+        <p class="author-detail">llion@google.com</p>
+      </div>
+
+      <div class="author-col">
+        <p class="author-line"><strong>Aidan N. Gomez</strong>*†</p>
+        <p class="author-affil"><em>Univ. of Toronto</em></p>
+        <p class="author-detail">Toronto, Canada</p>
+        <p class="author-detail">aidan@cs.toronto.edu</p>
+      </div>
+
+    </div>
+
+    <!-- Two Column Body -->
+    <div class="two-col-body">
+
+      <!-- Abstract -->
+      <section class="abstract-section">
+        <h2 class="run-in-head"><em>Abstract</em>—</h2>
+        <p class="abstract-text">The dominant sequence transduction models are based on complex recurrent or convolutional neural networks that include an encoder and a decoder. The best performing models also connect the encoder and decoder through an attention mechanism. We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely. Experiments on two machine translation tasks show these models to be superior in quality while being more parallelizable and requiring significantly less time to train. Our model achieves 28.4 BLEU on the WMT 2014 English-to-German translation task, improving over the existing best results, including ensembles, by over 2 BLEU. On the WMT 2014 English-to-French translation task, our model establishes a new single-model state-of-the-art BLEU score of 41.8 after training for 3.5 days on eight GPUs, a small fraction of the training costs of the best models from the literature.</p>
+      </section>
+
+      <!-- Keywords -->
+      <section class="keywords-section">
+        <h2 class="run-in-head"><em>Index Terms</em>—</h2>
+        <p class="keywords-text"><em>Transformer architecture, self-attention, deep learning, sequence transduction, natural language processing, neural machine translation.</em></p>
+      </section>
+
+      <!-- I. Introduction -->
+      <section class="body-section">
+        <h2 class="section-heading">I. Introduction</h2>
+        <p>Recurrent neural networks, long short-term memory [1] and gated recurrent [2] neural networks in particular, have been firmly established as state of the art approaches in sequence modeling and transduction problems such as language modeling and machine translation [3], [4]. Numerous efforts have since continued to push the boundaries of recurrent language models and encoder-decoder architectures [5], [6].</p>
+        <p>Recurrent models typically factor computation along the symbol positions of the input and output sequences. Aligning the positions to steps in computation time, they generate a sequence of hidden states <em>h<sub>t</sub></em>, as a function of the previous hidden state <em>h<sub>t−1</sub></em> and the input for position <em>t</em>. This inherently sequential nature precludes parallelization within training examples, which becomes critical at longer sequence lengths, as memory constraints limit batching across examples. Recent work has achieved significant improvements in computational efficiency through factorization tricks [7] and conditional computation [8], while also improving model performance in case of the latter. The fundamental constraint of sequential computation, however, remains.</p>
+        <p>Attention mechanisms have become an integral part of compelling sequence modeling and transduction models in various tasks, allowing modeling of dependencies without regard to their distance in the input or output sequences [2], [9]. In all but a few cases [10], however, such attention mechanisms are used in conjunction with a recurrent network.</p>
+        <p>In this work we propose the Transformer, a model architecture eschewing recurrence and instead relying entirely on an attention mechanism to draw global dependencies between input and output. The Transformer allows for significantly more parallelization and can reach a new state of the art in translation quality after being trained for as little as twelve hours on eight P100 GPUs.</p>
+      </section>
+
+      <!-- II. Model Architecture -->
+      <section class="body-section">
+        <h2 class="section-heading">II. Model Architecture</h2>
+        <p>Most competitive neural sequence transduction models have an encoder-decoder structure [3], [4], [11]. Here, the encoder maps an input sequence of symbol representations (<em>x</em><sub>1</sub>, ..., <em>x<sub>n</sub></em>) to a sequence of continuous representations <strong>z</strong> = (<em>z</em><sub>1</sub>, ..., <em>z<sub>n</sub></em>). Given <strong>z</strong>, the decoder then generates an output sequence (<em>y</em><sub>1</sub>, ..., <em>y<sub>m</sub></em>) of symbols one element at a time. At each step the model is auto-regressive [12], consuming the previously generated symbols as additional input when generating the next.</p>
+
+        <h3 class="subsection-heading"><em>A. Scaled Dot-Product Attention</em></h3>
+        <p>We call our particular attention &#8220;Scaled Dot-Product Attention&#8221;. The input consists of queries and keys of dimension <em>d<sub>k</sub></em>, and values of dimension <em>d<sub>v</sub></em>. We compute the dot products of the query with all keys, divide each by &radic;<span style="text-decoration:overline"><em>d<sub>k</sub></em></span>, and apply a softmax function to obtain the weights on the values.</p>
+        
+        <!-- Attention Equation -->
+        <div class="equation-block">
+          <p class="equation">Attention(<em>Q, K, V</em>) = softmax&#40; <sup><em>QK<sup>T</sup></em></sup>&frasl;<sub>&radic;<em>d<sub>k</sub></em></sub> &#41; <em>V</em></p>
+          <span class="eq-number">(1)</span>
+        </div>
+
+        <p>In practice, we compute the attention function on a set of queries simultaneously, packed together into a matrix <em>Q</em>. The keys and values are also packed together into matrices <em>K</em> and <em>V</em>.</p>
+
+        <h3 class="subsection-heading"><em>B. Multi-Head Attention</em></h3>
+        <p>Instead of performing a single attention function with <em>d</em><sub>model</sub>-dimensional keys, values and queries, we found it beneficial to linearly project the queries, keys and values <em>h</em> times with different, learned linear projections to <em>d<sub>k</sub></em>, <em>d<sub>k</sub></em> and <em>d<sub>v</sub></em> dimensions, respectively. On each of these projected versions of queries, keys and values we then perform the attention function in parallel, yielding <em>d<sub>v</sub></em>-dimensional output values. These are concatenated and once again projected, resulting in the final values.</p>
+
+        <!-- Multi-Head Equation -->
+        <div class="equation-block">
+          <p class="equation">MultiHead(<em>Q, K, V</em>) = Concat(head<sub>1</sub>, ..., head<sub><em>h</em></sub>)<em>W<sup>O</sup></em></p>
+          <span class="eq-number">(2)</span>
+        </div>
+
+        <!-- Table 1: Model Translation Performance -->
+        <div class="table-wrap">
+          <p class="table-title">Table I. Machine Translation Performance (BLEU Score)</p>
+          <table class="ieee-table">
+            <thead>
+              <tr>
+                <th class="table-head" colspan="3">Translation Benchmark Comparison</th>
+              </tr>
+              <tr>
+                <th class="table-col-head">Model Architecture</th>
+                <th class="table-col-head">EN-DE (BLEU)</th>
+                <th class="table-col-head">EN-FR (BLEU)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>ByteNet [10]</td>
+                <td>23.75</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td>GNMT + RL [5]</td>
+                <td>24.60</td>
+                <td>39.92</td>
+              </tr>
+              <tr>
+                <td>ConvS2S [6]</td>
+                <td>25.16</td>
+                <td>40.46</td>
+              </tr>
+              <tr>
+                <td><strong>Transformer (base model)</strong></td>
+                <td><strong>27.30</strong></td>
+                <td><strong>38.10</strong></td>
+              </tr>
+              <tr>
+                <td><strong>Transformer (big)</strong></td>
+                <td><strong>28.40</strong></td>
+                <td><strong>41.80</strong></td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="table-footnote"><sup>a</sup>Evaluated on newstest2014 test set under identical byte-pair encodings.</p>
+        </div>
+
+        <h3 class="subsection-heading"><em>C. Positional Encoding</em></h3>
+        <p>Since our model contains no recurrence and no convolution, in order for the model to make use of the order of the sequence, we must inject some information about the relative or absolute position of the tokens in the sequence. To this end, we add &#8220;positional encodings&#8221; to the input embeddings at the bottoms of the encoder and decoder stacks. We use sine and cosine functions of different frequencies:</p>
+
+        <!-- Positional Encoding Equation -->
+        <div class="equation-block">
+          <p class="equation"><em>PE</em><sub>(<em>pos</em>, 2<em>i</em>)</sub> = sin(<em>pos</em> / 10000<sup>2<em>i</em>/<em>d</em><sub>model</sub></sup>)</p>
+          <span class="eq-number">(3)</span>
+        </div>
+      </section>
+
+      <!-- III. Conclusion -->
+      <section class="body-section">
+        <h2 class="section-heading">III. Conclusion</h2>
+        <p>In this work, we presented the Transformer, the first sequence transduction model based entirely on attention, replacing the recurrent layers most commonly used in encoder-decoder architectures with multi-headed self-attention. For translation tasks, the Transformer can be trained significantly faster than architectures based on recurrent or convolutional layers. On both WMT 2014 English-to-German and WMT 2014 English-to-French translation tasks, we achieve a new state of the art.</p>
+      </section>
+
+      <!-- Acknowledgment -->
+      <section class="body-section">
+        <h2 class="component-heading">Acknowledgment</h2>
+        <p>We thank Nal Kalchbrenner, Stephan Gouws, and the Google Brain team for fruitful discussions, comments, and support. Work performed while Aidan Gomez was at the Google Brain Residency program.</p>
+      </section>
+
+      <!-- References -->
+      <section class="body-section references-section">
+        <h2 class="component-heading">References</h2>
+        <ol class="reference-list">
+          <li>S. Hochreiter and J. Schmidhuber, &#8220;Long short-term memory,&#8221; <em>Neural Computation</em>, vol. 9, no. 8, pp. 1735&#8211;1780, 1997.</li>
+          <li>K. Cho, B. van Merrienboer, C. Gulcehre, D. Bahdanau, F. Bougares, H. Schwenk, and Y. Bengio, &#8220;Learning phrase representations using RNN encoder-decoder for statistical machine translation,&#8221; in <em>Proc. EMNLP</em>, 2014, pp. 1724&#8211;1734.</li>
+          <li>I. Sutskever, O. Vinyals, and Q. V. Le, &#8220;Sequence to sequence learning with neural networks,&#8221; in <em>Advances in Neural Information Processing Systems (NeurIPS)</em>, 2014, pp. 3104&#8211;3112.</li>
+          <li>D. Bahdanau, K. Cho, and Y. Bengio, &#8220;Neural machine translation by jointly learning to align and translate,&#8221; <em>arXiv preprint arXiv:1409.0473</em>, 2014.</li>
+          <li>Y. Wu et al., &#8220;Google&#8217;s neural machine translation system: Bridging the gap between human and machine translation,&#8221; <em>arXiv preprint arXiv:1609.08144</em>, 2016.</li>
+          <li>J. Gehring, M. Auli, D. Grangier, D. Yarats, and Y. N. Dauphin, &#8220;Convolutional sequence to sequence learning,&#8221; <em>arXiv preprint arXiv:1705.03122</em>, 2017.</li>
+          <li>O. Kuchaiev and B. Ginsburg, &#8220;Factorization tricks for LSTM networks,&#8221; <em>arXiv preprint arXiv:1703.10722</em>, 2017.</li>
+          <li>N. Shazeer et al., &#8220;Outrageously large neural networks: The sparsely-gated mixture-of-experts layer,&#8221; <em>arXiv preprint arXiv:1701.06538</em>, 2017.</li>
+          <li>A. Vaswani et al., &#8220;Attention is all you need,&#8221; in <em>Advances in Neural Information Processing Systems (NeurIPS)</em>, vol. 30, 2017, pp. 5998&#8211;6008.</li>
+          <li>N. Kalchbrenner, L. Espeholt, K. Simonyan, A. v. d. Oord, A. Graves, and K. Kavukcuoglu, &#8220;Neural machine translation in linear time,&#8221; <em>arXiv preprint arXiv:1610.10099</em>, 2016.</li>
+        </ol>
+      </section>
+
+    </div><!-- /.two-col-body -->
+
+    <!-- IEEE Template Notice -->
+    <footer class="ieee-footer">
+      <p>IEEE conference templates contain guidance text for composing and formatting conference papers. Please ensure that all template text is removed from your conference paper prior to submission to the conference. Failure to remove template text from your paper may result in your paper not being published.</p>
+    </footer>
+
+    <!-- Lab Submission Credit -->
+    <div class="lab-credit">
+      <p>Recreated in semantic HTML &amp; CSS for <strong>Web Development Lab 2 (Task 5)</strong> by <strong>Roman Fatima (241878)</strong> · BSCS 5A · Air University</p>
+    </div>
+
+  </article>
+
+</body>
+</html>

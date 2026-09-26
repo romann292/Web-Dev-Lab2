@@ -1,0 +1,1371 @@
+/* ==========================================================================
+   FACEBOOK HOME PAGE - AUTHENTIC REPLICA STYLESHEET
+   Accurately styled with official Facebook Blue (#0866ff), layout metrics,
+   crisp typography, interactive states, and cute besties aesthetic content.
+   ========================================================================== */
+
+:root {
+  --fb-blue: #0866ff;
+  --fb-blue-hover: #075ce0;
+  --fb-blue-light: #e7f3ff;
+  
+  --bg-page: #f0f2f5;
+  --bg-card: #ffffff;
+  --bg-hover: #f2f2f2;
+  --bg-input: #f0f2f5;
+  --bg-comment: #f0f2f5;
+
+  --text-primary: #050505;
+  --text-secondary: #65676b;
+  --text-muted: #8a8d91;
+
+  --border-color: #e4e6eb;
+  --border-light: #ced0d4;
+
+  --badge-red: #e41e3f;
+
+  /* Cute Bestie Pastel Accents */
+  --insha-pink: #ec4899;
+  --aniqa-purple: #8b5cf6;
+  --sana-amber: #f59e0b;
+  --wania-teal: #10b981;
+
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-full: 9999px;
+
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.1);
+  --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.12);
+  --shadow-nav: 0 2px 4px rgba(0, 0, 0, 0.08);
+
+  --font-fb: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-fb);
+}
+
+body {
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  line-height: 1.34;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   ASSIGNMENT QUICK TASK BAR (Sticky Top Bar for Teacher / Reviewer)
+   ========================================================================== */
+.lab2-quick-bar {
+  background: #1e293b;
+  color: #ffffff;
+  padding: 8px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 0.85rem;
+  z-index: 2000;
+  position: relative;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.quick-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.lab2-pill {
+  background: #0866ff;
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  letter-spacing: 0.5px;
+}
+
+.quick-bar-title {
+  font-size: 0.84rem;
+  color: #e2e8f0;
+}
+
+.quick-bar-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.q-link {
+  color: #cbd5e1;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.08);
+  transition: all 0.15s ease;
+}
+
+.q-link:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+}
+
+.q-link.active {
+  background: #0866ff;
+  color: #ffffff;
+}
+
+.q-link.hub-btn {
+  background: #059669;
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   AUTHENTIC FACEBOOK HEADER (56px Height, 3 Sections)
+   ========================================================================== */
+.fb-header {
+  height: 56px;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: var(--shadow-nav);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Left Section: Logo & Search */
+.fb-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 280px;
+}
+
+.fb-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease;
+}
+
+.fb-logo:hover {
+  transform: scale(1.04);
+}
+
+.fb-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-input);
+  border-radius: var(--radius-full);
+  padding: 9px 14px;
+  width: 240px;
+  transition: all 0.2s ease;
+}
+
+.fb-search-bar:focus-within {
+  background: #ffffff;
+  box-shadow: 0 0 0 2px var(--fb-blue);
+}
+
+.fb-search-bar input {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 0.93rem;
+  color: var(--text-primary);
+  width: 100%;
+}
+
+.fb-search-bar input::placeholder {
+  color: var(--text-secondary);
+}
+
+/* Center Section: 5 Primary Nav Tabs */
+.fb-header-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  flex: 1;
+  max-width: 680px;
+}
+
+.nav-tab {
+  height: 100%;
+  width: 110px;
+  max-width: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  color: var(--text-secondary);
+  border-radius: var(--radius-md);
+  margin: 4px 2px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.nav-tab:hover {
+  background: var(--bg-hover);
+}
+
+.nav-tab.active {
+  color: var(--fb-blue);
+}
+
+.active-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: var(--fb-blue);
+  border-radius: 2px 2px 0 0;
+}
+
+/* Right Section: Action Circles & Profile */
+.fb-header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 280px;
+  justify-content: flex-end;
+}
+
+.circle-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg-input);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  position: relative;
+  transition: background 0.15s ease;
+}
+
+.circle-btn:hover {
+  background: #e4e6eb;
+}
+
+.fb-badge {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  background: var(--badge-red);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 10px;
+  border: 2px solid #ffffff;
+}
+
+.user-chip-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px 3px 3px;
+  border-radius: var(--radius-full);
+  transition: background 0.15s ease;
+}
+
+.user-chip-btn:hover {
+  background: var(--bg-hover);
+}
+
+.user-avatar-top {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-chip-name {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* ==========================================================================
+   MAIN 3-COLUMN LAYOUT
+   ========================================================================= */
+.fb-main-layout {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 16px 8px;
+}
+
+/* Left & Right Sidebars */
+.fb-sidebar-left,
+.fb-sidebar-right {
+  width: 340px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 72px;
+  height: calc(100vh - 80px);
+  overflow-y: auto;
+}
+
+.sidebar-scrollable {
+  padding: 8px;
+}
+
+.sidebar-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 10px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background 0.15s ease;
+  margin-bottom: 2px;
+}
+
+.sidebar-row:hover {
+  background: var(--bg-hover);
+}
+
+.sidebar-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.sidebar-row-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-row-title {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.sidebar-row-sub {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.sidebar-icon-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e4e6eb;
+}
+.sidebar-icon-circle.blue { background: #e7f3ff; }
+.sidebar-icon-circle.purple { background: #f3e8ff; }
+.sidebar-icon-circle.pink { background: #ffe4e6; }
+.sidebar-icon-circle.green { background: #d1fae5; }
+.sidebar-icon-circle.amber { background: #fef3c7; }
+.sidebar-icon-circle.red { background: #fee2e2; }
+
+.sidebar-divider {
+  height: 1px;
+  background: var(--border-color);
+  margin: 12px 10px;
+}
+
+.sidebar-heading {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  padding: 8px 10px 4px 10px;
+}
+
+.shortcut-thumb {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+.shortcut-thumb.blue-grad { background: linear-gradient(135deg, #0284c7, #1e40af); }
+.shortcut-thumb.pink-grad { background: linear-gradient(135deg, #ec4899, #be185d); }
+.shortcut-thumb.purple-grad { background: linear-gradient(135deg, #8b5cf6, #5b21b6); }
+
+.sidebar-footer-links {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  padding: 16px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* ==========================================================================
+   CENTER COLUMN (Feeds, Stories, Posts)
+   ========================================================================== */
+.fb-feed-center {
+  flex: 1;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 12px;
+}
+
+/* FB Cards Base */
+.fb-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  margin-bottom: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* ==========================================================================
+   STORIES TRAY
+   Requirements:
+   - Card 1: Roman's "Create story" tile (+ button)
+   - Friend stories: Insha, Aniqa, Sana, Wania
+   - NO Roman in friend stories!
+   ========================================================================== */
+.stories-tray {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.stories-tray::-webkit-scrollbar {
+  height: 6px;
+}
+.stories-tray::-webkit-scrollbar-thumb {
+  background: #ced0d4;
+  border-radius: 4px;
+}
+
+.story-tile {
+  width: 120px;
+  min-width: 120px;
+  height: 200px;
+  border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  user-select: none;
+}
+
+.story-tile:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.story-tile:hover .story-background-img {
+  transform: scale(1.04);
+}
+
+/* Create Story Tile */
+.create-story-tile {
+  background: var(--bg-card);
+  display: flex;
+  flex-direction: column;
+}
+
+.create-story-img-wrap {
+  height: 140px;
+  width: 100%;
+  overflow: hidden;
+  background: #000;
+}
+
+.create-story-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.2s ease;
+}
+
+.create-story-tile:hover .create-story-img-wrap img {
+  transform: scale(1.05);
+}
+
+.create-story-bottom {
+  height: 60px;
+  background: var(--bg-card);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 8px;
+  position: relative;
+}
+
+.create-story-plus-btn {
+  position: absolute;
+  top: -18px;
+  width: 36px;
+  height: 36px;
+  background: var(--fb-blue);
+  border: 4px solid var(--bg-card);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.create-story-text {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Friend Stories */
+.story-background-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: transform 0.3s ease;
+}
+
+.story-overlay-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 35%, rgba(0, 0, 0, 0.75) 100%);
+}
+
+.story-avatar-ring {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 3px solid var(--fb-blue);
+  background: #ffffff;
+  padding: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.story-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 1rem;
+}
+
+.insha-avatar { background: linear-gradient(135deg, #ec4899, #be185d); }
+.aniqa-avatar { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
+.sana-avatar { background: linear-gradient(135deg, #f59e0b, #d97706); }
+.wania-avatar { background: linear-gradient(135deg, #10b981, #059669); }
+.default-avatar { background: linear-gradient(135deg, #64748b, #334155); }
+
+.story-author-name {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  line-height: 1.2;
+  z-index: 2;
+}
+
+/* ==========================================================================
+   "WHAT'S ON YOUR MIND?" CREATE POST CARD
+   ========================================================================== */
+.create-post-card {
+  padding: 12px 16px 8px 16px;
+}
+
+.create-post-top-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.post-user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.mind-input-btn {
+  flex: 1;
+  background: var(--bg-input);
+  border-radius: var(--radius-full);
+  padding: 10px 16px;
+  text-align: left;
+  color: var(--text-secondary);
+  font-size: 0.93rem;
+  transition: background 0.15s ease;
+}
+
+.mind-input-btn:hover {
+  background: #e4e6eb;
+}
+
+.post-divider {
+  height: 1px;
+  background: var(--border-color);
+  margin: 12px 0 6px 0;
+}
+
+.create-post-actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.action-item-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: background 0.15s ease;
+}
+
+.action-item-btn:hover {
+  background: var(--bg-hover);
+}
+
+/* ==========================================================================
+   FEED POST CARDS (Authentic Facebook Post Component)
+   ========================================================================== */
+.post-card {
+  padding: 12px 0;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px 10px 16px;
+}
+
+.post-author-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar-ring-sm {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.post-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.post-author-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-author-name {
+  font-size: 0.93rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.25;
+}
+
+.post-author-name a:hover {
+  text-decoration: underline;
+}
+
+.post-tag-with {
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+.post-mood {
+  font-weight: 500;
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+}
+
+.post-timestamp-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.bullet {
+  font-weight: 700;
+}
+
+.post-menu-btn {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 50%;
+  transition: background 0.15s ease;
+}
+
+.post-menu-btn:hover {
+  background: var(--bg-hover);
+}
+
+/* Post Text Content */
+.post-text-body {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  line-height: 1.45;
+  padding: 0 16px 12px 16px;
+}
+
+/* Post Media Container */
+.post-media-container {
+  width: 100%;
+  background: #000;
+  max-height: 540px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.post-image {
+  width: 100%;
+  height: auto;
+  max-height: 540px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Engagement Summary */
+.post-engagement-stats {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.reactions-summary {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.reaction-bubble {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.reactions-count-text {
+  margin-left: 4px;
+}
+
+.comments-shares-summary {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Post Actions Bar */
+.post-actions-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: 4px 16px;
+  margin: 0 16px;
+}
+
+.post-action-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.post-action-btn:hover {
+  background: var(--bg-hover);
+}
+
+.post-action-btn.liked {
+  color: var(--fb-blue);
+}
+
+/* Comments Section */
+.post-comments-container {
+  padding: 12px 16px 4px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.comment-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.comment-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.comment-bubble {
+  background: var(--bg-comment);
+  border-radius: 18px;
+  padding: 8px 14px;
+  max-width: 88%;
+}
+
+.comment-author-name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.comment-body-text {
+  font-size: 0.88rem;
+  color: var(--text-primary);
+  line-height: 1.35;
+}
+
+/* Write a comment */
+.write-comment-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.write-comment-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.write-comment-box {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background: var(--bg-comment);
+  border-radius: var(--radius-full);
+  padding: 8px 12px;
+  gap: 8px;
+}
+
+.write-comment-box input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 0.88rem;
+  color: var(--text-primary);
+}
+
+.comment-input-icons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   RIGHT SIDEBAR: Sponsored, Birthdays & Contacts
+   ========================================================================== */
+.right-section {
+  padding: 4px 8px;
+}
+
+.right-heading {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+
+.sponsored-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  border-radius: var(--radius-md);
+  transition: background 0.15s ease;
+  margin-bottom: 8px;
+}
+
+.sponsored-item:hover {
+  background: var(--bg-hover);
+}
+
+.sponsored-thumbnail {
+  width: 90px;
+  height: 90px;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.sponsored-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sponsored-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.sponsored-domain {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+/* Birthday Card */
+.birthday-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  border-radius: var(--radius-md);
+  transition: background 0.15s ease;
+}
+
+.birthday-row:hover {
+  background: var(--bg-hover);
+}
+
+.birthday-gift-icon {
+  font-size: 1.6rem;
+}
+
+.birthday-text {
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+/* Contacts Header */
+.contacts-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.contacts-actions {
+  display: flex;
+  gap: 12px;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.contacts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.contact-item:hover {
+  background: var(--bg-hover);
+}
+
+.contact-avatar-wrap {
+  position: relative;
+  width: 36px;
+  height: 36px;
+}
+
+.contact-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.online-dot {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  background-color: #31a24c;
+  border: 2px solid var(--bg-card);
+  border-radius: 50%;
+}
+
+.contact-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.group-avatar-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #e4e6eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+/* ==========================================================================
+   STORY VIEWER MODAL
+   ========================================================================== */
+.story-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.88);
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+}
+
+.story-modal-box {
+  width: 380px;
+  max-width: 95vw;
+  height: 600px;
+  max-height: 90vh;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+  background: #111;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  color: #ffffff;
+  font-size: 1.3rem;
+  z-index: 10;
+  background: rgba(0,0,0,0.5);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.story-progress-bar {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.3);
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  right: 12px;
+  border-radius: 2px;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.story-progress-fill {
+  height: 100%;
+  background: #ffffff;
+  width: 0%;
+  transition: width 0.1s linear;
+}
+
+.story-modal-header {
+  position: absolute;
+  top: 20px;
+  left: 16px;
+  z-index: 10;
+}
+
+.story-modal-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal-author-name {
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+}
+
+.modal-story-time {
+  color: #d1d5db;
+  font-size: 0.72rem;
+}
+
+.story-modal-media {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+}
+
+.story-modal-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.story-modal-caption {
+  position: absolute;
+  bottom: 24px;
+  left: 16px;
+  right: 16px;
+  background: rgba(0, 0, 0, 0.65);
+  color: #ffffff;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* ==========================================================================
+   MINI CHAT DOCK (Bottom Right Messenger Box)
+   ========================================================================== */
+.chat-dock {
+  position: fixed;
+  bottom: 0;
+  right: 70px;
+  width: 320px;
+  background: var(--bg-card);
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0 -2px 16px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--border-color);
+  border-bottom: none;
+  z-index: 2500;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-header {
+  background: #ffffff;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border-color);
+  border-radius: 10px 10px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chat-user-info {
+  display: flex;
+  align-items: center;
+}
+
+.chat-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.chat-btn {
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.chat-messages {
+  height: 250px;
+  padding: 12px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #f8fafc;
+}
+
+.chat-bubble {
+  max-width: 80%;
+  padding: 8px 12px;
+  border-radius: 18px;
+  font-size: 0.85rem;
+  line-height: 1.35;
+}
+
+.chat-bubble.received {
+  background: #e4e6eb;
+  color: var(--text-primary);
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+}
+
+.chat-bubble.sent {
+  background: var(--fb-blue);
+  color: #ffffff;
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+
+.chat-input-row {
+  display: flex;
+  align-items: center;
+  padding: 8px 10px;
+  border-top: 1px solid var(--border-color);
+  background: #ffffff;
+  gap: 8px;
+}
+
+.chat-input-row input {
+  flex: 1;
+  border: none;
+  background: var(--bg-input);
+  padding: 8px 12px;
+  border-radius: var(--radius-full);
+  outline: none;
+  font-size: 0.85rem;
+}
+
+.chat-send-btn {
+  background: var(--fb-blue);
+  color: #ffffff;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+}
+
+/* ==========================================================================
+   RESPONSIVE LAYOUT QUERIES
+   ========================================================================== */
+@media (max-width: 1200px) {
+  .fb-sidebar-left {
+    width: 80px;
+  }
+  .sidebar-row-title, .sidebar-row-sub, .sidebar-heading, .sidebar-footer-links {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .fb-sidebar-right {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .fb-sidebar-left {
+    display: none;
+  }
+  .fb-search-bar {
+    width: 40px;
+    padding: 10px;
+  }
+  .fb-search-bar input {
+    display: none;
+  }
+  .user-chip-name {
+    display: none;
+  }
+  .fb-header-left, .fb-header-right {
+    min-width: auto;
+  }
+}

@@ -1,0 +1,502 @@
+/* ================================================================
+   IEEE Conference Paper Template — CSS
+   style.css — Created for Web Development Lab 2 (Task 5)
+   Student: Roman Fatima (241878) · BSCS 5A · Air University
+   
+   Faithfully reproduces the IEEE US-letter conference paper layout:
+   - 8.5" × 11" page dimensions
+   - Two-column body text (3.25" columns, 0.33" gutter)
+   - Times New Roman equivalent font family
+   - IEEE-standard margins, spacing, and heading hierarchy
+   ================================================================ */
+
+/* ── Reset & Base ── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10pt;
+}
+
+body {
+  font-family: 'Times New Roman', Times, 'Liberation Serif', Georgia, serif;
+  background: #e8e8e8;
+  color: #000;
+  line-height: 1.15;
+  -webkit-font-smoothing: auto;
+}
+
+/* ── Lab Navigation Top Banner ── */
+.lab-nav-top {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #0f172a;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #f1f5f9;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+.lab-nav-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.lab-nav-badge {
+  background: linear-gradient(135deg, #10b981, #06b6d4);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.lab-nav-title {
+  font-size: 0.88rem;
+  color: #cbd5e1;
+}
+
+.lab-nav-title strong {
+  color: #f8fafc;
+}
+
+.lab-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.nav-btn {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #94a3b8;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  transition: all 0.2s ease;
+}
+
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.nav-btn.active {
+  background: #10b981;
+  color: #ffffff;
+  border-color: #10b981;
+}
+
+/* ── Paper Container (US Letter: 8.5in × 11in) ── */
+.ieee-paper {
+  width: 8.5in;
+  min-height: 11in;
+  margin: 20px auto;
+  padding: 0.75in 0.63in 1in 0.63in;
+  background: #fff;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ── Paper Header (Title) ── */
+.paper-header {
+  text-align: center;
+  margin-bottom: 12pt;
+}
+
+.paper-title {
+  font-size: 24pt;
+  font-weight: normal;
+  line-height: 1.15;
+  margin-bottom: 4pt;
+}
+
+.paper-subtitle-note {
+  font-size: 8pt;
+  line-height: 1.3;
+  margin-top: 2pt;
+}
+
+.style-note {
+  font-size: 8pt;
+  font-style: italic;
+  color: #444;
+  font-weight: normal;
+}
+
+/* ── Authors Block ── */
+.authors-block {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6pt 12pt;
+  text-align: center;
+  margin-bottom: 18pt;
+  padding-bottom: 6pt;
+}
+
+.author-col {
+  font-size: 9pt;
+  line-height: 1.35;
+}
+
+.author-line {
+  font-size: 9pt;
+  margin-bottom: 1pt;
+}
+
+.author-line-label {
+  display: none; /* Hide label prefix for clean rendering */
+}
+
+.author-affil {
+  font-size: 9pt;
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.author-detail {
+  font-size: 9pt;
+  line-height: 1.3;
+}
+
+sup {
+  font-size: 0.65em;
+  vertical-align: super;
+  line-height: 0;
+}
+
+sub {
+  font-size: 0.65em;
+  vertical-align: sub;
+  line-height: 0;
+}
+
+/* ── Two-Column Body Layout ── */
+.two-col-body {
+  column-count: 2;
+  column-gap: 0.33in;
+  column-rule: none;
+  text-align: justify;
+  font-size: 10pt;
+  line-height: 1.15;
+  orphans: 3;
+  widows: 3;
+}
+
+/* ── Abstract ── */
+.abstract-section {
+  break-inside: avoid;
+  margin-bottom: 10pt;
+}
+
+.run-in-head {
+  display: inline;
+  font-size: 9pt;
+  font-weight: bold;
+}
+
+.abstract-text {
+  display: inline;
+  font-size: 9pt;
+  font-style: italic;
+}
+
+.critical-note {
+  font-size: 9pt;
+  margin-top: 6pt;
+}
+
+/* ── Keywords ── */
+.keywords-section {
+  margin-bottom: 12pt;
+  break-inside: avoid;
+}
+
+.keywords-text {
+  display: inline;
+  font-size: 9pt;
+}
+
+/* ── Section Headings (Heading 1 — Uppercase Roman Numerals style) ── */
+.body-section {
+  margin-bottom: 10pt;
+}
+
+.section-heading {
+  font-size: 10pt;
+  font-weight: normal;
+  text-align: center;
+  text-transform: uppercase;
+  margin-top: 12pt;
+  margin-bottom: 6pt;
+  font-variant: small-caps;
+}
+
+/* ── Subsection Headings (Heading 2 — Italic) ── */
+.subsection-heading {
+  font-size: 10pt;
+  font-weight: normal;
+  font-style: italic;
+  margin-top: 8pt;
+  margin-bottom: 4pt;
+}
+
+/* ── Component Headings (Acknowledgment, References — Heading 5) ── */
+.component-heading {
+  font-size: 10pt;
+  font-weight: normal;
+  text-align: center;
+  text-transform: uppercase;
+  font-variant: small-caps;
+  margin-top: 12pt;
+  margin-bottom: 6pt;
+}
+
+/* ── Body Paragraphs ── */
+.body-section p {
+  text-indent: 0.25in;
+  margin-bottom: 4pt;
+  font-size: 10pt;
+  line-height: 1.15;
+}
+
+.body-section p:first-of-type {
+  text-indent: 0.25in;
+}
+
+/* ── Funding Box (Aside) ── */
+.funding-box {
+  border: 1px solid #888;
+  padding: 6pt 8pt;
+  margin: 8pt 0;
+  font-size: 8pt;
+  line-height: 1.3;
+  text-align: left;
+  break-inside: avoid;
+}
+
+.funding-box p {
+  text-indent: 0;
+  font-size: 8pt;
+  margin: 0;
+}
+
+/* ── Equation Block ── */
+.equation-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 8pt 0;
+  position: relative;
+  break-inside: avoid;
+}
+
+.equation {
+  text-indent: 0;
+  text-align: center;
+  font-size: 10pt;
+  font-style: italic;
+  margin: 0;
+  flex: 1;
+}
+
+.eq-number {
+  position: absolute;
+  right: 0;
+  font-size: 10pt;
+}
+
+/* ── Table ── */
+.table-wrap {
+  break-inside: avoid;
+  margin: 10pt 0;
+}
+
+.table-title {
+  text-indent: 0 !important;
+  text-align: center;
+  font-size: 8pt;
+  font-variant: small-caps;
+  font-weight: normal;
+  margin-bottom: 4pt;
+}
+
+.ieee-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 8pt;
+  line-height: 1.3;
+  margin-bottom: 4pt;
+}
+
+.ieee-table th,
+.ieee-table td {
+  border: 1px solid #000;
+  padding: 2pt 4pt;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.table-head {
+  background: #d4d4d8;
+  font-weight: bold;
+  font-size: 8pt;
+}
+
+.table-col-head {
+  background: #e4e4e8;
+  font-weight: bold;
+  font-size: 7pt;
+}
+
+.table-footnote {
+  font-size: 6pt;
+  text-indent: 0 !important;
+  margin-top: 2pt;
+  text-align: left;
+}
+
+/* ── Figure ── */
+.figure-wrap {
+  break-inside: avoid;
+  margin: 10pt 0;
+  text-align: center;
+}
+
+.figure-placeholder {
+  width: 100%;
+  height: 80pt;
+  border: 1px solid #999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fafafa;
+  font-size: 8pt;
+  color: #888;
+  margin-bottom: 4pt;
+}
+
+.figure-caption {
+  text-indent: 0 !important;
+  font-size: 8pt;
+  text-align: center;
+}
+
+/* ── References ── */
+.references-section {
+  break-inside: auto;
+}
+
+.ref-instructions {
+  font-size: 9pt;
+  text-indent: 0.25in;
+  margin-bottom: 4pt;
+}
+
+.reference-list {
+  list-style: none;
+  counter-reset: ref-counter;
+  padding: 0;
+  font-size: 8pt;
+  line-height: 1.35;
+}
+
+.reference-list li {
+  counter-increment: ref-counter;
+  text-indent: -16pt;
+  padding-left: 16pt;
+  margin-bottom: 3pt;
+}
+
+.reference-list li::before {
+  content: "[" counter(ref-counter) "]  ";
+  font-weight: normal;
+}
+
+/* ── Footer (IEEE notice) ── */
+.ieee-footer {
+  margin-top: 12pt;
+  padding-top: 6pt;
+  border-top: 0.5pt solid #ccc;
+  font-size: 7pt;
+  text-align: center;
+  color: #666;
+  line-height: 1.4;
+  column-span: all;
+}
+
+/* ── Lab Submission Credit ── */
+.lab-credit {
+  margin-top: 8pt;
+  text-align: center;
+  font-size: 8pt;
+  color: #888;
+  line-height: 1.4;
+  padding-top: 6pt;
+  border-top: 0.5pt dashed #ccc;
+}
+
+.lab-credit strong {
+  color: #333;
+}
+
+/* ── Print Styles ── */
+@media print {
+  body {
+    background: #fff;
+  }
+
+  .ieee-paper {
+    box-shadow: none;
+    margin: 0;
+    padding: 0.75in 0.63in 1in 0.63in;
+  }
+
+  .lab-nav-top,
+  .lab-credit {
+    display: none !important;
+  }
+}
+
+/* ── Screen Responsiveness (for viewing on smaller screens) ── */
+@media screen and (max-width: 900px) {
+  .ieee-paper {
+    width: 100%;
+    padding: 20px;
+    min-height: auto;
+  }
+
+  .two-col-body {
+    column-count: 1;
+  }
+
+  .authors-block {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .authors-block {
+    grid-template-columns: 1fr;
+  }
+
+  html {
+    font-size: 9pt;
+  }
+}

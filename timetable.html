@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Class Timetable | BSCS 5A · Air University</title>
+  <meta name="description" content="Official Class Timetable for BSCS 5th Semester (Section 5A) - Department of Computer Science, Air University. Designed using semantic HTML and modern CSS.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="timetable.css">
+</head>
+<body>
+
+  <!-- Top Lab 2 Navigation Bar -->
+  <nav class="lab-nav">
+    <div class="lab-nav-brand">
+      <span class="lab-badge">Lab 2 · Task 1</span>
+      <span class="lab-title">Class Timetable (HTML + CSS)</span>
+    </div>
+    <div class="lab-nav-links">
+      <a href="index.html" class="nav-btn">Task 2: Facebook</a>
+      <a href="portfolio.html" class="nav-btn">Task 3: Portfolio</a>
+      <a href="custom-ui.html" class="nav-btn">Task 4: Custom UI</a>
+      <a href="ieee-paper.html" class="nav-btn">Task 5: IEEE Paper</a>
+      <a href="full stack lab/Lab 2/index.html" class="nav-btn" style="background:#0284c7;color:#fff;">📂 Lab 2 Hub</a>
+    </div>
+  </nav>
+
+  <div class="page-container">
+
+    <!-- University & Student Header Banner -->
+    <header class="header-card">
+      <div class="header-content">
+        <div class="univ-logo-wrap">
+          <div class="univ-emblem">AU</div>
+        </div>
+        <div class="header-text">
+          <div class="univ-name">Air University, Islamabad</div>
+          <div class="dept-name">Department of Computer Science · Faculty of Computing & AI</div>
+          <h1 class="timetable-title">Class Timetable — Fall 2026</h1>
+          <div class="meta-row">
+            <span class="meta-pill"><span class="pill-dot blue"></span> <strong>Program:</strong> BS Computer Science (BSCS)</span>
+            <span class="meta-pill"><span class="pill-dot purple"></span> <strong>Semester:</strong> 5th Semester</span>
+            <span class="meta-pill"><span class="pill-dot green"></span> <strong>Section:</strong> 5A</span>
+            <span class="meta-pill"><span class="pill-dot gold"></span> <strong>Student:</strong> Roman Fatima (241878)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Controls -->
+      <div class="header-actions">
+        <button class="btn-action" onclick="window.print()">
+          🖨️ Print Timetable
+        </button>
+        <button class="btn-action btn-outline" id="highlightTodayBtn">
+          📍 Highlight Today
+        </button>
+      </div>
+    </header>
+
+    <!-- Quick Stats Bar -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-num">5</div>
+        <div class="stat-label">Theory Courses</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">2</div>
+        <div class="stat-label">Hands-on Labs</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">17</div>
+        <div class="stat-label">Total Credit Hours</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">5 Days</div>
+        <div class="stat-label">Mon — Fri Schedule</div>
+      </div>
+    </div>
+
+    <!-- Day Filter Pills -->
+    <div class="filter-container">
+      <span class="filter-label">Filter by Day:</span>
+      <div class="filter-pills" id="dayFilter">
+        <button class="pill active" data-day="all">All Days</button>
+        <button class="pill" data-day="mon">Monday</button>
+        <button class="pill" data-day="tue">Tuesday</button>
+        <button class="pill" data-day="wed">Wednesday</button>
+        <button class="pill" data-day="thu">Thursday</button>
+        <button class="pill" data-day="fri">Friday</button>
+      </div>
+    </div>
+
+    <!-- Main Timetable Table Container -->
+    <div class="table-card">
+      <div class="table-responsive">
+        <table class="timetable" id="mainTimetable">
+          <caption>Weekly Academic Schedule — BSCS Section 5A</caption>
+          <thead>
+            <tr>
+              <th scope="col" class="th-day">Day / Time</th>
+              <th scope="col">
+                <span class="time-slot-title">Slot 1</span>
+                <span class="time-slot-sub">08:30 — 10:00</span>
+              </th>
+              <th scope="col">
+                <span class="time-slot-title">Slot 2</span>
+                <span class="time-slot-sub">10:00 — 11:30</span>
+              </th>
+              <th scope="col">
+                <span class="time-slot-title">Slot 3</span>
+                <span class="time-slot-sub">11:30 — 01:00</span>
+              </th>
+              <th scope="col" class="th-break">
+                <span class="time-slot-title">Break</span>
+                <span class="time-slot-sub">01:00 — 02:00</span>
+              </th>
+              <th scope="col">
+                <span class="time-slot-title">Slot 4</span>
+                <span class="time-slot-sub">02:00 — 03:30</span>
+              </th>
+              <th scope="col">
+                <span class="time-slot-title">Slot 5</span>
+                <span class="time-slot-sub">03:30 — 05:00</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <!-- MONDAY -->
+            <tr data-day="mon" id="row-mon">
+              <th scope="row" class="day-cell">
+                <span class="day-name">Monday</span>
+                <span class="day-code">MON</span>
+              </th>
+              <td>
+                <div class="course-slot subject-web">
+                  <div class="course-code">CS311</div>
+                  <div class="course-title">Web Technologies</div>
+                  <div class="course-room">📍 Room 304</div>
+                  <div class="course-teacher">👨‍🏫 Dr. Tariq Mahmood</div>
+                </div>
+              </td>
+              <td>
+                <div class="course-slot subject-os">
+                  <div class="course-code">CS312</div>
+                  <div class="course-title">Operating Systems</div>
+                  <div class="course-room">📍 Room 201</div>
+                  <div class="course-teacher">👨‍🏫 Dr. Kamran Malik</div>
+                </div>
+              </td>
+              <td>
+                <div class="free-slot">
+                  <span class="free-text">Free Slot</span>
+                  <span class="free-sub">Self Study / Library</span>
+                </div>
+              </td>
+              <td class="break-cell" rowspan="5">
+                <div class="break-indicator">
+                  <span class="break-icon">☕</span>
+                  <span class="break-vertical-title">LUNCH & PRAYER BREAK</span>
+                  <span class="break-time">01:00 PM — 02:00 PM</span>
+                </div>
+              </td>
+              <!-- 3-Hour Lab Session with Colspan 2 -->
+              <td colspan="2">
+                <div class="course-slot subject-weblab lab-highlight">
+                  <div class="lab-badge-flag">🔬 3-HOUR LAB SESSION</div>
+                  <div class="course-code">CS311L</div>
+                  <div class="course-title">Web Technologies Lab (Hands-on HTML, CSS & JS)</div>
+                  <div class="course-room">💻 Computer Science Lab 3 (CS-L03)</div>
+                  <div class="course-teacher">👨‍💻 Engr. Usama · Continuous Lab Evaluation</div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- TUESDAY -->
+            <tr data-day="tue" id="row-tue">
+              <th scope="row" class="day-cell">
+                <span class="day-name">Tuesday</span>
+                <span class="day-code">TUE</span>
+              </th>
+              <td>
+                <div class="course-slot subject-se">
+                  <div class="course-code">CS313</div>
+                  <div class="course-title">Software Engineering</div>
+                  <div class="course-room">📍 Room 302</div>
+                  <div class="course-teacher">👩‍🏫 Dr. Ayesha Siddiqa</div>
+                </div>
+              </td>
+              <td>
+                <div class="course-slot subject-algo">
+                  <div class="course-code">CS314</div>
+                  <div class="course-title">Design & Analysis of Algorithms</div>
+                  <div class="course-room">📍 Room 105</div>
+                  <div class="course-teacher">👨‍🏫 Dr. Farooq Khan</div>
+                </div>
+              </td>
+              <td>
+                <div class="course-slot subject-auto">
+                  <div class="course-code">CS315</div>
+                  <div class="course-title">Theory of Automata</div>
+                  <div class="course-room">📍 Room 206</div>
+                  <div class="course-teacher">👨‍🏫 Dr. Noman Ahmed</div>
+                </div>
+              </td>
+              <!-- (Break column handled by rowspan on Monday) -->
+              <td>
+                <div class="course-slot subject-web">
+                  <div class="course-code">CS311</div>
+                  <div class="course-title">Web Technologies (Tutorial)</div>
+                  <div class="course-room">📍 Room 304</div>
+                  <div class="course-teacher">👨‍🏫 Dr. Tariq Mahmood</div>
+                </div>
+              </td>
+              <td>
+                <div class="free-slot">
+                  <span class="free-text">Sports / Society</span>
+                  <span class="free-sub">Student Activity Hour</span>
+                </div>
+              </td>
+            </tr>
+
+            <!-- WEDNESDAY -->
+            <tr data-day="wed" id="row-wed">
+              <th scope="row" class="day-cell">
+                <span class="day-name">Wednesday</span>
+                <span class="day-code">WED</span>
+              </th>
+              <td>
+                <div class="course-slot subject-algo">
+                  <div class="course-code">CS314</div>
+                  <div class="course-title">Design & Analysis of Algorithms</div>
+                  <div class="course-room">📍 Room 105</div>
+                  <div class="course-teacher">👨‍🏫 Dr. Farooq Khan</div>
+                </div>
+              </td>
+              <td>
+                <div class="course-slot subject-se">
+                  <div class="course-code">CS313</div>
+                  <div class="course-title">Software Engineering</div>
+                  <div class="course-room">📍 Room 302</div>
+                  <div class="course-teacher">👩‍🏫 Dr. Ayesha Siddiqa</div>
+                </div>
+              </td>
+              <td>
+                <div class="course-slot subject-os">
+                  <div class="course-code">CS312</div>
+                  <div class="course-title">Operating Systems</div>
+                  <div class="course-room">📍 Room 201</div>
+                  <div class="course-teacher">👨‍🏫 Dr. Kamran Malik</div>
+                </div>
+              </td>
+              <!-- 3-Hour Lab Session with Colspan 2 -->
+              <td colspan="2">
+                <div class="course-slot subject-oslab lab-highlight">
+                  <div class="lab-badge-flag">🔬 3-HOUR LAB SESSION</div>
+                  <div class="course-code">CS312L</div>
+                  <div class="course-title">Operating Systems Lab (Linux Kernels & Bash)</div>
+                  <div class="course-room">💻 Software Lab 1 (SL-01)</div>
+                  <div class="course-teacher">👨‍💻 Engr. Bilal · Lab Assignment Assessment</div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- THURSDAY -->
+            <tr data-day="thu" id="row-thu">
+              <th scope="row" class="day-cell">
+                <span class="day-name">Thursday</span>
+                <span class="day-code">THU</span>
+              </th>
+              <td>
+                <div class="course-slot subject-auto">
+                  <div class="course-code">CS315</div>
+                  <div class="course-title">Theory of Automata</div>
+                  <div class="course-room">📍 Room 206</div>
+                  <div class="course-teacher">👨‍🏫 Dr. Noman Ahmed</div>
+                </div>
+              </td>
+              <td>
+                <div class="course-slot subject-web">
+                  <div class="course-code">CS311</div>
+                  <div class="course-title">Web Technologies</div>
+                  <div class="course-room">📍 Room 304</div>
+                  <div class="course-teacher">👨‍🏫 Dr. Tariq Mahmood</div>
+                </div>
+              </td>
+              <td>
+                <div class="course-slot subject-se">
+                  <div class="course-code">CS313</div>
+                  <div class="course-title">Software Engineering</div>
+                  <div class="course-room">📍 Room 302</div>
+                  <div class="course-teacher">👩‍🏫 Dr. Ayesha Siddiqa</div>
+                </div>
+              </td>
+              <td>
+                <div class="course-slot subject-os">
+                  <div class="course-code">CS312</div>
+                  <div class="course-title">Operating Systems (Discussion)</div>
+                  <div class="course-room">📍 Room 201</div>
+                  <div class="course-teacher">👨‍🏫 Dr. Kamran Malik</div>
+                </div>
+              </td>
+              <td>
+                <div class="free-slot">
+                  <span class="free-text">Free Slot</span>
+                  <span class="free-sub">Consultation Hour</span>
+                </div>
+              </td>
+            </tr>
+
+            <!-- FRIDAY -->
+            <tr data-day="fri" id="row-fri">
+              <th scope="row" class="day-cell">
+                <span class="day-name">Friday</span>
+                <span class="day-code">FRI</span>
+              </th>
+              <td>
+                <div class="course-slot subject-algo">
+                  <div class="course-code">CS314</div>
+                  <div class="course-title">Design & Analysis of Algorithms</div>
+                  <div class="course-room">📍 Room 105</div>
+                  <div class="course-teacher">👨‍🏫 Dr. Farooq Khan</div>
+                </div>
+              </td>
+              <td>
+                <div class="course-slot subject-auto">
+                  <div class="course-code">CS315</div>
+                  <div class="course-title">Theory of Automata</div>
+                  <div class="course-room">📍 Room 206</div>
+                  <div class="course-teacher">👨‍🏫 Dr. Noman Ahmed</div>
+                </div>
+              </td>
+              <td>
+                <div class="free-slot">
+                  <span class="free-text">Friday Prayers Prep</span>
+                  <span class="free-sub">Auditorium / Mosque</span>
+                </div>
+              </td>
+              <td colspan="2">
+                <div class="free-slot weekend-soon">
+                  <span class="free-text">🌟 Weekend Preparation & Project Sprints</span>
+                  <span class="free-sub">Web Development Lab 2 Project Group Work</span>
+                </div>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Course Directory Cards Grid -->
+    <section class="directory-section">
+      <h2 class="section-title">Enrolled Courses & Faculty Directory · 5th Semester</h2>
+      <div class="directory-grid">
+
+        <div class="directory-card card-web">
+          <div class="dir-top">
+            <span class="dir-code">CS311 · 3 Cr. Hrs</span>
+            <span class="dir-badge">Theory</span>
+          </div>
+          <h3 class="dir-title">Web Technologies</h3>
+          <p class="dir-desc">Semantic HTML5, Advanced CSS3, JavaScript ES6+, DOM manipulation, Responsive Web Design & Web APIs.</p>
+          <div class="dir-meta">
+            <div>👨‍🏫 <strong>Instructor:</strong> Dr. Tariq Mahmood</div>
+            <div>📍 <strong>Venue:</strong> Room 304</div>
+          </div>
+        </div>
+
+        <div class="directory-card card-weblab">
+          <div class="dir-top">
+            <span class="dir-code">CS311L · 1 Cr. Hr</span>
+            <span class="dir-badge lab">Practical Lab</span>
+          </div>
+          <h3 class="dir-title">Web Technologies Lab</h3>
+          <p class="dir-desc">Hands-on front-end development, Git/GitHub workflows, real-time UI clones, portfolio creation & custom CSS applications.</p>
+          <div class="dir-meta">
+            <div>👨‍💻 <strong>Lab Engr:</strong> Engr. Usama</div>
+            <div>💻 <strong>Venue:</strong> CS Lab 3 (3-hr slot)</div>
+          </div>
+        </div>
+
+        <div class="directory-card card-os">
+          <div class="dir-top">
+            <span class="dir-code">CS312 · 3 Cr. Hrs</span>
+            <span class="dir-badge">Theory</span>
+          </div>
+          <h3 class="dir-title">Operating Systems</h3>
+          <p class="dir-desc">Process management, CPU scheduling algorithms, thread synchronization, memory virtualization & file systems.</p>
+          <div class="dir-meta">
+            <div>👨‍🏫 <strong>Instructor:</strong> Dr. Kamran Malik</div>
+            <div>📍 <strong>Venue:</strong> Room 201</div>
+          </div>
+        </div>
+
+        <div class="directory-card card-oslab">
+          <div class="dir-top">
+            <span class="dir-code">CS312L · 1 Cr. Hr</span>
+            <span class="dir-badge lab">Practical Lab</span>
+          </div>
+          <h3 class="dir-title">Operating Systems Lab</h3>
+          <p class="dir-desc">POSIX system calls in C/C++, Linux shell scripting, thread creation with pthread, and CPU scheduler simulations.</p>
+          <div class="dir-meta">
+            <div>👨‍💻 <strong>Lab Engr:</strong> Engr. Bilal</div>
+            <div>💻 <strong>Venue:</strong> Software Lab 1 (3-hr slot)</div>
+          </div>
+        </div>
+
+        <div class="directory-card card-se">
+          <div class="dir-top">
+            <span class="dir-code">CS313 · 3 Cr. Hrs</span>
+            <span class="dir-badge">Theory</span>
+          </div>
+          <h3 class="dir-title">Software Engineering</h3>
+          <p class="dir-desc">Agile & Scrum methodologies, requirements elicitation, UML diagrams, architectural patterns & software testing QA.</p>
+          <div class="dir-meta">
+            <div>👩‍🏫 <strong>Instructor:</strong> Dr. Ayesha Siddiqa</div>
+            <div>📍 <strong>Venue:</strong> Room 302</div>
+          </div>
+        </div>
+
+        <div class="directory-card card-algo">
+          <div class="dir-top">
+            <span class="dir-code">CS314 · 3 Cr. Hrs</span>
+            <span class="dir-badge">Theory</span>
+          </div>
+          <h3 class="dir-title">Design & Analysis of Algorithms</h3>
+          <p class="dir-desc">Asymptotic complexity notation, divide-and-conquer, greedy algorithms, dynamic programming & graph traversals.</p>
+          <div class="dir-meta">
+            <div>👨‍🏫 <strong>Instructor:</strong> Dr. Farooq Khan</div>
+            <div>📍 <strong>Venue:</strong> Room 105</div>
+          </div>
+        </div>
+
+        <div class="directory-card card-auto">
+          <div class="dir-top">
+            <span class="dir-code">CS315 · 3 Cr. Hrs</span>
+            <span class="dir-badge">Theory</span>
+          </div>
+          <h3 class="dir-title">Theory of Automata</h3>
+          <p class="dir-desc">Deterministic & Nondeterministic Finite Automata (DFA/NFA), Regular Expressions, Context-Free Grammars & Turing Machines.</p>
+          <div class="dir-meta">
+            <div>👨‍🏫 <strong>Instructor:</strong> Dr. Noman Ahmed</div>
+            <div>📍 <strong>Venue:</strong> Room 206</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="timetable-footer">
+      <p>Department of Computer Science · Air University, Islamabad · Academic Year 2026–2027</p>
+      <p>Submitted by <strong>Roman Fatima (Reg No: 241878)</strong> · BSCS 5A · Web Development Lab 2</p>
+    </footer>
+
+  </div>
+
+  <script>
+    // Day Filter Script
+    const pills = document.querySelectorAll('#dayFilter .pill');
+    const rows = document.querySelectorAll('#mainTimetable tbody tr');
+
+    pills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        pills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        const selectedDay = pill.getAttribute('data-day');
+
+        rows.forEach(row => {
+          if (selectedDay === 'all') {
+            row.style.display = '';
+          } else {
+            row.style.display = row.getAttribute('data-day') === selectedDay ? '' : 'none';
+          }
+        });
+      });
+    });
+
+    // Highlight Current Day Button
+    document.getElementById('highlightTodayBtn').addEventListener('click', () => {
+      const dayIndex = new Date().getDay(); // 0 is Sun, 1 is Mon...
+      const dayMap = { 1: 'row-mon', 2: 'row-tue', 3: 'row-wed', 4: 'row-thu', 5: 'row-fri' };
+      const todayRowId = dayMap[dayIndex] || 'row-mon';
+      
+      rows.forEach(r => r.classList.remove('today-highlight'));
+      const targetRow = document.getElementById(todayRowId);
+      if (targetRow) {
+        targetRow.classList.add('today-highlight');
+        targetRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    });
+  </script>
+
+</body>
+</html>
