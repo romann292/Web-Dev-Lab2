@@ -14,12 +14,13 @@ This repository contains all 5 tasks designed and developed using semantic HTML5
 
 | Task # | Task Name | Main Entry File | Subdirectory File | Description |
 | :--- | :--- | :--- | :--- | :--- |
-| **Hub** | **Lab 2 Hub** | — | `full stack lab/Lab 2/index.html` | Central hub showcasing all 5 tasks with glassmorphism cards and direct navigation. |
-| **Task 1** | **Class Timetable** | `timetable.html` | `full stack lab/Lab 2/task1-timetable/index.html` | Semantic HTML + CSS BSCS 5A timetable with university branding, color-coded subjects, print styles, and interactive "Highlight Today" button. |
-| **Task 2** | **Facebook Home Page** | `index.html` | `full stack lab/Lab 2/task2-facebook/index.html` | Pixel-perfect replica of the authentic Facebook feed layout (Facebook Blue `#0866ff`, 3-column feed, Stories tray with besties Insha, Aniqa, Sana, Wania, interactive reactions, comments modal, and Messenger dock). |
-| **Task 3** | **2-Column Portfolio** | `portfolio.html` | `full stack lab/Lab 2/task3-portfolio/index.html` | Two-column developer portfolio for Roman Fatima featuring sticky left sidebar, project showcases, skills progress, education timeline, and functional contact form. |
-| **Task 4** | **Custom UI Showcase** | `custom-ui.html` | `full stack lab/Lab 2/task4-custom-ui/index.html` | "AetherOS" interactive creative studio featuring 3D perspective transforms, dynamic theme switching (Cyberpunk, Rose Dream, Frost Glass, Matrix), and a **7-Song Music Studio** (Barbie, Tom Odell, Hamza Malik, Akon, Lana Del Rey, Asfar Hussain, Kavish) with song selector dropdown, next/prev controls, seeking, and volume slider. |
-| **Task 5** | **IEEE Paper Template** | `ieee-paper.html` | `full stack lab/Lab 2/task5-ieee-paper/index.html` | Authentic IEEE conference paper format (8.5" × 11" US Letter, 2-column body) replicating the seminal research paper **"Attention Is All You Need"** (Vaswani et al.) with equations, Table I benchmarks, and IEEE citations. |
+| **Hub** | **Lab 2 Hub** | — | `full stack lab/Lab 2/index.html` | Central hub showcasing all 6 tasks with glassmorphism cards and direct navigation. |
+| **Task 1** | **Class Timetable** | `timetable.html` | `full stack lab/Lab 2/task1-timetable/index.html` | Bootstrap 5 BSCS 5A timetable with university branding, color-coded subjects, print styles, and interactive "Highlight Today" button. |
+| **Task 2** | **Facebook Home Page** | `index.html` | `full stack lab/Lab 2/task2-facebook/index.html` | Bootstrap 5 replica of authentic Facebook feed layout (Facebook Blue `#0866ff`, 3-column feed, Stories tray with besties, reactions, and comments modal). |
+| **Task 3** | **2-Column Portfolio** | `portfolio.html` | `full stack lab/Lab 2/task3-portfolio/index.html` | Bootstrap 5 two-column developer portfolio for Roman Fatima with sticky left sidebar, project showcases, skills progress, and contact form. |
+| **Task 4** | **Custom UI Showcase** | `custom-ui.html` | `full stack lab/Lab 2/task4-custom-ui/index.html` | "AetherOS" Bootstrap 5 interactive studio featuring 3D perspective transforms, theme switching, and music audio widget with live spectrum equalizer. |
+| **Task 5** | **IEEE Paper Template** | `ieee-paper.html` | `full stack lab/Lab 2/task5-ieee-paper/index.html` | Bootstrap 5 authentic IEEE conference paper format (8.5" × 11" US Letter, 2-column body) replicating "Attention Is All You Need" with equations and tables. |
+| **Task 6** | **E-Commerce Store** | `ecommerce.html` | `full stack lab/Lab 2/task6-ecommerce/index.html` | Full-scale modern tech e-commerce store with Bootstrap 5: Signup, Login, Navbar, Hero Carousel, Product Listing with filters, Reviews system, Add/Edit Cart, and Checkout. |
 
 ---
 

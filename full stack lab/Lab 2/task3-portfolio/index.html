@@ -3,426 +3,442 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Roman Fatima | 2-Column Developer Portfolio</title>
-  <meta name="description" content="Official 2-Column Portfolio of Roman Fatima (BSCS 5A · Air University). Highlighting frontend web development projects, skills, education, and contact form.">
-  
+  <title>Roman Fatima | 2-Column Portfolio</title>
+  <meta name="description" content="2-Column Developer Portfolio of Roman Fatima, BSCS 5A, Air University. Built with Bootstrap 5.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
-  
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f0f4f8; }
+
+    /* Lab Nav */
+    .lab-navbar { background: linear-gradient(135deg, #1e3a5f, #0d6efd); }
+
+    /* Left Sidebar Card */
+    .sidebar-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      overflow: hidden;
+      position: sticky; top: 80px;
+    }
+    .sidebar-header {
+      background: linear-gradient(135deg, #1e3a5f 0%, #0d6efd 100%);
+      padding: 2rem 1.5rem 3rem;
+      text-align: center;
+      position: relative;
+    }
+    .profile-photo {
+      width: 110px; height: 110px; border-radius: 50%;
+      border: 4px solid #fff;
+      object-fit: cover;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg,#a855f7,#0d6efd);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem; font-weight: 800; color: #fff;
+    }
+    .online-badge {
+      width: 14px; height: 14px; background: #22c55e;
+      border: 2px solid #fff; border-radius: 50%;
+      position: absolute; bottom: 4px; right: 4px;
+    }
+
+    /* Skills Progress */
+    .skill-label { font-size: .83rem; font-weight: 600; color: #374151; }
+    .progress { height: 6px; border-radius: 10px; }
+
+    /* Section Title */
+    .section-title {
+      font-size: 1.1rem; font-weight: 800; margin-bottom: 1.25rem;
+      display: flex; align-items: center; gap: .5rem;
+      color: #1e3a5f;
+    }
+    .section-title::after { content: ''; flex: 1; height: 2px; background: #e2e8f0; border-radius: 2px; }
+
+    /* Project Cards */
+    .project-card {
+      border-radius: 12px; overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      transition: transform .25s, box-shadow .25s;
+      background: #fff;
+    }
+    .project-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(0,0,0,0.13); }
+    .project-banner {
+      height: 100px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem;
+    }
+
+    /* Timeline */
+    .timeline-item { position: relative; padding-left: 2rem; border-left: 2px solid #e2e8f0; }
+    .timeline-item::before {
+      content: '';
+      width: 12px; height: 12px; border-radius: 50%;
+      background: #0d6efd; border: 2px solid #fff;
+      box-shadow: 0 0 0 2px #0d6efd;
+      position: absolute; left: -7px; top: 4px;
+    }
+
+    /* Contact Form */
+    .contact-form .form-control { border-radius: 10px; border: 1.5px solid #e2e8f0; }
+    .contact-form .form-control:focus { border-color: #0d6efd; box-shadow: 0 0 0 3px rgba(13,110,253,.15); }
+  </style>
 </head>
 <body>
 
-  <!-- Top Lab 2 Navigation Banner -->
-  <aside class="lab-nav" aria-label="Lab Navigation">
-    <div class="lab-nav-left">
-      <span class="lab-badge">Lab 2 · Task 3</span>
-      <span class="lab-nav-title">Portfolio (2-Column Format) · <strong>Roman Fatima (241878)</strong></span>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg lab-navbar sticky-top">
+    <div class="container-fluid px-3">
+      <span class="navbar-brand text-white fw-bold">
+        <span class="badge bg-warning text-dark me-2">Lab 2 · Task 3</span>
+        Portfolio
+      </span>
+      <button class="navbar-toggler border-light" type="button" data-bs-toggle="collapse" data-bs-target="#navLinks">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navLinks">
+        <div class="navbar-nav ms-auto gap-1">
+          <a class="nav-link text-white-50" href="../index.html"><i class="bi bi-house-fill me-1"></i>Hub</a>
+          <a class="nav-link text-white-50" href="../task1-timetable/index.html">Task 1</a>
+          <a class="nav-link text-white-50" href="../task2-facebook/index.html">Task 2</a>
+          <a class="nav-link text-white active" href="index.html">Task 3</a>
+          <a class="nav-link text-white-50" href="../task4-custom-ui/index.html">Task 4</a>
+          <a class="nav-link text-white-50" href="../task5-ieee-paper/index.html">Task 5</a>
+          <a class="nav-link text-white-50" href="../task6-ecommerce/index.html">Task 6</a>
+        </div>
+      </div>
     </div>
-    <div class="lab-nav-links">
-      <a href="../index.html" class="nav-btn">🏠 Lab 2 Hub</a>
-      <a href="../task1-timetable/index.html" class="nav-btn">Task 1: Timetable</a>
-      <a href="../task2-facebook/index.html" class="nav-btn">Task 2: Facebook</a>
-      <a href="index.html" class="nav-btn active">Task 3: Portfolio</a>
-      <a href="../task4-custom-ui/index.html" class="nav-btn">Task 4: Custom UI</a>
-      <a href="../task5-ieee-paper/index.html" class="nav-btn">Task 5: IEEE Paper</a>
-    </div>
-  </aside>
+  </nav>
 
-  <!-- ======================================================================
-       MAIN 2-COLUMN PORTFOLIO CONTAINER
-       ====================================================================== -->
-  <div class="portfolio-container">
+  <div class="container-xl py-4">
+    <div class="row g-4">
 
-    <!-- ====================================================================
-         COLUMN 1 (LEFT): STICKY PROFILE & SKILLS SIDEBAR
-         ==================================================================== -->
-    <aside class="col-left-sidebar">
-      <div class="sidebar-inner-card">
+      <!-- ============================================================
+           LEFT COLUMN — Sticky Profile Sidebar
+           ============================================================ -->
+      <div class="col-lg-4">
+        <div class="sidebar-card">
 
-        <!-- Profile Photo with Gradient Ring -->
-        <div class="profile-avatar-wrap">
-          <img src="img2.jpg" alt="Roman Fatima" class="profile-photo">
-          <span class="status-indicator" title="Available for Opportunities"></span>
-        </div>
-
-        <!-- Name & Title -->
-        <h1 class="profile-name">Roman Fatima</h1>
-        <div class="profile-handle">@romann292 · Reg: 241878</div>
-        <p class="profile-title">Frontend Web Developer &amp; Computer Science Student</p>
-        <div class="dept-badge">🎓 BSCS 5A · Air University</div>
-
-        <div class="divider"></div>
-
-        <!-- Contact Information List -->
-        <div class="contact-list">
-          <div class="contact-item">
-            <span class="contact-icon">📧</span>
-            <div class="contact-info">
-              <span class="contact-label">Email</span>
-              <a href="mailto:romanfatima087@gmail.com" class="contact-val">romanfatima087@gmail.com</a>
+          <!-- Header -->
+          <div class="sidebar-header">
+            <div class="position-relative d-inline-block">
+              <div class="profile-photo mx-auto">RF</div>
+              <span class="online-badge"></span>
             </div>
+            <h1 class="h5 fw-bold text-white mb-1">Roman Fatima</h1>
+            <div class="text-white-50 small mb-2">@romann292 · Reg: 241878</div>
+            <span class="badge bg-white text-primary fw-semibold">Frontend Developer</span>
           </div>
 
-          <div class="contact-item">
-            <span class="contact-icon">📍</span>
-            <div class="contact-info">
-              <span class="contact-label">Location</span>
-              <span class="contact-val">Islamabad, Pakistan</span>
+          <div class="p-3">
+            <!-- Dept Badge -->
+            <div class="text-center mb-3">
+              <span class="badge bg-primary bg-opacity-10 text-primary border border-primary border-opacity-25 fw-semibold">
+                🎓 BSCS 5A · Air University
+              </span>
             </div>
-          </div>
 
-          <div class="contact-item">
-            <span class="contact-icon">🐙</span>
-            <div class="contact-info">
-              <span class="contact-label">GitHub</span>
-              <a href="https://github.com/romann292" target="_blank" class="contact-val">github.com/romann292</a>
+            <!-- Contact Info -->
+            <div class="mb-3">
+              <div class="d-flex align-items-center gap-2 mb-2 small">
+                <i class="bi bi-envelope-fill text-primary"></i>
+                <span>roman.241878@students.au.edu.pk</span>
+              </div>
+              <div class="d-flex align-items-center gap-2 mb-2 small">
+                <i class="bi bi-geo-alt-fill text-danger"></i>
+                <span>Islamabad, Pakistan</span>
+              </div>
+              <div class="d-flex align-items-center gap-2 mb-2 small">
+                <i class="bi bi-telephone-fill text-success"></i>
+                <span>+92-321-1234567</span>
+              </div>
+              <div class="d-flex align-items-center gap-2 mb-2 small">
+                <i class="bi bi-github text-dark"></i>
+                <span>github.com/romann292</span>
+              </div>
+              <div class="d-flex align-items-center gap-2 small">
+                <i class="bi bi-linkedin text-primary"></i>
+                <span>linkedin.com/in/romanfatima</span>
+              </div>
             </div>
-          </div>
+            <hr>
 
-          <div class="contact-item">
-            <span class="contact-icon">💼</span>
-            <div class="contact-info">
-              <span class="contact-label">LinkedIn</span>
-              <span class="contact-val">linkedin.com/in/romanfatima</span>
+            <!-- Skills -->
+            <div class="mb-3">
+              <div class="section-title" style="font-size:.85rem">Technical Skills</div>
+              <div class="mb-2">
+                <div class="d-flex justify-content-between mb-1"><span class="skill-label">HTML5</span><span class="small text-muted">95%</span></div>
+                <div class="progress"><div class="progress-bar bg-primary" style="width:95%"></div></div>
+              </div>
+              <div class="mb-2">
+                <div class="d-flex justify-content-between mb-1"><span class="skill-label">CSS3 / Bootstrap</span><span class="small text-muted">90%</span></div>
+                <div class="progress"><div class="progress-bar" style="width:90%; background:#6f42c1"></div></div>
+              </div>
+              <div class="mb-2">
+                <div class="d-flex justify-content-between mb-1"><span class="skill-label">JavaScript</span><span class="small text-muted">80%</span></div>
+                <div class="progress"><div class="progress-bar bg-warning" style="width:80%"></div></div>
+              </div>
+              <div class="mb-2">
+                <div class="d-flex justify-content-between mb-1"><span class="skill-label">C / C++</span><span class="small text-muted">75%</span></div>
+                <div class="progress"><div class="progress-bar bg-info" style="width:75%"></div></div>
+              </div>
+              <div class="mb-2">
+                <div class="d-flex justify-content-between mb-1"><span class="skill-label">Python</span><span class="small text-muted">65%</span></div>
+                <div class="progress"><div class="progress-bar bg-success" style="width:65%"></div></div>
+              </div>
             </div>
-          </div>
-        </div>
+            <hr>
 
-        <div class="divider"></div>
-
-        <!-- Technical Skills with Progress Bars -->
-        <div class="skills-section">
-          <h2 class="sub-heading">Technical Skills</h2>
-
-          <div class="skill-row">
-            <div class="skill-meta">
-              <span>HTML5 & Semantic Architecture</span>
-              <span class="skill-pct">98%</span>
+            <!-- Tools -->
+            <div class="mb-3">
+              <div class="section-title" style="font-size:.85rem">Tools &amp; Platforms</div>
+              <div class="d-flex flex-wrap gap-2">
+                <span class="badge bg-dark">Git / GitHub</span>
+                <span class="badge bg-primary">VS Code</span>
+                <span class="badge bg-info text-dark">Bootstrap 5</span>
+                <span class="badge bg-warning text-dark">Figma</span>
+                <span class="badge bg-success">Linux</span>
+                <span class="badge bg-secondary">MySQL</span>
+                <span class="badge bg-danger">Adobe XD</span>
+              </div>
             </div>
-            <div class="skill-bar"><div class="skill-fill" style="width: 98%;"></div></div>
-          </div>
+            <hr>
 
-          <div class="skill-row">
-            <div class="skill-meta">
-              <span>CSS3, Flexbox & CSS Grid</span>
-              <span class="skill-pct">95%</span>
+            <!-- Social Links -->
+            <div class="d-flex justify-content-center gap-3">
+              <a href="#" class="btn btn-sm btn-outline-dark rounded-circle" style="width:36px;height:36px;padding:0;display:flex;align-items:center;justify-content:center"><i class="bi bi-github"></i></a>
+              <a href="#" class="btn btn-sm btn-primary rounded-circle" style="width:36px;height:36px;padding:0;display:flex;align-items:center;justify-content:center"><i class="bi bi-linkedin"></i></a>
+              <a href="#" class="btn btn-sm btn-info rounded-circle text-white" style="width:36px;height:36px;padding:0;display:flex;align-items:center;justify-content:center"><i class="bi bi-twitter-x"></i></a>
+              <a href="#" class="btn btn-sm btn-danger rounded-circle" style="width:36px;height:36px;padding:0;display:flex;align-items:center;justify-content:center"><i class="bi bi-envelope-fill"></i></a>
             </div>
-            <div class="skill-bar"><div class="skill-fill" style="width: 95%;"></div></div>
-          </div>
-
-          <div class="skill-row">
-            <div class="skill-meta">
-              <span>JavaScript ES6+ & DOM APIs</span>
-              <span class="skill-pct">90%</span>
-            </div>
-            <div class="skill-bar"><div class="skill-fill" style="width: 90%;"></div></div>
-          </div>
-
-          <div class="skill-row">
-            <div class="skill-meta">
-              <span>Responsive UI/UX & Theming</span>
-              <span class="skill-pct">94%</span>
-            </div>
-            <div class="skill-bar"><div class="skill-fill" style="width: 94%;"></div></div>
-          </div>
-
-          <div class="skill-row">
-            <div class="skill-meta">
-              <span>C++ & Object-Oriented Design</span>
-              <span class="skill-pct">88%</span>
-            </div>
-            <div class="skill-bar"><div class="skill-fill" style="width: 88%;"></div></div>
-          </div>
-
-          <div class="skill-row">
-            <div class="skill-meta">
-              <span>Git, GitHub & Version Control</span>
-              <span class="skill-pct">90%</span>
-            </div>
-            <div class="skill-bar"><div class="skill-fill" style="width: 90%;"></div></div>
           </div>
         </div>
+      </div>
 
-        <div class="divider"></div>
+      <!-- ============================================================
+           RIGHT COLUMN — Main Portfolio Content
+           ============================================================ -->
+      <div class="col-lg-8">
 
-        <!-- Education Summary -->
-        <div class="edu-section">
-          <h2 class="sub-heading">Education</h2>
-          <div class="edu-item">
-            <div class="edu-degree">Bachelor of Computer Science (BSCS)</div>
-            <div class="edu-school">Air University, Islamabad</div>
-            <div class="edu-year">2024 — 2028 · 5th Semester</div>
-          </div>
-          <div class="edu-item" style="margin-top: 10px;">
-            <div class="edu-degree">FSc Pre-Engineering / Computer Science</div>
-            <div class="edu-school">Islamabad Model College</div>
-            <div class="edu-year">Graduated with High Honors (A+)</div>
+        <!-- About Section -->
+        <div class="bg-white rounded-4 shadow-sm p-4 mb-4">
+          <div class="section-title"><i class="bi bi-person-circle text-primary"></i>About Me</div>
+          <p class="text-secondary" style="line-height:1.8">
+            I'm <strong>Roman Fatima</strong>, a passionate frontend web developer and 5th-semester Computer Science student at Air University, Islamabad. I love building beautiful, responsive, and interactive user interfaces using modern web technologies. My strength lies in translating designs into pixel-perfect code.
+          </p>
+          <p class="text-secondary" style="line-height:1.8">
+            Currently studying under the BSCS program (Section 5A), I have hands-on experience with <strong>HTML5, CSS3, Bootstrap 5, and JavaScript</strong>. I'm always eager to learn and grow as a developer, aiming for a career in full-stack web development.
+          </p>
+          <div class="row g-3 mt-2">
+            <div class="col-4 text-center">
+              <div class="h3 fw-bold text-primary mb-0">6+</div>
+              <div class="small text-muted">Projects</div>
+            </div>
+            <div class="col-4 text-center">
+              <div class="h3 fw-bold text-success mb-0">3+</div>
+              <div class="small text-muted">Certifications</div>
+            </div>
+            <div class="col-4 text-center">
+              <div class="h3 fw-bold text-warning mb-0">2+</div>
+              <div class="small text-muted">Years Coding</div>
+            </div>
           </div>
         </div>
 
-        <!-- Action Download Resume Button -->
-        <div class="sidebar-actions">
-          <a href="#contact" class="btn-primary-full">
-            💬 Send Message
-          </a>
+        <!-- Projects -->
+        <div class="bg-white rounded-4 shadow-sm p-4 mb-4">
+          <div class="section-title"><i class="bi bi-code-square text-primary"></i>Projects</div>
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <div class="project-card">
+                <div class="project-banner" style="background:linear-gradient(135deg,#667eea,#764ba2)">🛍️</div>
+                <div class="p-3">
+                  <h6 class="fw-bold mb-1">ShopAura E-Commerce</h6>
+                  <p class="text-muted small mb-2">Full Bootstrap 5 store with cart, checkout, login/signup.</p>
+                  <div class="d-flex gap-1 flex-wrap">
+                    <span class="badge bg-primary">Bootstrap</span>
+                    <span class="badge bg-warning text-dark">JS</span>
+                    <span class="badge bg-success">HTML</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="project-card">
+                <div class="project-banner" style="background:linear-gradient(135deg,#0866ff,#4facfe)">📘</div>
+                <div class="p-3">
+                  <h6 class="fw-bold mb-1">Facebook Home Clone</h6>
+                  <p class="text-muted small mb-2">Pixel-perfect Facebook UI with Bootstrap 5 grid system.</p>
+                  <div class="d-flex gap-1 flex-wrap">
+                    <span class="badge bg-info text-dark">Bootstrap</span>
+                    <span class="badge bg-secondary">CSS</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="project-card">
+                <div class="project-banner" style="background:linear-gradient(135deg,#11998e,#38ef7d)">📅</div>
+                <div class="p-3">
+                  <h6 class="fw-bold mb-1">BSCS 5A Timetable</h6>
+                  <p class="text-muted small mb-2">Responsive university timetable with Bootstrap tables.</p>
+                  <div class="d-flex gap-1 flex-wrap">
+                    <span class="badge bg-success">Bootstrap</span>
+                    <span class="badge bg-primary">HTML</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="project-card">
+                <div class="project-banner" style="background:linear-gradient(135deg,#f093fb,#f5576c)">🎨</div>
+                <div class="p-3">
+                  <h6 class="fw-bold mb-1">AetherOS Custom UI</h6>
+                  <p class="text-muted small mb-2">Creative studio with 3D transforms, themes, music widget.</p>
+                  <div class="d-flex gap-1 flex-wrap">
+                    <span class="badge bg-danger">CSS3</span>
+                    <span class="badge bg-dark">JavaScript</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="project-card">
+                <div class="project-banner" style="background:linear-gradient(135deg,#1a1a2e,#16213e)">📄</div>
+                <div class="p-3">
+                  <h6 class="fw-bold mb-1">IEEE Paper Template</h6>
+                  <p class="text-muted small mb-2">2-column LaTeX-style paper in HTML + CSS (Bootstrap).</p>
+                  <div class="d-flex gap-1 flex-wrap">
+                    <span class="badge bg-dark">HTML</span>
+                    <span class="badge bg-secondary">CSS</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="project-card">
+                <div class="project-banner" style="background:linear-gradient(135deg,#fd7e14,#ffc107)">🧮</div>
+                <div class="p-3">
+                  <h6 class="fw-bold mb-1">Calculator App</h6>
+                  <p class="text-muted small mb-2">Scientific calculator built in HTML, CSS and JavaScript.</p>
+                  <div class="d-flex gap-1 flex-wrap">
+                    <span class="badge bg-warning text-dark">JavaScript</span>
+                    <span class="badge bg-primary">HTML</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+
+        <!-- Education Timeline -->
+        <div class="bg-white rounded-4 shadow-sm p-4 mb-4">
+          <div class="section-title"><i class="bi bi-mortarboard-fill text-primary"></i>Education</div>
+          <div class="d-flex flex-column gap-4">
+            <div class="timeline-item">
+              <div class="fw-bold">BS Computer Science</div>
+              <div class="text-primary small">Air University, Islamabad · 2024 – 2028 (Expected)</div>
+              <p class="text-muted small mt-1 mb-0">CGPA: 3.5/4.0 · Section 5A · Web Technologies, OS, SE, Algorithms, Automata</p>
+            </div>
+            <div class="timeline-item">
+              <div class="fw-bold">Intermediate (FSc Pre-Engineering)</div>
+              <div class="text-primary small">Rawalpindi Board · 2022 – 2024</div>
+              <p class="text-muted small mt-1 mb-0">Grade A · Scored 891/1100 in FSc annual exams</p>
+            </div>
+            <div class="timeline-item">
+              <div class="fw-bold">Matric (Science Group)</div>
+              <div class="text-primary small">Federal Board · 2020 – 2022</div>
+              <p class="text-muted small mt-1 mb-0">Grade A+ · First position in school (Science division)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Certifications -->
+        <div class="bg-white rounded-4 shadow-sm p-4 mb-4">
+          <div class="section-title"><i class="bi bi-award-fill text-warning"></i>Certifications</div>
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <div class="d-flex align-items-start gap-3 p-3 rounded-3" style="background:#fffbeb; border:1px solid #fde68a">
+                <i class="bi bi-patch-check-fill text-warning fs-4 mt-1"></i>
+                <div>
+                  <div class="fw-semibold small">Responsive Web Design</div>
+                  <div class="text-muted" style="font-size:.75rem">freeCodeCamp · 2025</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="d-flex align-items-start gap-3 p-3 rounded-3" style="background:#eff6ff; border:1px solid #bfdbfe">
+                <i class="bi bi-patch-check-fill text-primary fs-4 mt-1"></i>
+                <div>
+                  <div class="fw-semibold small">JavaScript Algorithms</div>
+                  <div class="text-muted" style="font-size:.75rem">freeCodeCamp · 2025</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="d-flex align-items-start gap-3 p-3 rounded-3" style="background:#f0fdf4; border:1px solid #bbf7d0">
+                <i class="bi bi-patch-check-fill text-success fs-4 mt-1"></i>
+                <div>
+                  <div class="fw-semibold small">Bootstrap 5 Crash Course</div>
+                  <div class="text-muted" style="font-size:.75rem">Udemy · 2026</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="bg-white rounded-4 shadow-sm p-4 mb-4 contact-form">
+          <div class="section-title"><i class="bi bi-envelope-fill text-primary"></i>Contact Me</div>
+          <form>
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <label class="form-label fw-semibold small">Your Name</label>
+                <input type="text" class="form-control" placeholder="Enter your name">
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label fw-semibold small">Email Address</label>
+                <input type="email" class="form-control" placeholder="email@example.com">
+              </div>
+              <div class="col-12">
+                <label class="form-label fw-semibold small">Subject</label>
+                <input type="text" class="form-control" placeholder="Subject of your message">
+              </div>
+              <div class="col-12">
+                <label class="form-label fw-semibold small">Message</label>
+                <textarea class="form-control" rows="4" placeholder="Write your message here..."></textarea>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary px-4 fw-semibold">
+                  <i class="bi bi-send-fill me-2"></i>Send Message
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center text-muted py-3 border-top small">
+          <p class="mb-1">Web Development Lab 2 · Task 3 · Two-Column Portfolio (Bootstrap 5)</p>
+          <p class="mb-0">Submitted by <strong>Roman Fatima (241878)</strong> · BSCS 5A · Air University</p>
+        </footer>
 
       </div>
-    </aside>
-
-    <!-- ====================================================================
-         COLUMN 2 (RIGHT): MAIN SCROLLABLE CONTENT & PORTFOLIO SHOWCASE
-         ==================================================================== -->
-    <main class="col-right-content">
-
-      <!-- Hero Welcome Card -->
-      <section class="content-card hero-card">
-        <div class="hero-badge">✨ Welcome to my creative portfolio</div>
-        <h2 class="hero-heading">Crafting aesthetic, responsive, and high-performance digital experiences.</h2>
-        <p class="hero-subtext">
-          I am a 5th-semester Computer Science undergraduate at Air University, passionate about human-centered frontend design, creative animations, algorithmic problem solving, and building scalable modern web applications.
-        </p>
-        <div class="hero-stats">
-          <div class="h-stat">
-            <span class="h-num">5+</span>
-            <span class="h-label">Lab 2 Tasks Delivered</span>
-          </div>
-          <div class="h-stat">
-            <span class="h-num">100%</span>
-            <span class="h-label">Semantic HTML & CSS</span>
-          </div>
-          <div class="h-stat">
-            <span class="h-num">3.7+</span>
-            <span class="h-label">Academic Excellence</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- About Me Narrative Section -->
-      <section class="content-card" id="about">
-        <h2 class="section-title">
-          <span class="title-icon">👩‍💻</span>
-          About Roman
-        </h2>
-        <div class="narrative-text">
-          <p>
-            Hello! I'm <strong>Roman Fatima</strong>, an enthusiastic software engineering student who believes that the intersection of technical rigor and visual aesthetics is where extraordinary software is created.
-          </p>
-          <p>
-            Currently in my <strong>5th Semester of BS Computer Science at Air University, Islamabad</strong>, I have engaged in coursework spanning Web Technologies, Operating Systems, Software Engineering, and Algorithms. My favorite aspect of web development is taking complex structural specifications—such as the IEEE conference paper standards or high-traffic social media clones—and transforming them into accessible, responsive, and delightful web interfaces.
-          </p>
-          <p>
-            When I'm not coding or debugging CSS grid alignments with a cup of iced latte, I actively collaborate with my study squad—Insha, Aniqa, Sana, and Wania—on academic sprints, hackathons, and creative design systems.
-          </p>
-        </div>
-      </section>
-
-      <!-- Featured Projects Section -->
-      <section class="content-card" id="projects">
-        <div class="section-header-flex">
-          <h2 class="section-title">
-            <span class="title-icon">🚀</span>
-            Featured Academic Projects (Lab 2 Showcase)
-          </h2>
-          <span class="view-all-tag">All 5 Tasks Live</span>
-        </div>
-
-        <div class="projects-grid">
-
-          <!-- Project 1: Facebook Clone -->
-          <div class="project-card">
-            <div class="project-header">
-              <div class="project-icon-badge fb">📘</div>
-              <span class="project-task-pill">Task 2</span>
-            </div>
-            <h3 class="project-title">Facebook Home Page Clone</h3>
-            <p class="project-desc">
-              Authentic recreation of the Facebook Home Page using semantic HTML and Vanilla CSS. Features a 3-column desktop layout, real-time stories reel with friend integration (Insha, Aniqa, Sana, Wania), interactive reaction states, and threaded friend comments.
-            </p>
-            <div class="tech-tags">
-              <span class="tag">HTML5</span>
-              <span class="tag">CSS3 Grid & Flexbox</span>
-              <span class="tag">Interactive DOM</span>
-              <span class="tag">Responsive UI</span>
-            </div>
-            <div class="project-footer">
-              <a href="../task2-facebook/index.html" class="project-link">🚀 Open Live Project →</a>
-            </div>
-          </div>
-
-          <!-- Project 2: Class Timetable -->
-          <div class="project-card">
-            <div class="project-header">
-              <div class="project-icon-badge timetable">📅</div>
-              <span class="project-task-pill">Task 1</span>
-            </div>
-            <h3 class="project-title">Interactive Academic Class Timetable</h3>
-            <p class="project-desc">
-              Comprehensive weekly academic schedule for BSCS Section 5A. Built with semantic HTML table elements, proper rowspan/colspan for 3-hour lab sessions and prayer breaks, day filter tabs, and dedicated print stylesheets for PDF export.
-            </p>
-            <div class="tech-tags">
-              <span class="tag">Semantic &lt;table&gt;</span>
-              <span class="tag">Print Media CSS</span>
-              <span class="tag">Color Coding</span>
-              <span class="tag">Air University Schedule</span>
-            </div>
-            <div class="project-footer">
-              <a href="../task1-timetable/index.html" class="project-link">🚀 Open Live Project →</a>
-            </div>
-          </div>
-
-          <!-- Project 3: AetherOS Custom UI -->
-          <div class="project-card">
-            <div class="project-header">
-              <div class="project-icon-badge custom-ui">✨</div>
-              <span class="project-task-pill">Task 4</span>
-            </div>
-            <h3 class="project-title">AetherOS: Advanced CSS Custom UI Studio</h3>
-            <p class="project-desc">
-              Next-generation futuristic glassmorphic workspace showcasing all CSS concepts studied: 3D perspective tilt cards, animated conic-gradient glowing borders, dynamic theme engine (Cyberpunk, Rose Gold, Crystal Glass), spinning vinyl music player, and animated SVG gauges.
-            </p>
-            <div class="tech-tags">
-              <span class="tag">3D Transforms</span>
-              <span class="tag">Glassmorphism</span>
-              <span class="tag">CSS Variables</span>
-              <span class="tag">Keyframe Animations</span>
-            </div>
-            <div class="project-footer">
-              <a href="../task4-custom-ui/index.html" class="project-link">🚀 Open Live Project →</a>
-            </div>
-          </div>
-
-          <!-- Project 4: IEEE Paper Template -->
-          <div class="project-card">
-            <div class="project-header">
-              <div class="project-icon-badge ieee">📄</div>
-              <span class="project-task-pill">Task 5</span>
-            </div>
-            <h3 class="project-title">IEEE Conference Research Paper Template</h3>
-            <p class="project-desc">
-              Two-column official IEEE academic publishing template built with CSS multi-column layouts, Times New Roman typography, Roman-numeral section hierarchy, mathematical equation numbering, formatted IEEE tables, and print-ready margins.
-            </p>
-            <div class="tech-tags">
-              <span class="tag">CSS Multi-Column</span>
-              <span class="tag">IEEE Standards</span>
-              <span class="tag">Typography Engine</span>
-              <span class="tag">Print to PDF</span>
-            </div>
-            <div class="project-footer">
-              <a href="../task5-ieee-paper/index.html" class="project-link">🚀 Open Live Project →</a>
-            </div>
-          </div>
-
-          <!-- Project 5: Lab 1 Scientific Calculator -->
-          <div class="project-card">
-            <div class="project-header">
-              <div class="project-icon-badge calc">🧮</div>
-              <span class="project-task-pill">Lab 1</span>
-            </div>
-            <h3 class="project-title">Scientific Web Calculator</h3>
-            <p class="project-desc">
-              Full-featured web calculator built during Full Stack Web Development Lab 1. Includes keyboard entry, floating point operations, calculation history logs, and responsive layout.
-            </p>
-            <div class="tech-tags">
-              <span class="tag">JavaScript Engine</span>
-              <span class="tag">CSS Layouts</span>
-              <span class="tag">State Management</span>
-            </div>
-            <div class="project-footer">
-              <a href="../../calcu.html" class="project-link">🚀 Open Lab 1 Calculator →</a>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- Coursework & Academic Highlights -->
-      <section class="content-card">
-        <h2 class="section-title">
-          <span class="title-icon">📚</span>
-          Core Coursework &amp; Competencies
-        </h2>
-        <div class="course-chips-grid">
-          <div class="course-chip">
-            <span class="chip-code">CS311</span>
-            <span class="chip-name">Web Technologies (HTML, CSS, JS)</span>
-          </div>
-          <div class="course-chip">
-            <span class="chip-code">CS312</span>
-            <span class="chip-name">Operating Systems (Linux, POSIX)</span>
-          </div>
-          <div class="course-chip">
-            <span class="chip-code">CS313</span>
-            <span class="chip-name">Software Engineering &amp; Agile</span>
-          </div>
-          <div class="course-chip">
-            <span class="chip-code">CS314</span>
-            <span class="chip-name">Design &amp; Analysis of Algorithms</span>
-          </div>
-          <div class="course-chip">
-            <span class="chip-code">CS315</span>
-            <span class="chip-name">Theory of Automata &amp; Computation</span>
-          </div>
-          <div class="course-chip">
-            <span class="chip-code">CS211</span>
-            <span class="chip-name">Data Structures &amp; Algorithms</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- Contact Form Section -->
-      <section class="content-card" id="contact">
-        <h2 class="section-title">
-          <span class="title-icon">📬</span>
-          Get in Touch / Send a Message
-        </h2>
-        <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.95rem;">
-          Have a question about my projects, academic coursework, or wish to collaborate? Drop me a message below!
-        </p>
-
-        <form class="contact-form" id="portfolioContactForm" onsubmit="event.preventDefault(); document.getElementById('formSuccess').style.display='block'; this.reset();">
-          <div class="form-row-2">
-            <div class="form-group">
-              <label for="nameInput">Your Name</label>
-              <input type="text" id="nameInput" placeholder="e.g. Dr. Tariq Mahmood" required>
-            </div>
-            <div class="form-group">
-              <label for="emailInput">Your Email</label>
-              <input type="email" id="emailInput" placeholder="tariq@au.edu.pk" required>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="subjectInput">Subject</label>
-            <input type="text" id="subjectInput" placeholder="Feedback on Lab 2 Tasks" required>
-          </div>
-
-          <div class="form-group">
-            <label for="messageInput">Message</label>
-            <textarea id="messageInput" rows="4" placeholder="Write your message here..." required></textarea>
-          </div>
-
-          <button type="submit" class="btn-submit">
-            <span>✨ Send Message to Roman</span>
-          </button>
-
-          <div id="formSuccess" class="form-success-alert" style="display: none;">
-            ✅ Thank you for your message! Roman Fatima will get back to you shortly.
-          </div>
-        </form>
-      </section>
-
-      <!-- Footer -->
-      <footer class="portfolio-footer">
-        <p>© 2026 Roman Fatima · Registration No: 241878 · BSCS 5A · Air University Islamabad</p>
-        <p>Designed with pure HTML5 &amp; CSS3 for Web Development Lab 2</p>
-      </footer>
-
-    </main>
-
+    </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Animate progress bars on page load
+    window.addEventListener('load', () => {
+      document.querySelectorAll('.progress-bar').forEach(bar => {
+        const w = bar.style.width;
+        bar.style.width = '0';
+        setTimeout(() => { bar.style.transition = 'width 1s ease'; bar.style.width = w; }, 300);
+      });
+    });
+  </script>
 </body>
 </html>

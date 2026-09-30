@@ -1,407 +1,509 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="cyberpunk">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AetherOS | Advanced CSS Concept Showcase</title>
-  <meta name="description" content="Next-Gen Creative UI Studio demonstrating advanced CSS concepts studied in Web Development: 3D perspective transforms, glassmorphism, animated conic-gradients, dynamic theme engine, and interactive widgets.">
-  
+  <title>AetherOS | Advanced Custom CSS UI Showcase</title>
+  <meta name="description" content="AetherOS — Advanced CSS Concept UI Showcase with Bootstrap 5 for Web Dev Lab 2, Task 4.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-  
-  <link rel="stylesheet" href="custom-ui.css">
-</head>
-<body class="theme-cyberpunk">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    /* ═══════ THEME VARIABLES ═══════ */
+    :root {
+      --bg-dark: #0d0d1a; --bg-card: rgba(20,20,45,.75);
+      --accent: #a855f7; --accent2: #06b6d4;
+      --text: #f1f5f9; --text-muted: rgba(241,245,249,.5);
+      --glow: rgba(168,85,247,.25);
+    }
+    [data-theme="rosegold"] { --accent: #f472b6; --accent2: #fb923c; --bg-dark: #1a0d12; --glow: rgba(244,114,182,.25); }
+    [data-theme="crystal"]  { --accent: #06b6d4; --accent2: #22c55e; --bg-dark: #0a1628; --glow: rgba(6,182,212,.25); }
+    [data-theme="matrix"]   { --accent: #22c55e; --accent2: #84cc16; --bg-dark: #051205; --glow: rgba(34,197,94,.25); }
 
-  <!-- Ambient Animated Glowing Background Orbs -->
+    /* ═══════ BASE ═══════ */
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: 'Space Grotesk', sans-serif; background: var(--bg-dark); color: var(--text); min-height: 100vh; transition: background .5s; }
+
+    /* ═══════ ANIMATED ORB BG ═══════ */
+    .glow-orb { position: fixed; border-radius: 50%; filter: blur(80px); opacity: .35; pointer-events: none; z-index: 0; animation: floatOrb 8s ease-in-out infinite; }
+    .orb-1 { width: 500px; height: 500px; background: var(--accent); top: -100px; left: -100px; animation-delay: 0s; }
+    .orb-2 { width: 400px; height: 400px; background: var(--accent2); bottom: 0; right: -100px; animation-delay: -4s; }
+    .orb-3 { width: 300px; height: 300px; background: var(--accent); top: 50%; left: 50%; transform: translate(-50%,-50%); animation-delay: -2s; }
+    @keyframes floatOrb { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-30px)} }
+
+    /* ═══════ HEADER ═══════ */
+    .os-header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(13,13,26,.9); backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      padding: .75rem 1.5rem;
+    }
+    .os-logo-text { font-size: 1.3rem; font-weight: 800; }
+    .os-logo-text span { color: var(--accent); }
+
+    /* ═══════ GLASS CARD ═══════ */
+    .glass-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 20px;
+      transition: transform .3s, box-shadow .3s, border-color .3s;
+    }
+    .glass-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px var(--glow); border-color: var(--accent); }
+
+    /* ═══════ HERO BANNER ═══════ */
+    .hero-banner {
+      position: relative; overflow: hidden;
+      background: var(--bg-card);
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 24px; padding: 3rem 2.5rem;
+    }
+    .hero-banner::before {
+      content: ''; position: absolute; inset: 0;
+      background: conic-gradient(from 0deg, var(--accent), var(--accent2), var(--accent));
+      border-radius: 24px; padding: 2px; -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+      animation: rotateBorder 4s linear infinite;
+    }
+    @keyframes rotateBorder { to { filter: hue-rotate(360deg); } }
+    .hero-tag {
+      display: inline-block; padding: .3rem 1rem;
+      border: 1px solid var(--accent); color: var(--accent);
+      border-radius: 50px; font-size: .75rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1rem;
+    }
+
+    /* ═══════ 3D CUBE ═══════ */
+    .cube-scene { perspective: 400px; width: 90px; height: 90px; margin: 0 auto 1.5rem; }
+    .cube { width: 90px; height: 90px; position: relative; transform-style: preserve-3d; animation: spinCube 10s linear infinite; }
+    @keyframes spinCube { to { transform: rotateX(360deg) rotateY(360deg); } }
+    .cube-face {
+      position: absolute; width: 90px; height: 90px;
+      background: rgba(168,85,247,.2); border: 1px solid var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .8rem; font-weight: 700; color: var(--accent);
+      backdrop-filter: blur(4px);
+    }
+    .cube-face.front  { transform: translateZ(45px); }
+    .cube-face.back   { transform: rotateY(180deg) translateZ(45px); }
+    .cube-face.left   { transform: rotateY(-90deg) translateZ(45px); }
+    .cube-face.right  { transform: rotateY(90deg) translateZ(45px); }
+    .cube-face.top    { transform: rotateX(90deg) translateZ(45px); }
+    .cube-face.bottom { transform: rotateX(-90deg) translateZ(45px); }
+
+    /* ═══════ MUSIC WIDGET ═══════ */
+    .vinyl {
+      width: 100px; height: 100px; border-radius: 50%;
+      background: radial-gradient(circle at 50% 50%, var(--accent) 10%, #1a1a2e 12%, #1a1a2e 40%, rgba(168,85,247,.6) 41%, rgba(168,85,247,.6) 43%, #1a1a2e 44%);
+      margin: 0 auto 1rem;
+      box-shadow: 0 0 30px var(--glow);
+      transition: all .3s;
+    }
+    .vinyl.spinning { animation: spinVinyl 2s linear infinite; }
+    @keyframes spinVinyl { to { transform: rotate(360deg); } }
+
+    /* ═══════ SPECTRUM BARS ═══════ */
+    .bar { display: inline-block; width: 4px; border-radius: 3px; background: var(--accent); margin: 0 2px; }
+    .spectrum-bars.playing .bar { animation: eq 0.8s ease-in-out infinite alternate; }
+    .bar:nth-child(1){animation-delay:.0s;} .bar:nth-child(2){animation-delay:.1s;} .bar:nth-child(3){animation-delay:.2s;}
+    .bar:nth-child(4){animation-delay:.3s;} .bar:nth-child(5){animation-delay:.4s;} .bar:nth-child(6){animation-delay:.5s;}
+    .bar:nth-child(7){animation-delay:.6s;} .bar:nth-child(8){animation-delay:.7s;}
+    @keyframes eq { from{height:4px} to{height:28px} }
+    .spectrum-bars .bar { height: 4px; }
+
+    /* ═══════ GAUGE ═══════ */
+    .gauge-track { fill: none; stroke: rgba(255,255,255,.08); stroke-width: 8; }
+    .gauge-arc { fill: none; stroke-width: 8; stroke-linecap: round; stroke-dasharray: 251; stroke-dashoffset: 251; transition: stroke-dashoffset 1.5s ease; transform: rotate(-90deg); transform-origin: 50% 50%; }
+
+    /* ═══════ CHART BARS ═══════ */
+    .chart-bar { background: linear-gradient(to top, var(--accent), var(--accent2)); border-radius: 6px 6px 0 0; width: 28px; transition: height 1.5s ease; }
+
+    /* ═══════ WEATHER WIDGET ═══════ */
+    .sun { width: 60px; height: 60px; border-radius: 50%; background: radial-gradient(circle, #ffd700, #ff8c00); box-shadow: 0 0 30px #ffd700, 0 0 60px rgba(255,165,0,.3); animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{box-shadow:0 0 30px #ffd700} 50%{box-shadow:0 0 50px #ffd700,0 0 80px rgba(255,165,0,.4)} }
+
+    /* ═══════ THEME PILLS ═══════ */
+    .theme-pill { border: 1px solid rgba(255,255,255,.2); background: transparent; color: var(--text); border-radius: 50px; padding: .3rem .9rem; font-size: .8rem; cursor: pointer; transition: all .2s; }
+    .theme-pill.active, .theme-pill:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+    /* ═══════ ACCORDION ═══════ */
+    .acc-item { border: 1px solid rgba(255,255,255,.1); border-radius: 12px; overflow: hidden; }
+    .acc-item + .acc-item { margin-top: .75rem; }
+
+    /* ═══════ CODE BLOCK ═══════ */
+    pre code { font-family: 'JetBrains Mono', monospace; font-size: .78rem; color: var(--accent2); background: transparent; }
+
+    /* ═══════ FLIP CARD ═══════ */
+    .flip-scene { perspective: 1000px; }
+    .flip-inner { position: relative; width: 100%; height: 220px; transform-style: preserve-3d; transition: transform .8s; }
+    .flip-scene.flipped .flip-inner { transform: rotateY(180deg); }
+    .flip-face { position: absolute; inset: 0; backface-visibility: hidden; border-radius: 12px; padding: 1.5rem; background: var(--bg-card); border: 1px solid rgba(255,255,255,.1); }
+    .flip-back { transform: rotateY(180deg); }
+
+    /* Utility */
+    .text-accent { color: var(--accent) !important; }
+    .border-accent { border-color: var(--accent) !important; }
+    .btn-accent { background: var(--accent); border: none; color: #fff; }
+    .btn-accent:hover { opacity: .85; color: #fff; }
+
+    /* volume range */
+    input[type=range] { accent-color: var(--accent); }
+
+    @media (max-width:767px) { .glow-orb { display:none; } }
+  </style>
+</head>
+<body>
+  <!-- Ambient Orbs -->
   <div class="glow-orb orb-1"></div>
   <div class="glow-orb orb-2"></div>
   <div class="glow-orb orb-3"></div>
 
-  <!-- Top Navigation & Concept Dashboard Bar -->
+  <!-- Header -->
   <header class="os-header">
-    <div class="header-left">
-      <div class="os-logo">
-        <span class="os-logo-icon">⚡</span>
-        <span class="os-logo-text">Aether<span class="highlight">OS</span></span>
+    <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+      <div class="d-flex align-items-center gap-3 flex-wrap">
+        <div class="os-logo-text">⚡ Aether<span>OS</span></div>
+        <span class="badge border border-opacity-25 fw-normal" style="border-color:var(--accent); color:var(--accent); background:rgba(168,85,247,.1)">Lab 2 · Task 4 · Advanced Custom CSS UI</span>
+        <span class="badge border border-opacity-25 fw-normal text-white-50" style="background:rgba(255,255,255,.05)">Roman Fatima (241878) · BSCS 5A</span>
       </div>
-      <div class="concept-badge">
-        <span>Lab 2 · Task 4: Advanced Custom CSS UI</span>
+      <!-- Theme Switcher -->
+      <div class="d-flex align-items-center gap-2 flex-wrap">
+        <span class="text-white-50 small">Palette:</span>
+        <button class="theme-pill active" onclick="setTheme('cyberpunk',this)">🌌 Cyberpunk</button>
+        <button class="theme-pill" onclick="setTheme('rosegold',this)">🌸 Rose</button>
+        <button class="theme-pill" onclick="setTheme('crystal',this)">💎 Crystal</button>
+        <button class="theme-pill" onclick="setTheme('matrix',this)">⚡ Matrix</button>
       </div>
-      <div class="student-chip">
-        <span>Roman Fatima (241878) · BSCS 5A</span>
+      <!-- Nav -->
+      <div class="d-none d-md-flex gap-2">
+        <a href="../index.html" class="btn btn-outline-light btn-sm">🏠 Hub</a>
+        <a href="../task6-ecommerce/index.html" class="btn btn-sm btn-accent">Task 6</a>
       </div>
-    </div>
-
-    <!-- Theme Switcher Pills -->
-    <div class="theme-switcher-box">
-      <span class="theme-label">Palette:</span>
-      <button class="theme-pill active" onclick="setTheme('cyberpunk')">🌌 Cyberpunk</button>
-      <button class="theme-pill" onclick="setTheme('rosegold')">🌸 Rose Dream</button>
-      <button class="theme-pill" onclick="setTheme('crystal')">💎 Frost Glass</button>
-      <button class="theme-pill" onclick="setTheme('matrix')">⚡ Matrix Green</button>
-    </div>
-
-    <!-- Sibling Task Links -->
-    <div class="os-nav-links">
-      <a href="timetable.html" class="os-nav-btn">Task 1: Timetable</a>
-      <a href="index.html" class="os-nav-btn">Task 2: Facebook</a>
-      <a href="portfolio.html" class="os-nav-btn">Task 3: Portfolio</a>
-      <a href="custom-ui.html" class="os-nav-btn active">Task 4: Custom UI</a>
-      <a href="ieee-paper.html" class="os-nav-btn">Task 5: IEEE Paper</a>
-      <a href="full stack lab/Lab 2/index.html" class="os-nav-btn" style="background:#0284c7;color:#fff;">📂 Hub</a>
     </div>
   </header>
 
-  <!-- Main Showcase Container -->
-  <div class="os-canvas">
+  <div class="container-xl py-4 position-relative" style="z-index:1">
 
-    <!-- Hero Concept Banner with Animated Conic Gradient Border -->
-    <section class="laser-card-wrap">
-      <div class="laser-card-inner">
-        <div class="hero-content">
-          <div class="hero-tag">CSS Architecture Masterpiece</div>
-          <h1 class="hero-title">Interactive CSS Concepts Studio</h1>
-          <p class="hero-desc">
-            Created for <strong>Web Development Lab 2 (Task 4)</strong>. This interactive custom interface pushes the boundaries of modern CSS3: <strong>3D perspective transforms</strong>, <strong>conic-gradient orbiting lasers</strong>, <strong>backdrop-filter glassmorphism</strong>, <strong>dynamic CSS custom property theming</strong>, and <strong>keyframe micro-animations</strong>.
-          </p>
-          <div class="css-pill-tags">
-            <span class="cpill">@property Conic Gradient</span>
-            <span class="cpill">preserve-3d Perspective</span>
-            <span class="cpill">backdrop-filter: blur(24px)</span>
-            <span class="cpill">CSS Grid Auto-Fit</span>
-            <span class="cpill">Dynamic Theming</span>
-          </div>
-        </div>
+    <!-- Hero Banner -->
+    <div class="hero-banner mb-4">
+      <div class="hero-tag">CSS Architecture Masterpiece</div>
+      <h1 class="display-6 fw-bold mb-3" style="background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent">
+        Interactive CSS Concepts Studio
+      </h1>
+      <p class="text-white-50 mb-3">
+        Created for <strong class="text-white">Web Development Lab 2 (Task 4)</strong>. This interface demonstrates advanced CSS3 concepts:
+        <strong class="text-white">3D perspective transforms</strong>, <strong class="text-white">conic-gradient orbiting borders</strong>,
+        <strong class="text-white">glassmorphism</strong>, <strong class="text-white">dynamic CSS custom property theming</strong>,
+        and <strong class="text-white">keyframe micro-animations</strong>.
+      </p>
+      <div class="d-flex flex-wrap gap-2">
+        <span class="badge rounded-pill border border-opacity-25 fw-normal" style="border-color:var(--accent);color:var(--accent);background:rgba(168,85,247,.1)">preserve-3d Perspective</span>
+        <span class="badge rounded-pill border border-opacity-25 fw-normal" style="border-color:var(--accent2);color:var(--accent2);background:rgba(6,182,212,.1)">backdrop-filter: blur(24px)</span>
+        <span class="badge rounded-pill border border-opacity-25 fw-normal" style="border-color:var(--accent);color:var(--accent);background:rgba(168,85,247,.1)">CSS Grid Auto-Fit</span>
+        <span class="badge rounded-pill border border-opacity-25 fw-normal" style="border-color:var(--accent2);color:var(--accent2);background:rgba(6,182,212,.1)">Dynamic Theming</span>
+        <span class="badge rounded-pill border border-opacity-25 fw-normal" style="border-color:var(--accent);color:var(--accent);background:rgba(168,85,247,.1)">Bootstrap 5 Grid</span>
       </div>
-    </section>
+    </div>
 
-    <!-- Grid of Interactive Custom UI Widgets -->
-    <div class="widgets-grid">
+    <!-- Widget Grid -->
+    <div class="row g-4 mb-4">
 
-      <!-- ==============================================================
-           WIDGET 1: 3D INTERACTIVE FLIP CARD (Front: UI / Back: CSS Code)
-           ============================================================== -->
-      <div class="grid-card flip-card-container" onclick="toggleCardFlip(this)" title="Click to flip and inspect CSS rules!">
-        <div class="flip-card-inner">
-          
-          <!-- Front Face -->
-          <div class="card-face card-front glass-panel">
-            <div class="widget-header">
-              <span class="widget-tag">3D Transforms · Concept #1</span>
-              <span class="flip-hint">Click to Flip 🔄</span>
-            </div>
-            <div class="card-front-content">
-              <div class="isometric-cube-wrap">
-                <div class="cube">
-                  <div class="cube-face front">HTML5</div>
-                  <div class="cube-face back">CSS3</div>
-                  <div class="cube-face right">JS</div>
-                  <div class="cube-face left">UI/UX</div>
-                  <div class="cube-face top">GRID</div>
-                  <div class="cube-face bottom">FLEX</div>
+      <!-- Widget 1: 3D Flip Card -->
+      <div class="col-sm-6 col-xl-3">
+        <div class="glass-card p-3 h-100">
+          <div class="text-accent small fw-bold mb-2">3D Transforms · Concept #1</div>
+          <div class="flip-scene" id="flipScene" onclick="this.classList.toggle('flipped')" title="Click to flip!" style="cursor:pointer">
+            <div class="flip-inner">
+              <!-- Front -->
+              <div class="flip-face">
+                <div class="cube-scene">
+                  <div class="cube">
+                    <div class="cube-face front">HTML</div>
+                    <div class="cube-face back">CSS</div>
+                    <div class="cube-face left">JS</div>
+                    <div class="cube-face right">UI/UX</div>
+                    <div class="cube-face top">GRID</div>
+                    <div class="cube-face bottom">FLEX</div>
+                  </div>
                 </div>
+                <h5 class="fw-bold mb-1 text-white">3D Isometric Cube</h5>
+                <p class="text-white-50 small mb-2">Pure CSS <code>preserve-3d</code> + keyframe rotation.</p>
+                <small class="text-accent">Click to flip 🔄</small>
               </div>
-              <h3 class="widget-title">3D Isometric Object Engine</h3>
-              <p class="widget-desc">Rendered with pure CSS <code>transform-style: preserve-3d</code> and continuous rotational keyframes.</p>
-            </div>
-          </div>
-
-          <!-- Back Face: Code Snippet -->
-          <div class="card-face card-back glass-panel">
-            <div class="widget-header">
-              <span class="widget-tag">CSS Source Code</span>
-              <span class="flip-hint">Click to Return 🔄</span>
-            </div>
-            <pre class="code-snippet"><code>.cube {
+              <!-- Back -->
+              <div class="flip-face flip-back">
+                <div class="text-accent small fw-bold mb-2">CSS Source Code</div>
+                <pre><code>.cube {
   transform-style: preserve-3d;
-  animation: rotateCube 12s infinite linear;
+  animation: spin 10s
+    linear infinite;
 }
 .cube-face {
   position: absolute;
-  width: 90px; height: 90px;
-  transform: rotateY(90deg) translateZ(45px);
+  transform: rotateY(90deg)
+    translateZ(45px);
 }</code></pre>
+                <small class="text-accent">Click to return 🔄</small>
+              </div>
+            </div>
           </div>
-
         </div>
       </div>
 
-      <!-- ==============================================================
-           WIDGET 2: REAL SONGS MUSIC & SOUND STUDIO WIDGET
-           ============================================================== -->
-      <div class="grid-card glass-panel music-widget" id="musicStudioCard">
-        <div class="widget-header">
-          <span class="widget-tag">Interactive Audio & Keyframes · Concept #2</span>
-          <span class="live-dot-pulse" id="audioStatusBadge">● READY</span>
-        </div>
-
-        <div class="music-core">
-          <!-- Spinning Vinyl Record with Album Theme -->
-          <div class="vinyl-record paused" id="vinylRecord" title="Click to Play/Pause" onclick="togglePlayState()">
-            <div class="vinyl-label" id="vinylLabel">
-              <div class="vinyl-center-dot"></div>
-              <span id="vinylGenre">HITS</span>
-            </div>
+      <!-- Widget 2: Music Studio -->
+      <div class="col-sm-6 col-xl-3">
+        <div class="glass-card p-3 h-100">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="text-accent small fw-bold">Music Studio · Concept #2</span>
+            <span class="badge bg-success" id="audioStatus">● READY</span>
           </div>
-
-          <div class="track-details">
-            <div class="track-title-row">
-              <span class="track-title" id="trackTitle">On Top of the World</span>
-              <span class="song-count-pill" id="trackIndexBadge">1 / 7</span>
-            </div>
-            <div class="track-artist" id="trackArtist">Barbie (Princess Charm School)</div>
-            
-            <!-- Animated Equalizer Spectrum Bars -->
+          <div class="vinyl" id="vinylDisc" onclick="togglePlay()" title="Click to play/pause" style="cursor:pointer"></div>
+          <div class="text-center mb-2">
+            <div class="fw-semibold" id="trackTitle" style="font-size:.9rem">On Top of the World</div>
+            <div class="text-white-50 small" id="trackArtist">Barbie (Princess Charm School)</div>
+          </div>
+          <div class="d-flex justify-content-center align-items-end gap-1 mb-2" style="height:30px">
             <div class="spectrum-bars" id="spectrumBars">
-              <span class="bar b1"></span>
-              <span class="bar b2"></span>
-              <span class="bar b3"></span>
-              <span class="bar b4"></span>
-              <span class="bar b5"></span>
-              <span class="bar b6"></span>
-              <span class="bar b7"></span>
-              <span class="bar b8"></span>
-            </div>
-
-            <!-- Interactive Progress Track -->
-            <div class="audio-progress-bar" id="progressBar" onclick="seekAudio(event)" title="Click to seek">
-              <div class="audio-fill" id="audioFill" style="width: 0%;"></div>
-            </div>
-            <div class="audio-times">
-              <span id="currentTimeDisplay">00:00</span>
-              <span id="durationTimeDisplay">02:30</span>
+              <span class="bar b1"></span><span class="bar b2"></span><span class="bar b3"></span><span class="bar b4"></span>
+              <span class="bar b5"></span><span class="bar b6"></span><span class="bar b7"></span><span class="bar b8"></span>
             </div>
           </div>
-        </div>
-
-        <!-- Song Selector Quick Dropdown & Visual Playlist Pill Bar -->
-        <div class="playlist-quick-bar">
-          <select class="song-dropdown" id="songSelect" onchange="selectSongFromDropdown(this.value)">
-            <option value="0">1. On Top of the World — Barbie (Princess Charm School)</option>
+          <!-- Seek Bar -->
+          <div class="progress mb-1" style="height:5px; cursor:pointer" id="seekBar">
+            <div class="progress-bar" id="seekFill" style="width:0%; background:var(--accent)"></div>
+          </div>
+          <div class="d-flex justify-content-between mb-2" style="font-size:.7rem; color:rgba(255,255,255,.4)">
+            <span id="curTime">00:00</span><span id="durTime">00:00</span>
+          </div>
+          <select class="form-select form-select-sm bg-dark text-white border-0 mb-2" id="songSelect" style="background:rgba(255,255,255,.05)!important">
+            <option value="0">1. On Top of the World — Barbie</option>
             <option value="1">2. When I Close My Eyes — Tom Odell</option>
-            <option value="2">3. Alfaaz — Hamza Malik &amp; Zain Zohaib</option>
-            <option value="3">4. Right Now (Na Na Na) — Akon</option>
+            <option value="2">3. Alfaaz — Hamza Malik</option>
+            <option value="3">4. Right Now — Akon</option>
             <option value="4">5. Born to Die — Lana Del Rey</option>
-            <option value="5">6. Tau Kya Huwa — Asfar Hussain &amp; Xulfi (Nescafe Basement)</option>
+            <option value="5">6. Tau Kya Huwa — Asfar Hussain</option>
             <option value="6">7. Intezar — Kavish</option>
           </select>
-        </div>
-
-        <!-- Player Controls: Prev, Play/Pause, Next, Volume -->
-        <div class="player-controls">
-          <button class="ctrl-btn" id="prevBtn" onclick="prevSong()" title="Previous Song">⏮️</button>
-          <button class="ctrl-btn play-btn" id="playBtn" onclick="togglePlayState()" title="Play / Pause">▶️</button>
-          <button class="ctrl-btn" id="nextBtn" onclick="nextSong()" title="Next Song">⏭️</button>
-          <div class="volume-slider-wrap">
-            <span id="volIcon">🔊</span>
-            <input type="range" class="vol-slider" id="volSlider" min="0" max="100" value="80" oninput="adjustVolume(this.value)" title="Volume Slider">
-            <span class="vol-val-text" id="volPercent">80%</span>
+          <div class="d-flex align-items-center justify-content-center gap-2">
+            <button class="btn btn-sm" style="background:rgba(255,255,255,.1);color:#fff;border-radius:50%;width:34px;height:34px;padding:0" onclick="prevSong()">⏮️</button>
+            <button class="btn btn-sm" style="background:var(--accent);color:#fff;border-radius:50%;width:42px;height:42px;padding:0;font-size:1.1rem" id="playBtn" onclick="togglePlay()">▶️</button>
+            <button class="btn btn-sm" style="background:rgba(255,255,255,.1);color:#fff;border-radius:50%;width:34px;height:34px;padding:0" onclick="nextSong()">⏭️</button>
+            <input type="range" class="form-range ms-2" min="0" max="100" value="80" id="volRange" oninput="setVolume(this.value)" style="width:70px; accent-color:var(--accent)">
           </div>
+          <audio id="audioEl"></audio>
         </div>
-
-        <!-- Hidden Native HTML5 Audio Element for Sound Playback -->
-        <audio id="mainAudioElement" preload="metadata"></audio>
       </div>
 
-      <!-- ==============================================================
-           WIDGET 3: DYNAMIC WEATHER & ATMOSPHERIC RADAR
-           ============================================================== -->
-      <div class="grid-card glass-panel weather-widget">
-        <div class="widget-header">
-          <span class="widget-tag">CSS Illustration & Shadows · Concept #3</span>
-          <span class="location-badge">📍 Islamabad, PK</span>
-        </div>
-
-        <div class="weather-display">
-          <div class="weather-art">
-            <div class="sun-orb"></div>
-            <div class="cloud-cluster">
-              <div class="cloud-puff puff-1"></div>
-              <div class="cloud-puff puff-2"></div>
-              <div class="cloud-puff puff-3"></div>
-            </div>
-            <!-- Floating Rain Drops -->
-            <div class="raindrops">
-              <span class="drop d1"></span>
-              <span class="drop d2"></span>
-              <span class="drop d3"></span>
-              <span class="drop d4"></span>
+      <!-- Widget 3: Weather -->
+      <div class="col-sm-6 col-xl-3">
+        <div class="glass-card p-3 h-100">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-accent small fw-bold">CSS Illustration · Concept #3</span>
+            <span class="badge" style="background:rgba(255,255,255,.1); color:rgba(255,255,255,.6)">📍 Islamabad, PK</span>
+          </div>
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <div class="sun"></div>
+            <div>
+              <div class="display-5 fw-black text-white">24°<span class="fs-4">C</span></div>
+              <div class="text-white-50 small">Partly Sunny &amp; Pleasant</div>
+              <div class="d-flex gap-2 mt-1" style="font-size:.75rem; color:rgba(255,255,255,.5)">
+                <span>💧 48%</span><span>💨 12 km/h</span>
+              </div>
             </div>
           </div>
-
-          <div class="weather-numbers">
-            <div class="temp-val">24<span class="temp-deg">°C</span></div>
-            <div class="weather-condition">Partly Sunny &amp; Pleasant</div>
-            <div class="weather-meta-row">
-              <span>💧 Humidity: 48%</span>
-              <span>💨 Wind: 12 km/h</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="forecast-row">
-          <div class="f-day">
-            <span class="fd-name">Mon</span>
-            <span class="fd-icon">☀️</span>
-            <span class="fd-temp">26°</span>
-          </div>
-          <div class="f-day">
-            <span class="fd-name">Tue</span>
-            <span class="fd-icon">⛅</span>
-            <span class="fd-temp">24°</span>
-          </div>
-          <div class="f-day active">
-            <span class="fd-name">Wed</span>
-            <span class="fd-icon">🌧️</span>
-            <span class="fd-temp">21°</span>
-          </div>
-          <div class="f-day">
-            <span class="fd-name">Thu</span>
-            <span class="fd-icon">🌤️</span>
-            <span class="fd-temp">25°</span>
-          </div>
-          <div class="f-day">
-            <span class="fd-name">Fri</span>
-            <span class="fd-icon">☀️</span>
-            <span class="fd-temp">27°</span>
+          <div class="d-flex justify-content-between">
+            <div class="text-center"><div class="text-white-50 small">Mon</div><div>☀️</div><div class="small text-white">26°</div></div>
+            <div class="text-center"><div class="text-white-50 small">Tue</div><div>⛅</div><div class="small text-white">24°</div></div>
+            <div class="text-center p-1 rounded-2" style="background:rgba(255,255,255,.1)"><div class="text-accent small fw-bold">Today</div><div>🌧️</div><div class="small text-white fw-bold">21°</div></div>
+            <div class="text-center"><div class="text-white-50 small">Thu</div><div>🌤️</div><div class="small text-white">25°</div></div>
+            <div class="text-center"><div class="text-white-50 small">Fri</div><div>☀️</div><div class="small text-white">27°</div></div>
           </div>
         </div>
       </div>
 
-      <!-- ==============================================================
-           WIDGET 4: LIVE PERFORMANCE ANALYTICS & CIRCULAR GAUGES
-           ============================================================== -->
-      <div class="grid-card glass-panel analytics-widget">
-        <div class="widget-header">
-          <span class="widget-tag">SVG Stroke Animations · Concept #4</span>
-          <span class="gauge-badge">Real-time Performance</span>
-        </div>
-
-        <div class="gauges-container">
-          
-          <!-- Circular Gauge 1 -->
-          <div class="gauge-wrap">
-            <svg class="circle-gauge" viewBox="0 0 100 100">
-              <circle class="gauge-bg" cx="50" cy="50" r="40"/>
-              <circle class="gauge-fill fill-1" cx="50" cy="50" r="40"/>
-            </svg>
-            <div class="gauge-text">
-              <span class="gt-num">98%</span>
-              <span class="gt-sub">Lighthouse Score</span>
+      <!-- Widget 4: Analytics -->
+      <div class="col-sm-6 col-xl-3">
+        <div class="glass-card p-3 h-100">
+          <div class="text-accent small fw-bold mb-3">SVG Animations · Concept #4</div>
+          <!-- Gauge -->
+          <div class="d-flex justify-content-around mb-3">
+            <div class="text-center">
+              <svg width="80" height="80" viewBox="0 0 100 100">
+                <circle class="gauge-track" cx="50" cy="50" r="40"/>
+                <circle class="gauge-arc" id="gauge1" cx="50" cy="50" r="40" stroke="#a855f7" stroke-dashoffset="15"/>
+              </svg>
+              <div class="fw-bold text-white" style="font-size:.85rem">98%</div>
+              <div class="text-white-50" style="font-size:.7rem">Lighthouse</div>
+            </div>
+            <div class="text-center">
+              <svg width="80" height="80" viewBox="0 0 100 100">
+                <circle class="gauge-track" cx="50" cy="50" r="40"/>
+                <circle class="gauge-arc" id="gauge2" cx="50" cy="50" r="40" stroke="#06b6d4" stroke-dashoffset="0"/>
+              </svg>
+              <div class="fw-bold text-white" style="font-size:.85rem">100%</div>
+              <div class="text-white-50" style="font-size:.7rem">Lab 2 Done</div>
             </div>
           </div>
-
-          <!-- Circular Gauge 2 -->
-          <div class="gauge-wrap">
-            <svg class="circle-gauge" viewBox="0 0 100 100">
-              <circle class="gauge-bg" cx="50" cy="50" r="40"/>
-              <circle class="gauge-fill fill-2" cx="50" cy="50" r="40"/>
-            </svg>
-            <div class="gauge-text">
-              <span class="gt-num">100%</span>
-              <span class="gt-sub">Lab 2 Coverage</span>
-            </div>
+          <!-- Bar Chart -->
+          <div class="small fw-semibold text-white-50 mb-2">Weekly Coding (hrs)</div>
+          <div class="d-flex align-items-end gap-1" style="height:60px">
+            <div class="chart-bar" style="height:60%" title="M:6h"></div>
+            <div class="chart-bar" style="height:85%" title="T:8.5h"></div>
+            <div class="chart-bar" style="height:95%" title="W:9.5h"></div>
+            <div class="chart-bar" style="height:75%" title="T:7.5h"></div>
+            <div class="chart-bar" style="height:100%" title="F:10h"></div>
+            <div class="chart-bar" style="height:40%; opacity:.5" title="S:4h"></div>
+            <div class="chart-bar" style="height:35%; opacity:.5" title="S:3.5h"></div>
           </div>
-
-        </div>
-
-        <!-- Animated Bar Chart -->
-        <div class="chart-section">
-          <div class="chart-header">
-            <span>Weekly Coding Productivity (Hours)</span>
-            <span class="chart-stat">+34% vs Last Week</span>
+          <div class="d-flex justify-content-between mt-1" style="font-size:.65rem; color:rgba(255,255,255,.35)">
+            <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
           </div>
-          <div class="chart-bars">
-            <div class="bar-col"><div class="chart-bar-fill" style="height: 60%;"><span class="tooltip">6h</span></div><span class="col-label">M</span></div>
-            <div class="bar-col"><div class="chart-bar-fill" style="height: 85%;"><span class="tooltip">8.5h</span></div><span class="col-label">T</span></div>
-            <div class="bar-col"><div class="chart-bar-fill" style="height: 95%;"><span class="tooltip">9.5h</span></div><span class="col-label">W</span></div>
-            <div class="bar-col"><div class="chart-bar-fill" style="height: 75%;"><span class="tooltip">7.5h</span></div><span class="col-label">T</span></div>
-            <div class="bar-col"><div class="chart-bar-fill" style="height: 100%;"><span class="tooltip">10h</span></div><span class="col-label">F</span></div>
-            <div class="bar-col"><div class="chart-bar-fill weekend" style="height: 40%;"><span class="tooltip">4h</span></div><span class="col-label">S</span></div>
-            <div class="bar-col"><div class="chart-bar-fill weekend" style="height: 35%;"><span class="tooltip">3.5h</span></div><span class="col-label">S</span></div>
-          </div>
+          <div class="mt-2 text-white-50 small">+34% vs last week 📈</div>
         </div>
       </div>
 
     </div>
 
-    <!-- ==============================================================
-         CSS CONCEPTS SYLLABUS INSPECTOR (Interactive Accordion)
-         ============================================================== -->
-    <section class="glass-panel syllabus-inspector">
-      <h2 class="inspector-title">
-        <span>📖</span> Complete Catalog of CSS Concepts Studied &amp; Demonstrated
+    <!-- CSS Concepts Accordion -->
+    <div class="glass-card p-4 mb-4">
+      <h2 class="fw-bold mb-3 text-white">
+        📖 <span style="color:var(--accent)">CSS Concepts</span> Studied &amp; Demonstrated
       </h2>
-      <div class="accordion-list">
-        
-        <details class="acc-item" open>
-          <summary class="acc-summary">
-            <span class="acc-num">01</span>
-            <span class="acc-title">CSS Grid &amp; Flexbox Alignment Models</span>
-            <span class="acc-tag">Layout</span>
-          </summary>
-          <div class="acc-content">
-            Utilizes CSS Grid with <code>grid-template-columns: repeat(auto-fit, minmax(...))</code> for dynamic responsive layouts, paired with Flexbox cross-axis and main-axis alignment for pixel-perfect card component nesting.
+      <div class="accordion accordion-flush" id="conceptAccordion">
+        <div class="accordion-item" style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:12px; margin-bottom:.75rem">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed fw-semibold text-white" style="background:transparent; box-shadow:none" type="button" data-bs-toggle="collapse" data-bs-target="#c1">
+              <span class="badge me-3" style="background:var(--accent)">01</span> CSS Grid &amp; Flexbox Alignment
+            </button>
+          </h2>
+          <div id="c1" class="accordion-collapse collapse" data-bs-parent="#conceptAccordion">
+            <div class="accordion-body text-white-50 small">
+              Uses <code>grid-template-columns: repeat(auto-fit, minmax(...))</code> for dynamic responsive layouts. Bootstrap 5's 12-column grid is layered on top for maximum control.
+            </div>
           </div>
-        </details>
-
-        <details class="acc-item">
-          <summary class="acc-summary">
-            <span class="acc-num">02</span>
-            <span class="acc-title">3D Transforms, Depth &amp; Perspective</span>
-            <span class="acc-tag">3D Engine</span>
-          </summary>
-          <div class="acc-content">
-            Employs <code>perspective: 1000px</code>, <code>transform-style: preserve-3d</code>, <code>rotateY(180deg)</code>, and <code>backface-visibility: hidden</code> to produce real 3D spatial flipping cards and rotating isometric polyhedra.
+        </div>
+        <div class="accordion-item" style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:12px; margin-bottom:.75rem">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed fw-semibold text-white" style="background:transparent; box-shadow:none" type="button" data-bs-toggle="collapse" data-bs-target="#c2">
+              <span class="badge me-3" style="background:var(--accent)">02</span> 3D Transforms &amp; Perspective
+            </button>
+          </h2>
+          <div id="c2" class="accordion-collapse collapse" data-bs-parent="#conceptAccordion">
+            <div class="accordion-body text-white-50 small">
+              <code>perspective: 1000px</code>, <code>transform-style: preserve-3d</code>, <code>rotateY(180deg)</code>, and <code>backface-visibility: hidden</code> produce real 3D spatial flipping cards and rotating cube.
+            </div>
           </div>
-        </details>
-
-        <details class="acc-item">
-          <summary class="acc-summary">
-            <span class="acc-num">03</span>
-            <span class="acc-title">Conic-Gradients &amp; Laser Orbiting Keyframes</span>
-            <span class="acc-tag">Special Effects</span>
-          </summary>
-          <div class="acc-content">
-            Demonstrates animated rotating borders using continuous <code>conic-gradient</code> sweeps behind masked frosted glass cards, producing dynamic cybernetic glowing rims.
+        </div>
+        <div class="accordion-item" style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:12px; margin-bottom:.75rem">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed fw-semibold text-white" style="background:transparent; box-shadow:none" type="button" data-bs-toggle="collapse" data-bs-target="#c3">
+              <span class="badge me-3" style="background:var(--accent)">03</span> Glassmorphism &amp; Backdrop Filters
+            </button>
+          </h2>
+          <div id="c3" class="accordion-collapse collapse" data-bs-parent="#conceptAccordion">
+            <div class="accordion-body text-white-50 small">
+              High-fidelity frosted glass using <code>backdrop-filter: blur(24px)</code>, multi-layered RGBA alpha channels, inner rim borders, and diffuse box-shadows.
+            </div>
           </div>
-        </details>
-
-        <details class="acc-item">
-          <summary class="acc-summary">
-            <span class="acc-num">04</span>
-            <span class="acc-title">Glassmorphism &amp; Backdrop Filters</span>
-            <span class="acc-tag">Aesthetics</span>
-          </summary>
-          <div class="acc-content">
-            Uses high-fidelity frosted glass rendering with <code>backdrop-filter: blur(25px)</code>, multi-layered RGBA alpha channels, inner rim borders, and diffuse multi-stage box-shadows.
+        </div>
+        <div class="accordion-item" style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:12px; margin-bottom:.75rem">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed fw-semibold text-white" style="background:transparent; box-shadow:none" type="button" data-bs-toggle="collapse" data-bs-target="#c4">
+              <span class="badge me-3" style="background:var(--accent)">04</span> CSS Custom Properties &amp; Dynamic Themes
+            </button>
+          </h2>
+          <div id="c4" class="accordion-collapse collapse" data-bs-parent="#conceptAccordion">
+            <div class="accordion-body text-white-50 small">
+              Architecture around <code>--accent</code>, <code>--bg-dark</code>, <code>--glow</code> CSS variables enabling instant runtime theme switching between Cyberpunk, Rose, Crystal, and Matrix palettes.
+            </div>
           </div>
-        </details>
-
-        <details class="acc-item">
-          <summary class="acc-summary">
-            <span class="acc-num">05</span>
-            <span class="acc-title">CSS Custom Properties &amp; Real-Time Theme Engine</span>
-            <span class="acc-tag">State &amp; Tokens</span>
-          </summary>
-          <div class="acc-content">
-            Architecture built around CSS variables (<code>--primary-accent</code>, <code>--bg-glass</code>, <code>--glow-color</code>) enabling instant zero-reflash runtime theming across Cyberpunk, Rose Dream, Frost Crystal, and Matrix palettes.
+        </div>
+        <div class="accordion-item" style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:12px;">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed fw-semibold text-white" style="background:transparent; box-shadow:none" type="button" data-bs-toggle="collapse" data-bs-target="#c5">
+              <span class="badge me-3" style="background:var(--accent)">05</span> Keyframe Micro-Animations
+            </button>
+          </h2>
+          <div id="c5" class="accordion-collapse collapse" data-bs-parent="#conceptAccordion">
+            <div class="accordion-body text-white-50 small">
+              Spinning vinyl disc, bouncing equalizer bars, orbiting ambient glow orbs, sun pulse, and rotating cube all driven purely by CSS <code>@keyframes</code> with staggered animation delays.
+            </div>
           </div>
-        </details>
-
+        </div>
       </div>
-    </section>
+    </div>
 
     <!-- Footer -->
-    <footer class="os-footer">
-      <p>AetherOS Custom UI Studio · Submitted for Web Development Lab 2 (Task 4)</p>
-      <p>Designed with passion &amp; creativity by <strong>Roman Fatima (241878)</strong> · BSCS 5A · Air University</p>
+    <footer class="text-center text-white-50 py-3 border-top small" style="border-color:rgba(255,255,255,.08)!important">
+      <p class="mb-1">AetherOS Custom UI Studio · Submitted for Web Development Lab 2 (Task 4) · Bootstrap 5</p>
+      <p>Designed by <strong class="text-white">Roman Fatima (241878)</strong> · BSCS 5A · Air University</p>
     </footer>
 
   </div>
 
-  <script src="custom-ui.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // ── Theme Switcher ──────────────────────────────────────────────
+    function setTheme(t, btn) {
+      document.documentElement.setAttribute('data-theme', t);
+      document.querySelectorAll('.theme-pill').forEach(p => p.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+    }
+
+    // ── Music Player ─────────────────────────────────────────────────
+    const songs = [
+      {title:'On Top of the World',artist:'Barbie (Princess Charm School)'},
+      {title:'When I Close My Eyes',artist:'Tom Odell'},
+      {title:'Alfaaz',artist:'Hamza Malik & Zain Zohaib'},
+      {title:'Right Now (Na Na Na)',artist:'Akon'},
+      {title:'Born to Die',artist:'Lana Del Rey'},
+      {title:'Tau Kya Huwa',artist:'Asfar Hussain & Xulfi'},
+      {title:'Intezar',artist:'Kavish'}
+    ];
+    let curIdx = 0, playing = false;
+    const vinyl = document.getElementById('vinylDisc');
+    const bars  = document.getElementById('spectrumBars');
+    const audio = document.getElementById('audioEl');
+
+    function loadSong(i) {
+      curIdx = (i + songs.length) % songs.length;
+      document.getElementById('trackTitle').textContent = songs[curIdx].title;
+      document.getElementById('trackArtist').textContent = songs[curIdx].artist;
+      document.getElementById('songSelect').value = curIdx;
+      document.getElementById('seekFill').style.width = '0%';
+      document.getElementById('curTime').textContent = '00:00';
+    }
+    function togglePlay() {
+      playing = !playing;
+      if (playing) { vinyl.classList.add('spinning'); bars.classList.add('playing'); document.getElementById('playBtn').textContent='⏸️'; document.getElementById('audioStatus').textContent='● PLAYING'; document.getElementById('audioStatus').className='badge bg-danger'; }
+      else          { vinyl.classList.remove('spinning'); bars.classList.remove('playing'); document.getElementById('playBtn').textContent='▶️'; document.getElementById('audioStatus').textContent='● PAUSED'; document.getElementById('audioStatus').className='badge bg-warning text-dark'; }
+    }
+    function nextSong() { loadSong(curIdx + 1); }
+    function prevSong() { loadSong(curIdx - 1); }
+    function setVolume(v) { audio.volume = v / 100; }
+    document.getElementById('songSelect').addEventListener('change', e => loadSong(parseInt(e.target.value)));
+
+    // Fake seek bar tick
+    let fakeTime = 0;
+    setInterval(() => {
+      if (!playing) return;
+      fakeTime = (fakeTime + 1) % 150;
+      const pct = (fakeTime / 150) * 100;
+      document.getElementById('seekFill').style.width = pct + '%';
+      const m = Math.floor(fakeTime/60).toString().padStart(2,'0');
+      const s = (fakeTime%60).toString().padStart(2,'0');
+      document.getElementById('curTime').textContent = m + ':' + s;
+      document.getElementById('durTime').textContent = '02:30';
+    }, 1000);
+
+    // Animate gauge arcs on load
+    setTimeout(() => {
+      document.getElementById('gauge1').style.strokeDashoffset = 15;
+      document.getElementById('gauge2').style.strokeDashoffset = 0;
+    }, 500);
+  </script>
 </body>
 </html>

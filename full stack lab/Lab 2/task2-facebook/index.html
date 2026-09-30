@@ -4,1030 +4,561 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Facebook | Roman Fatima (BSCS 5A)</title>
-  <meta name="description" content="Authentic Facebook Home Page Clone built with pure HTML and CSS for Web Development Lab 2. Featuring stories, real-time reactions, friends posts, and authentic Facebook layout.">
-  
-  <!-- Modern Clean Typography matching Facebook -->
+  <meta name="description" content="Facebook Home Page Clone with Bootstrap 5 for Web Development Lab 2.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    :root { --fb-blue: #0866ff; --fb-bg: #f0f2f5; --fb-card: #fff; }
+    body { font-family: 'Inter', sans-serif; background: var(--fb-bg); color: #1c1e21; }
+
+    /* FB Header */
+    .fb-header {
+      background: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: sticky; top: 0; z-index: 1030;
+      height: 56px;
+    }
+    .fb-header .container-fluid { height: 100%; }
+    .fb-logo-svg { width: 40px; height: 40px; }
+    .fb-search-input {
+      background: var(--fb-bg);
+      border: none; border-radius: 50px;
+      padding: .45rem 1rem .45rem 2.5rem;
+      font-size: .9rem; outline: none; width: 240px;
+    }
+    .fb-search-wrap { position: relative; }
+    .fb-search-wrap .bi-search { position: absolute; left: .8rem; top: 50%; transform: translateY(-50%); color: #65676b; }
+
+    /* Nav tabs */
+    .fb-nav-tab {
+      display: flex; align-items: center; justify-content: center;
+      width: 110px; height: 50px; border-radius: 8px;
+      color: #65676b; font-size: 1.4rem; cursor: pointer;
+      border: none; background: transparent;
+      transition: background .15s;
+      position: relative;
+    }
+    .fb-nav-tab:hover { background: var(--fb-bg); }
+    .fb-nav-tab.active { color: var(--fb-blue); }
+    .fb-nav-tab.active::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--fb-blue); border-radius: 3px 3px 0 0; }
+
+    /* Right icons */
+    .fb-icon-btn {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--fb-bg);
+      border: none; color: #050505;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; cursor: pointer; transition: background .15s;
+    }
+    .fb-icon-btn:hover { background: #e4e6eb; }
+
+    /* Stories */
+    .story-card {
+      width: 110px; min-width: 110px; height: 200px;
+      border-radius: 12px; overflow: hidden; position: relative; cursor: pointer;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      transition: transform .2s;
+      flex-shrink: 0;
+    }
+    .story-card:hover { transform: scale(1.03); }
+    .story-avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      border: 3px solid var(--fb-blue);
+      position: absolute; top: 10px; left: 10px;
+      background: #fff; display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 1rem;
+    }
+    .story-name {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 8px; font-size: .75rem; font-weight: 600;
+      color: #fff; background: linear-gradient(transparent, rgba(0,0,0,.5));
+    }
+    .story-add {
+      background: #fff !important;
+      border: 1px solid #ddd !important;
+    }
+    .story-add .add-icon {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: var(--fb-blue); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; position: absolute; top: 10px; left: 10px;
+    }
+    .story-add .story-name { color: #050505; background: linear-gradient(transparent, rgba(255,255,255,.9)); }
+
+    /* Post Composer */
+    .post-composer {
+      background: #fff; border-radius: 8px; padding: 1rem;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+    .post-input {
+      background: var(--fb-bg); border: none; border-radius: 50px;
+      padding: .6rem 1rem; width: 100%; font-size: .95rem;
+      cursor: pointer; outline: none;
+      transition: background .15s;
+    }
+    .post-input:hover { background: #e4e6eb; }
+    .post-action-btn {
+      display: flex; align-items: center; gap: .5rem;
+      font-weight: 600; font-size: .87rem; color: #65676b;
+      padding: .5rem .75rem; border-radius: 8px; cursor: pointer;
+      border: none; background: transparent; transition: background .15s;
+    }
+    .post-action-btn:hover { background: var(--fb-bg); }
+
+    /* Feed Post Card */
+    .post-card {
+      background: #fff; border-radius: 8px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+      overflow: hidden; margin-bottom: 1rem;
+    }
+    .post-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: linear-gradient(135deg, #0d6efd, #6610f2);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-weight: 700; font-size: .9rem; flex-shrink: 0;
+    }
+    .post-reactions {
+      display: flex; gap: 4px; align-items: center;
+      font-size: .85rem; color: #65676b;
+    }
+    .reaction-emoji { font-size: 1rem; }
+    .post-action-bar button {
+      flex: 1; border: none; background: transparent;
+      padding: .5rem; border-radius: 4px; font-size: .9rem;
+      font-weight: 600; color: #65676b; cursor: pointer;
+      transition: background .15s;
+    }
+    .post-action-bar button:hover { background: var(--fb-bg); }
+
+    /* Post image */
+    .post-image {
+      width: 100%; aspect-ratio: 16/9; object-fit: cover;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    /* Left Sidebar */
+    .sidebar-link {
+      display: flex; align-items: center; gap: .75rem;
+      padding: .5rem .75rem; border-radius: 8px; cursor: pointer;
+      font-size: .95rem; font-weight: 500; color: #050505;
+      text-decoration: none; transition: background .15s;
+    }
+    .sidebar-link:hover { background: var(--fb-bg); color: #050505; }
+    .sidebar-link .link-icon {
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    /* Right Sidebar */
+    .friend-row {
+      display: flex; align-items: center; gap: .75rem;
+      padding: .4rem .5rem; border-radius: 8px; cursor: pointer;
+      transition: background .15s;
+    }
+    .friend-row:hover { background: var(--fb-bg); }
+    .friend-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; color: #fff; font-size: .85rem; flex-shrink: 0;
+      position: relative;
+    }
+    .online-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: #31a24c; border: 2px solid #fff;
+      position: absolute; bottom: 0; right: 0;
+    }
+
+    /* Lab Banner */
+    .lab-banner { background: #1e3a5f; color: #fff; font-size: .8rem; padding: .4rem 1rem; }
+
+    /* Messenger dock */
+    .messenger-dock {
+      position: fixed; bottom: 1rem; right: 1rem;
+      display: flex; flex-direction: column; align-items: flex-end; gap: .5rem; z-index: 999;
+    }
+    .messenger-btn {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--fb-blue); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; cursor: pointer; box-shadow: 0 4px 12px rgba(8,102,255,.4);
+      border: none; transition: transform .2s;
+    }
+    .messenger-btn:hover { transform: scale(1.08); }
+
+    /* Post image placeholder */
+    .fake-img {
+      width: 100%; aspect-ratio: 16/9;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+    }
+
+    @media (max-width: 991px) { .fb-nav-tab { width: 70px; } .fb-search-input { width: 180px; } }
+    @media (max-width: 767px) { .fb-nav-tab { width: 52px; } .fb-search-input { width: 130px; } }
+  </style>
 </head>
-<body class="theme-classic">
+<body>
 
-  <!-- ======================================================================
-       LAB 2 ASSIGNMENT TASK SWITCHER BANNER
-       ====================================================================== -->
-  <aside class="lab2-quick-bar" aria-label="Assignment Navigation">
-    <div class="quick-bar-left">
-      <span class="lab2-pill">🎓 Lab 2 · Task 2</span>
-      <span class="quick-bar-title">Facebook Home Page (HTML + CSS) · <strong>Roman Fatima (241878)</strong></span>
+  <!-- Lab Assignment Banner -->
+  <div class="lab-banner d-flex justify-content-between align-items-center flex-wrap gap-2">
+    <span><span class="badge bg-warning text-dark me-2">Lab 2 · Task 2</span> Facebook Clone (Bootstrap 5) · <strong>Roman Fatima (241878)</strong></span>
+    <div class="d-flex gap-2 flex-wrap">
+      <a href="../index.html" class="btn btn-outline-light btn-sm">🏠 Hub</a>
+      <a href="../task1-timetable/index.html" class="btn btn-outline-light btn-sm">Task 1</a>
+      <a href="../task3-portfolio/index.html" class="btn btn-outline-light btn-sm">Task 3</a>
+      <a href="../task4-custom-ui/index.html" class="btn btn-outline-light btn-sm">Task 4</a>
+      <a href="../task5-ieee-paper/index.html" class="btn btn-outline-light btn-sm">Task 5</a>
+      <a href="../task6-ecommerce/index.html" class="btn btn-outline-light btn-sm">Task 6</a>
     </div>
-    <div class="quick-bar-links">
-      <a href="../task1-timetable/index.html" class="q-link">📅 Task 1: Timetable</a>
-      <a href="index.html" class="q-link active">📘 Task 2: Facebook</a>
-      <a href="../task3-portfolio/index.html" class="q-link">👤 Task 3: Portfolio (2-Col)</a>
-      <a href="../task4-custom-ui/index.html" class="q-link">✨ Task 4: Custom UI</a>
-      <a href="../task5-ieee-paper/index.html" class="q-link">📄 Task 5: IEEE Paper</a>
-      <a href="../index.html" class="q-link hub-btn">📂 Lab 2 Hub</a>
-    </div>
-  </aside>
+  </div>
 
-  <!-- ======================================================================
-       FACEBOOK TOP NAVIGATION BAR (Authentic Facebook Structure)
-       ====================================================================== -->
+  <!-- FB Header -->
   <header class="fb-header">
-    
-    <!-- Left: FB Logo & Search -->
-    <div class="fb-header-left">
-      <a href="index.html" class="fb-logo" title="Facebook">
-        <svg viewBox="0 0 36 36" fill="url(#fb-blue-grad)" width="40" height="40">
-          <defs>
-            <linearGradient id="fb-blue-grad" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#0088FF"/>
-              <stop offset="100%" stop-color="#0066EE"/>
-            </linearGradient>
-          </defs>
-          <path d="M20.181 35.87C29.094 34.791 36 27.202 36 18c0-9.941-8.059-18-18-18S0 8.059 0 18c0 8.36 5.706 15.39 13.438 17.38v-12.3H8.973v-5.08h4.465V14.12c0-4.41 2.625-6.85 6.643-6.85 1.924 0 3.937.344 3.937.344v4.33h-2.219c-2.186 0-2.868 1.356-2.868 2.75v3.31h4.88l-.78 5.08h-4.1V35.87z" fill="#0866ff"/>
-          <path d="M24.846 22.98l.78-5.08h-4.88v-3.31c0-1.394.682-2.75 2.868-2.75h2.219v-4.33s-2.013-.344-3.937-.344c-4.018 0-6.643 2.44-6.643 6.85v3.88H8.973v5.08h4.465v12.3c.883.136 1.785.207 2.702.207.86 0 1.705-.064 2.534-.187v-12.32h4.172z" fill="#ffffff"/>
-        </svg>
-      </a>
-      <div class="fb-search-bar">
-        <svg class="search-icon" viewBox="0 0 16 16" width="16" height="16" fill="#65676b">
-          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-        </svg>
-        <input type="text" placeholder="Search Facebook" aria-label="Search Facebook">
+    <div class="container-fluid px-3 d-flex align-items-center justify-content-between">
+      <!-- Left: Logo + Search -->
+      <div class="d-flex align-items-center gap-2">
+        <svg class="fb-logo-svg" viewBox="0 0 36 36" fill="#0866ff"><path d="M20.181 35.87C29.094 34.791 36 27.202 36 18c0-9.941-8.059-18-18-18S0 8.059 0 18c0 8.36 5.706 15.39 13.438 17.38v-12.3H8.973v-5.08h4.465V14.12c0-4.41 2.625-6.85 6.643-6.85 1.924 0 3.937.344 3.937.344v4.33h-2.219c-2.186 0-2.868 1.356-2.868 2.75v3.31h4.88l-.78 5.08h-4.1V35.87z"/><path d="M24.846 22.98l.78-5.08h-4.88v-3.31c0-1.394.682-2.75 2.868-2.75h2.219v-4.33s-2.013-.344-3.937-.344c-4.018 0-6.643 2.44-6.643 6.85v3.88H8.973v5.08h4.465v12.3c.883.136 1.785.207 2.702.207.86 0 1.705-.064 2.534-.187v-12.32h4.172z" fill="#ffffff"/></svg>
+        <div class="fb-search-wrap d-none d-sm-block">
+          <i class="bi bi-search"></i>
+          <input type="text" class="fb-search-input" placeholder="Search Facebook" aria-label="Search Facebook">
+        </div>
+      </div>
+      <!-- Center: Nav Tabs -->
+      <div class="d-flex align-items-center">
+        <button class="fb-nav-tab active" title="Home"><i class="bi bi-house-fill"></i></button>
+        <button class="fb-nav-tab" title="Videos"><i class="bi bi-play-circle-fill"></i></button>
+        <button class="fb-nav-tab" title="Marketplace"><i class="bi bi-shop"></i></button>
+        <button class="fb-nav-tab d-none d-md-flex" title="Groups"><i class="bi bi-people-fill"></i></button>
+        <button class="fb-nav-tab d-none d-lg-flex" title="Gaming"><i class="bi bi-controller"></i></button>
+      </div>
+      <!-- Right: Icons -->
+      <div class="d-flex align-items-center gap-2">
+        <button class="fb-icon-btn d-sm-none"><i class="bi bi-search"></i></button>
+        <button class="fb-icon-btn"><i class="bi bi-grid-3x3-gap-fill"></i></button>
+        <button class="fb-icon-btn position-relative">
+          <i class="bi bi-messenger"></i>
+          <span class="badge bg-danger position-absolute top-0 end-0" style="font-size:.6rem">3</span>
+        </button>
+        <button class="fb-icon-btn position-relative">
+          <i class="bi bi-bell-fill"></i>
+          <span class="badge bg-danger position-absolute top-0 end-0" style="font-size:.6rem">7</span>
+        </button>
+        <div class="fb-icon-btn" style="background: linear-gradient(135deg,#764ba2,#0d6efd); color:#fff; font-weight:700; font-size:.85rem; cursor:pointer">RF</div>
       </div>
     </div>
-
-    <!-- Center: Primary 5 FB Navigation Tabs -->
-    <nav class="fb-header-center" aria-label="Global Navigation">
-      <a href="index.html" class="nav-tab active" title="Home">
-        <svg viewBox="0 0 28 28" width="28" height="28" fill="currentColor">
-          <path d="M25.825 12.29l-11-9.5a1.25 1.25 0 0 0-1.65 0l-11 9.5a1.25 1.25 0 0 0 1.65 1.88L5 13.197V23a2 2 0 0 0 2 2h4.5a1 1 0 0 0 1-1v-5a1.5 1.5 0 0 1 1.5-1.5h2a1.5 1.5 0 0 1 1.5 1.5v5a1 1 0 0 0 1 1H21a2 2 0 0 0 2-2V13.197l1.175.973a1.25 1.25 0 0 0 1.65-1.88z"/>
-        </svg>
-        <span class="active-indicator"></span>
-      </a>
-      <a href="#video" class="nav-tab" title="Video">
-        <svg viewBox="0 0 28 28" width="28" height="28" fill="currentColor">
-          <path d="M8 5a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H8zm4 5.5v7l5.5-3.5-5.5-3.5z"/>
-        </svg>
-      </a>
-      <a href="#marketplace" class="nav-tab" title="Marketplace">
-        <svg viewBox="0 0 28 28" width="28" height="28" fill="currentColor">
-          <path d="M19.5 4h-11a3.5 3.5 0 0 0-3.5 3.5v13A3.5 3.5 0 0 0 8.5 24h11a3.5 3.5 0 0 0 3.5-3.5v-13A3.5 3.5 0 0 0 19.5 4zm-7.5 3a2 2 0 1 1 4 0h-4zm7.5 15h-11a1.5 1.5 0 0 1-1.5-1.5V11h14v9.5a1.5 1.5 0 0 1-1.5 1.5z"/>
-        </svg>
-      </a>
-      <a href="#groups" class="nav-tab" title="Groups">
-        <svg viewBox="0 0 28 28" width="28" height="28" fill="currentColor">
-          <path d="M9 13a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm10 0a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm-10 2c-3.315 0-6 2.239-6 5v2a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-2c0-2.761-2.685-5-6-5zm10 0c-.868 0-1.684.155-2.422.428 1.458 1.144 2.422 2.76 2.422 4.572v2h5a1 1 0 0 0 1-1v-2c0-2.761-2.685-5-6-5z"/>
-        </svg>
-      </a>
-      <a href="#gaming" class="nav-tab" title="Gaming">
-        <svg viewBox="0 0 28 28" width="28" height="28" fill="currentColor">
-          <path d="M19.5 7h-11a5.5 5.5 0 0 0-5.5 5.5c0 3.55 2.11 6.64 5.37 7.76l1.79.62c.67.23 1.34-.27 1.34-.98v-1.9h5v1.9c0 .71.67 1.21 1.34.98l1.79-.62c3.26-1.12 5.37-4.21 5.37-7.76A5.5 5.5 0 0 0 19.5 7zm-8.5 7.5h-1.5v1.5a1 1 0 0 1-2 0v-1.5H6a1 1 0 0 1 0-2h1.5V11a1 1 0 0 1 2 0v1.5H11a1 1 0 0 1 0 2zm7.5 1a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm2.5-3a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z"/>
-        </svg>
-      </a>
-    </nav>
-
-    <!-- Right: Menu, Messenger, Notifications, Profile -->
-    <div class="fb-header-right">
-      
-      <button class="circle-btn" title="Menu" aria-label="Menu">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-          <circle cx="5" cy="5" r="2.5"/><circle cx="12" cy="5" r="2.5"/><circle cx="19" cy="5" r="2.5"/>
-          <circle cx="5" cy="12" r="2.5"/><circle cx="12" cy="12" r="2.5"/><circle cx="19" cy="12" r="2.5"/>
-          <circle cx="5" cy="19" r="2.5"/><circle cx="12" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/>
-        </svg>
-      </button>
-
-      <button class="circle-btn" title="Messenger" aria-label="Messenger" id="messengerBtn">
-        <svg viewBox="0 0 28 28" width="20" height="20" fill="currentColor">
-          <path d="M14 2C7.373 2 2 6.925 2 13c0 3.473 1.765 6.574 4.545 8.625v4.375l4.137-2.27c1.037.29 2.148.445 3.318.445 6.627 0 12-4.925 12-11S18.627 2 14 2zm1.25 14.5l-3.25-3.5-6.25 3.5 6.75-7.25 3.25 3.5 6.25-3.5-6.75 7.25z"/>
-        </svg>
-        <span class="fb-badge">4</span>
-      </button>
-
-      <button class="circle-btn" title="Notifications" aria-label="Notifications">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-          <path d="M12 22a2.5 2.5 0 0 0 2.5-2.5h-5A2.5 2.5 0 0 0 12 22zm7-6v-5c0-3.07-1.63-5.64-4.5-6.32V4a2.5 2.5 0 0 0-5 0v.68C6.64 5.36 5 7.92 5 11v5l-2 2v1h18v-1l-2-2z"/>
-        </svg>
-        <span class="fb-badge">5</span>
-      </button>
-
-      <!-- Roman's Profile Chip -->
-      <a href="portfolio.html" class="user-chip-btn" title="Roman Fatima Profile">
-        <img src="img2.jpg" alt="Roman Fatima" class="user-avatar-top">
-        <span class="user-chip-name">Roman</span>
-      </a>
-
-    </div>
-
   </header>
 
-  <!-- ======================================================================
-       FACEBOOK MAIN 3-COLUMN LAYOUT
-       ====================================================================== -->
-  <div class="fb-main-layout">
+  <!-- Main 3-Column Layout -->
+  <div class="container-fluid px-0" style="max-width:1440px; margin:auto">
+    <div class="row g-0">
 
-    <!-- ------------------------------------------------------------------
-         LEFT SIDEBAR: Shortcuts & Navigation
-         ------------------------------------------------------------------ -->
-    <aside class="fb-sidebar-left">
-      <div class="sidebar-scrollable">
-
-        <!-- User Profile Shortcut -->
-        <a href="portfolio.html" class="sidebar-row">
-          <img src="img2.jpg" alt="Roman Fatima" class="sidebar-avatar">
-          <div class="sidebar-row-info">
-            <span class="sidebar-row-title">Roman Fatima</span>
-            <span class="sidebar-row-sub">BSCS 5A · Air University</span>
-          </div>
-        </a>
-
-        <!-- Facebook Navigation Shortcuts -->
-        <a href="#friends" class="sidebar-row">
-          <div class="sidebar-icon-circle blue">
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="#1877f2"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
-          </div>
-          <span class="sidebar-row-title">Friends (248 online)</span>
-        </a>
-
-        <a href="#memories" class="sidebar-row">
-          <div class="sidebar-icon-circle purple">
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="#9333ea"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
-          </div>
-          <span class="sidebar-row-title">Memories</span>
-        </a>
-
-        <a href="#saved" class="sidebar-row">
-          <div class="sidebar-icon-circle pink">
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="#e11d48"><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>
-          </div>
-          <span class="sidebar-row-title">Saved</span>
-        </a>
-
-        <a href="#groups" class="sidebar-row">
-          <div class="sidebar-icon-circle green">
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="#059669"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm0-4H9V7h2v5zm4 4h-2v-2h2v2zm0-4h-2V7h2v5z"/></svg>
-          </div>
-          <span class="sidebar-row-title">Groups</span>
-        </a>
-
-        <a href="#video" class="sidebar-row">
-          <div class="sidebar-icon-circle amber">
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="#d97706"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/></svg>
-          </div>
-          <span class="sidebar-row-title">Video</span>
-        </a>
-
-        <a href="#events" class="sidebar-row">
-          <div class="sidebar-icon-circle red">
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="#dc2626"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
-          </div>
-          <span class="sidebar-row-title">Events</span>
-        </a>
-
-        <a href="#see-more" class="sidebar-row">
-          <div class="sidebar-icon-circle gray">
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="#65676b"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
-          </div>
-          <span class="sidebar-row-title">See more</span>
-        </a>
-
-        <div class="sidebar-divider"></div>
-
-        <!-- Shortcuts Section -->
-        <div class="sidebar-heading">Your shortcuts</div>
-
-        <a href="timetable.html" class="sidebar-row">
-          <div class="shortcut-thumb blue-grad">📅</div>
-          <span class="sidebar-row-title">BSCS 5A Timetable</span>
-        </a>
-
-        <a href="#squad" class="sidebar-row">
-          <div class="shortcut-thumb pink-grad">🌸</div>
-          <span class="sidebar-row-title">Besties Squad (Insha, Aniqa, Sana, Wania)</span>
-        </a>
-
-        <a href="#webdev" class="sidebar-row">
-          <div class="shortcut-thumb purple-grad">💻</div>
-          <span class="sidebar-row-title">Web Tech Lab 2 Projects</span>
-        </a>
-
-        <div class="sidebar-footer-links">
-          <span>Privacy · Terms · Advertising · Cookies · Meta © 2026</span>
-          <span>Submitted by Roman Fatima (241878)</span>
+      <!-- Left Sidebar (hidden on small) -->
+      <aside class="col-lg-3 d-none d-lg-block p-3" style="position:sticky; top:56px; height:calc(100vh - 56px); overflow-y:auto">
+        <div class="sidebar-link">
+          <div class="friend-avatar" style="background:linear-gradient(135deg,#0d6efd,#6610f2)">RF</div>
+          <span class="fw-bold">Roman Fatima</span>
         </div>
+        <div class="sidebar-link"><span class="link-icon bg-primary bg-opacity-10"><i class="bi bi-people-fill text-primary"></i></span>Friends</div>
+        <div class="sidebar-link"><span class="link-icon bg-danger bg-opacity-10"><i class="bi bi-clock-fill text-danger"></i></span>Memories</div>
+        <div class="sidebar-link"><span class="link-icon bg-success bg-opacity-10"><i class="bi bi-bookmark-fill text-success"></i></span>Saved</div>
+        <div class="sidebar-link"><span class="link-icon" style="background:rgba(8,102,255,.1)"><i class="bi bi-people" style="color:#0866ff"></i></span>Groups</div>
+        <div class="sidebar-link"><span class="link-icon bg-warning bg-opacity-10"><i class="bi bi-play-circle-fill text-warning"></i></span>Video</div>
+        <div class="sidebar-link"><span class="link-icon bg-info bg-opacity-10"><i class="bi bi-shop text-info"></i></span>Marketplace</div>
+        <div class="sidebar-link"><span class="link-icon bg-secondary bg-opacity-10"><i class="bi bi-calendar-event text-secondary"></i></span>Events</div>
+        <hr>
+        <p class="text-muted small px-3 mb-1 fw-semibold">YOUR SHORTCUTS</p>
+        <div class="sidebar-link"><span class="link-icon bg-primary bg-opacity-10"><i class="bi bi-code-slash text-primary"></i></span>BSCS 5A — Web Dev</div>
+        <div class="sidebar-link"><span class="link-icon bg-success bg-opacity-10"><i class="bi bi-mortarboard text-success"></i></span>Air University CS Group</div>
+        <p class="text-muted small text-center mt-4" style="font-size:.72rem">Privacy · Terms · Advertising · Cookies · Meta © 2026</p>
+      </aside>
 
-      </div>
-    </aside>
+      <!-- Center Feed -->
+      <main class="col-12 col-lg-6 py-3 px-2 px-md-3" style="max-width:680px; margin:0 auto">
 
-    <!-- ------------------------------------------------------------------
-         CENTER COLUMN: Newsfeed, Stories & Posts
-         ------------------------------------------------------------------ -->
-    <main class="fb-feed-center">
-      
-      <!-- ================================================================
-           STORIES CAROUSEL TRAY (Authentic Facebook Stories)
-           Rule: NO Roman in friend stories! Only Roman on "Create Story" card.
-           Friend stories: Insha, Aniqa, Sana, Wania.
-           ================================================================ -->
-      <section class="stories-tray" aria-label="Stories">
-        
-        <!-- 1. CREATE STORY CARD (Roman's Own Tile) -->
-        <div class="story-tile create-story-tile" title="Create your story">
-          <div class="create-story-img-wrap">
-            <img src="img2.jpg" alt="Roman Fatima">
+        <!-- Stories -->
+        <div class="d-flex gap-2 overflow-auto pb-2 mb-3" style="scrollbar-width:none">
+          <div class="story-card story-add">
+            <div class="add-icon"><i class="bi bi-plus-lg"></i></div>
+            <div class="story-name text-center">Create Story</div>
           </div>
-          <div class="create-story-bottom">
-            <div class="create-story-plus-btn">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="#ffffff">
-                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
-              </svg>
-            </div>
-            <span class="create-story-text">Create story</span>
+          <div class="story-card" style="background:linear-gradient(135deg,#f093fb,#f5576c)">
+            <div class="story-avatar" style="background:#fff; color:#f5576c; border-color:#f5576c">I</div>
+            <div class="story-name">Insha</div>
+          </div>
+          <div class="story-card" style="background:linear-gradient(135deg,#4facfe,#00f2fe)">
+            <div class="story-avatar" style="background:#fff; color:#4facfe; border-color:#4facfe">A</div>
+            <div class="story-name">Aniqa</div>
+          </div>
+          <div class="story-card" style="background:linear-gradient(135deg,#43e97b,#38f9d7)">
+            <div class="story-avatar" style="background:#fff; color:#43e97b; border-color:#43e97b">S</div>
+            <div class="story-name">Sana</div>
+          </div>
+          <div class="story-card" style="background:linear-gradient(135deg,#fa709a,#fee140)">
+            <div class="story-avatar" style="background:#fff; color:#fa709a; border-color:#fa709a">W</div>
+            <div class="story-name">Wania</div>
+          </div>
+          <div class="story-card" style="background:linear-gradient(135deg,#a18cd1,#fbc2eb)">
+            <div class="story-avatar" style="background:#fff; color:#a18cd1; border-color:#a18cd1">R</div>
+            <div class="story-name">Rida</div>
           </div>
         </div>
 
-        <!-- 2. INSHA'S STORY (Cute Fawn Aesthetic) -->
-        <div class="story-tile friend-story" onclick="openStoryModal('Insha Tariq', 'img1.jpg', 'avatar-insha.svg', 'Enchanted Forest 🌸✨')" title="View Insha's story">
-          <img src="img1.jpg" class="story-background-img" alt="Insha's Story">
-          <div class="story-overlay-gradient"></div>
-          <div class="story-avatar-ring">
-            <div class="story-avatar insha-avatar">I</div>
+        <!-- Post Composer -->
+        <div class="post-composer mb-3">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <div class="post-avatar">RF</div>
+            <input type="text" class="post-input" placeholder="What's on your mind, Roman?" readonly
+              data-bs-toggle="modal" data-bs-target="#createPostModal" style="cursor:pointer">
           </div>
-          <span class="story-author-name">Insha Tariq</span>
-        </div>
-
-        <!-- 3. ANIQA'S STORY (Coffee Mood / Flork Meme) -->
-        <div class="story-tile friend-story" onclick="openStoryModal('Aniqa Rehman', 'img4.jpg', 'avatar-aniqa.svg', 'Coffee First, Code Later ☕😭')" title="View Aniqa's story">
-          <img src="img4.jpg" class="story-background-img" alt="Aniqa's Story">
-          <div class="story-overlay-gradient"></div>
-          <div class="story-avatar-ring">
-            <div class="story-avatar aniqa-avatar">A</div>
-          </div>
-          <span class="story-author-name">Aniqa Rehman</span>
-        </div>
-
-        <!-- 4. SANA'S STORY (Dancing Celebration Flork) -->
-        <div class="story-tile friend-story" onclick="openStoryModal('Sana Malik', 'img5.jpg', 'avatar-sana.svg', 'Project Complete Happy Dance 💃🎉')" title="View Sana's story">
-          <img src="img5.jpg" class="story-background-img" alt="Sana's Story">
-          <div class="story-overlay-gradient"></div>
-          <div class="story-avatar-ring">
-            <div class="story-avatar sana-avatar">S</div>
-          </div>
-          <span class="story-author-name">Sana Malik</span>
-        </div>
-
-        <!-- 5. WANIA'S STORY (Relaxing Cozy Bed Flork) -->
-        <div class="story-tile friend-story" onclick="openStoryModal('Wania Khan', 'img 6.jpg', 'avatar-wania.svg', 'Hibernation Mode Activated 🛌💤')" title="View Wania's story">
-          <img src="img 6.jpg" class="story-background-img" alt="Wania's Story">
-          <div class="story-overlay-gradient"></div>
-          <div class="story-avatar-ring">
-            <div class="story-avatar wania-avatar">W</div>
-          </div>
-          <span class="story-author-name">Wania Khan</span>
-        </div>
-
-      </section>
-
-      <!-- ================================================================
-           "WHAT'S ON YOUR MIND?" CREATE POST BOX
-           ================================================================ -->
-      <section class="fb-card create-post-card">
-        <div class="create-post-top-row">
-          <img src="img2.jpg" alt="Roman Fatima" class="post-user-avatar">
-          <button class="mind-input-btn" id="openCreatePostModal">
-            What's on your mind, Roman?
-          </button>
-        </div>
-
-        <div class="post-divider"></div>
-
-        <div class="create-post-actions-row">
-          <button class="action-item-btn">
-            <svg viewBox="0 0 24 24" width="24" height="24" fill="#f3425f">
-              <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/>
-            </svg>
-            <span>Live video</span>
-          </button>
-
-          <button class="action-item-btn" id="photoVideoBtn">
-            <svg viewBox="0 0 24 24" width="24" height="24" fill="#45bd62">
-              <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
-            </svg>
-            <span>Photo/video</span>
-          </button>
-
-          <button class="action-item-btn">
-            <svg viewBox="0 0 24 24" width="24" height="24" fill="#f7b125">
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
-            </svg>
-            <span>Feeling/activity</span>
-          </button>
-        </div>
-      </section>
-
-      <!-- ================================================================
-           POSTS STREAM (Authentic Facebook Newsfeed)
-           Featuring: Insha, Aniqa, Roman Fatima, Sana, Wania!
-           NO Sarah Corruccini!
-           ================================================================ -->
-      <div class="posts-stream" id="postsStream">
-
-        <!-- --------------------------------------------------------------
-             POST 1: INSHA TARIQ (Cute Fawn Aesthetic)
-             -------------------------------------------------------------- -->
-        <article class="fb-card post-card" id="post-insha">
-          <!-- Post Header -->
-          <div class="post-header">
-            <div class="post-author-wrap">
-              <div class="avatar-ring-sm">
-                <div class="post-avatar insha-avatar">I</div>
-              </div>
-              <div class="post-author-details">
-                <div class="post-author-name">
-                  <a href="#">Insha Tariq</a>
-                  <span class="post-tag-with">is with <a href="#">Roman Fatima</a> and 3 others</span>
-                </div>
-                <div class="post-timestamp-row">
-                  <span class="post-time">42 mins</span>
-                  <span class="bullet">·</span>
-                  <svg class="privacy-icon" viewBox="0 0 16 16" width="12" height="12" fill="#65676b">
-                    <path d="M8 0a8 8 0 1 0 8 8A8 8 0 0 0 8 0zm0 1a6.97 6.97 0 0 1 4.93 2.05L11.5 4.5A5.5 5.5 0 0 0 8 3.5a5.45 5.45 0 0 0-2.48.59L4.2 3.16A6.97 6.97 0 0 1 8 1zm5.95 7a6.95 6.95 0 0 1-.52 2.65l-1.32-.76a5.53 5.53 0 0 0 .39-1.89c0-.43-.05-.85-.14-1.25l1.45-.44a6.83 6.83 0 0 1 .14 1.69zM8 15a6.97 6.97 0 0 1-4.93-2.05l1.43-1.45A5.5 5.5 0 0 0 8 12.5a5.45 5.45 0 0 0 2.48-.59l1.32.93A6.97 6.97 0 0 1 8 15z"/>
-                  </svg>
-                </div>
-              </div>
-            </div>
-            <div class="post-menu-btn" title="Options">•••</div>
-          </div>
-
-          <!-- Post Content -->
-          <div class="post-text-body">
-            Finally completed our Web Development assignment with my favorite girlies! Slayed the whole project 🌸✨ How cute is this dreamy aesthetic vibe?! Sending love to the whole group 💕
-          </div>
-
-          <!-- Post Media Image -->
-          <div class="post-media-container">
-            <img src="img1.jpg" alt="Enchanted Forest Aesthetic" class="post-image">
-          </div>
-
-          <!-- Engagement Stats Bar -->
-          <div class="post-engagement-stats">
-            <div class="reactions-summary">
-              <span class="reaction-bubble heart">❤️</span>
-              <span class="reaction-bubble like">👍</span>
-              <span class="reaction-bubble care">🥰</span>
-              <span class="reactions-count-text">Aniqa Rehman, Sana Malik and 148 others</span>
-            </div>
-            <div class="comments-shares-summary">
-              <span>24 comments</span>
-              <span class="bullet">·</span>
-              <span>6 shares</span>
-            </div>
-          </div>
-
-          <!-- Action Buttons Bar -->
-          <div class="post-actions-bar">
-            <button class="post-action-btn like-btn" onclick="toggleLike(this, 'reactions-count-insha')">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3v11z"/>
-              </svg>
-              <span>Like</span>
-            </button>
-            <button class="post-action-btn" onclick="focusCommentInput('comment-input-insha')">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
-              </svg>
-              <span>Comment</span>
-            </button>
-            <button class="post-action-btn">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
-              </svg>
-              <span>Share</span>
-            </button>
-          </div>
-
-          <!-- Comments Section -->
-          <div class="post-comments-container">
-            
-            <!-- Comment 1: Roman Fatima -->
-            <div class="comment-item">
-              <img src="img2.jpg" class="comment-avatar" alt="Roman Fatima">
-              <div class="comment-bubble">
-                <div class="comment-author-name">Roman Fatima</div>
-                <div class="comment-body-text">Proud of us bestie!! A+ guaranteed in Web Dev 💅🎀 Our whole lab group did so amazing!</div>
-              </div>
-            </div>
-
-            <!-- Comment 2: Aniqa Rehman -->
-            <div class="comment-item">
-              <div class="comment-avatar aniqa-avatar">A</div>
-              <div class="comment-bubble">
-                <div class="comment-author-name">Aniqa Rehman</div>
-                <div class="comment-body-text">Obsessed with this! You killed it Insha! 🥰 Sending to the group chat right now!</div>
-              </div>
-            </div>
-
-            <!-- Comment 3: Wania Khan -->
-            <div class="comment-item">
-              <div class="comment-avatar wania-avatar">W</div>
-              <div class="comment-bubble">
-                <div class="comment-author-name">Wania Khan</div>
-                <div class="comment-body-text">Literally perfection! So proud of our team girlies 💖✨</div>
-              </div>
-            </div>
-
-            <!-- Write a Comment Box -->
-            <div class="write-comment-row">
-              <img src="img2.jpg" class="write-comment-avatar" alt="Roman Fatima">
-              <div class="write-comment-box">
-                <input type="text" id="comment-input-insha" placeholder="Write a comment as Roman..." onkeydown="handleCommentSubmit(event, this, 'post-insha')">
-                <div class="comment-input-icons">
-                  <span>😊</span>
-                  <span>📷</span>
-                  <span>GIF</span>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </article>
-
-        <!-- --------------------------------------------------------------
-             POST 2: ANIQA REHMAN (Flork Coffee Meme)
-             -------------------------------------------------------------- -->
-        <article class="fb-card post-card" id="post-aniqa">
-          <div class="post-header">
-            <div class="post-author-wrap">
-              <div class="avatar-ring-sm">
-                <div class="post-avatar aniqa-avatar">A</div>
-              </div>
-              <div class="post-author-details">
-                <div class="post-author-name">
-                  <a href="#">Aniqa Rehman</a>
-                  <span class="post-mood">is ☕ sipping iced latte</span>
-                </div>
-                <div class="post-timestamp-row">
-                  <span class="post-time">2 hrs</span>
-                  <span class="bullet">·</span>
-                  <svg class="privacy-icon" viewBox="0 0 16 16" width="12" height="12" fill="#65676b"><path d="M8 0a8 8 0 1 0 8 8A8 8 0 0 0 8 0zm0 1a6.97 6.97 0 0 1 4.93 2.05L11.5 4.5A5.5 5.5 0 0 0 8 3.5a5.45 5.45 0 0 0-2.48.59L4.2 3.16A6.97 6.97 0 0 1 8 1zm5.95 7a6.95 6.95 0 0 1-.52 2.65l-1.32-.76a5.53 5.53 0 0 0 .39-1.89c0-.43-.05-.85-.14-1.25l1.45-.44a6.83 6.83 0 0 1 .14 1.69zM8 15a6.97 6.97 0 0 1-4.93-2.05l1.43-1.45A5.5 5.5 0 0 0 8 12.5a5.45 5.45 0 0 0 2.48-.59l1.32.93A6.97 6.97 0 0 1 8 15z"/></svg>
-                </div>
-              </div>
-            </div>
-            <div class="post-menu-btn">•••</div>
-          </div>
-
-          <div class="post-text-body">
-            On my 4th iced caramel macchiato while debugging CSS grid... 'Coffee first, code later' is officially our BSCS 5A semester motto ☕😭 Who else can relate?
-          </div>
-
-          <div class="post-media-container">
-            <img src="img4.jpg" alt="Coffee Flork Meme" class="post-image">
-          </div>
-
-          <div class="post-engagement-stats">
-            <div class="reactions-summary">
-              <span class="reaction-bubble haha">😆</span>
-              <span class="reaction-bubble heart">❤️</span>
-              <span class="reaction-bubble like">👍</span>
-              <span class="reactions-count-text">Roman Fatima, Wania Khan and 96 others</span>
-            </div>
-            <div class="comments-shares-summary">
-              <span>31 comments</span>
-              <span class="bullet">·</span>
-              <span>8 shares</span>
-            </div>
-          </div>
-
-          <div class="post-actions-bar">
-            <button class="post-action-btn like-btn" onclick="toggleLike(this)">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3v11z"/></svg>
-              <span>Like</span>
-            </button>
-            <button class="post-action-btn">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>
-              <span>Comment</span>
-            </button>
-            <button class="post-action-btn">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
-              <span>Share</span>
-            </button>
-          </div>
-
-          <div class="post-comments-container">
-            <div class="comment-item">
-              <div class="comment-avatar sana-avatar">S</div>
-              <div class="comment-bubble">
-                <div class="comment-author-name">Sana Malik</div>
-                <div class="comment-body-text">Me staring at my CSS flexbox at 2 AM like this 💀☕ Need another coffee right now!</div>
-              </div>
-            </div>
-            <div class="comment-item">
-              <img src="img2.jpg" class="comment-avatar" alt="Roman Fatima">
-              <div class="comment-bubble">
-                <div class="comment-author-name">Roman Fatima</div>
-                <div class="comment-body-text">Please save some coffee for the rest of us Aniqa haha! 🧋✨ Slaying the code!</div>
-              </div>
-            </div>
-            <div class="write-comment-row">
-              <img src="img2.jpg" class="write-comment-avatar" alt="Roman Fatima">
-              <div class="write-comment-box">
-                <input type="text" placeholder="Write a comment as Roman..." onkeydown="handleCommentSubmit(event, this, 'post-aniqa')">
-                <div class="comment-input-icons"><span>😊</span><span>📷</span><span>GIF</span></div>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- --------------------------------------------------------------
-             POST 3: ROMAN FATIMA (Celebration Flork Dance)
-             -------------------------------------------------------------- -->
-        <article class="fb-card post-card" id="post-roman">
-          <div class="post-header">
-            <div class="post-author-wrap">
-              <img src="img2.jpg" alt="Roman Fatima" class="post-avatar">
-              <div class="post-author-details">
-                <div class="post-author-name">
-                  <a href="#">Roman Fatima</a>
-                  <span class="post-mood">is 🎉 feeling accomplished</span>
-                </div>
-                <div class="post-timestamp-row">
-                  <span class="post-time">4 hrs</span>
-                  <span class="bullet">·</span>
-                  <svg class="privacy-icon" viewBox="0 0 16 16" width="12" height="12" fill="#65676b"><path d="M8 0a8 8 0 1 0 8 8A8 8 0 0 0 8 0zm0 1a6.97 6.97 0 0 1 4.93 2.05L11.5 4.5A5.5 5.5 0 0 0 8 3.5a5.45 5.45 0 0 0-2.48.59L4.2 3.16A6.97 6.97 0 0 1 8 1zm5.95 7a6.95 6.95 0 0 1-.52 2.65l-1.32-.76a5.53 5.53 0 0 0 .39-1.89c0-.43-.05-.85-.14-1.25l1.45-.44a6.83 6.83 0 0 1 .14 1.69zM8 15a6.97 6.97 0 0 1-4.93-2.05l1.43-1.45A5.5 5.5 0 0 0 8 12.5a5.45 5.45 0 0 0 2.48-.59l1.32.93A6.97 6.97 0 0 1 8 15z"/></svg>
-                </div>
-              </div>
-            </div>
-            <div class="post-menu-btn">•••</div>
-          </div>
-
-          <div class="post-text-body">
-            Successfully completed our Facebook clone, class timetable, IEEE paper template, 2-column portfolio, and custom UI! Nothing beats the satisfaction when your code compiles without a single error on the first try 💃🕺🎉 #WebDevLab #AirUniversity #BSCS5A
-          </div>
-
-          <div class="post-media-container">
-            <img src="img5.jpg" alt="Dance Flork Meme" class="post-image">
-          </div>
-
-          <div class="post-engagement-stats">
-            <div class="reactions-summary">
-              <span class="reaction-bubble heart">❤️</span>
-              <span class="reaction-bubble haha">😆</span>
-              <span class="reaction-bubble like">👍</span>
-              <span class="reactions-count-text">Insha Tariq, Aniqa Rehman, Sana Malik, Wania Khan and 215 others</span>
-            </div>
-            <div class="comments-shares-summary">
-              <span>38 comments</span>
-              <span class="bullet">·</span>
-              <span>14 shares</span>
-            </div>
-          </div>
-
-          <div class="post-actions-bar">
-            <button class="post-action-btn like-btn" onclick="toggleLike(this)">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3v11z"/></svg>
-              <span>Like</span>
-            </button>
-            <button class="post-action-btn">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>
-              <span>Comment</span>
-            </button>
-            <button class="post-action-btn">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
-              <span>Share</span>
-            </button>
-          </div>
-
-          <div class="post-comments-container">
-            <div class="comment-item">
-              <div class="comment-avatar insha-avatar">I</div>
-              <div class="comment-bubble">
-                <div class="comment-author-name">Insha Tariq</div>
-                <div class="comment-body-text">MAXIMUM MARKS INCOMING!! 👑✨ Slayed it Roman! The UI looks unbelievable!</div>
-              </div>
-            </div>
-            <div class="comment-item">
-              <div class="comment-avatar wania-avatar">W</div>
-              <div class="comment-bubble">
-                <div class="comment-author-name">Wania Khan</div>
-                <div class="comment-body-text">The dance moves are 100% accurate representation of us right now 😂💖</div>
-              </div>
-            </div>
-            <div class="comment-item">
-              <div class="comment-avatar aniqa-avatar">A</div>
-              <div class="comment-bubble">
-                <div class="comment-author-name">Aniqa Rehman</div>
-                <div class="comment-body-text">So proud of you Roman!! Best partner ever! 🥰</div>
-              </div>
-            </div>
-            <div class="write-comment-row">
-              <img src="img2.jpg" class="write-comment-avatar" alt="Roman Fatima">
-              <div class="write-comment-box">
-                <input type="text" placeholder="Write a comment as Roman..." onkeydown="handleCommentSubmit(event, this, 'post-roman')">
-                <div class="comment-input-icons"><span>😊</span><span>📷</span><span>GIF</span></div>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- --------------------------------------------------------------
-             POST 4: SANA MALIK (Relaxing Flork Bed Meme)
-             -------------------------------------------------------------- -->
-        <article class="fb-card post-card" id="post-sana">
-          <div class="post-header">
-            <div class="post-author-wrap">
-              <div class="avatar-ring-sm">
-                <div class="post-avatar sana-avatar">S</div>
-              </div>
-              <div class="post-author-details">
-                <div class="post-author-name">
-                  <a href="#">Sana Malik</a>
-                  <span class="post-mood">is 😴 sleeping in</span>
-                </div>
-                <div class="post-timestamp-row">
-                  <span class="post-time">6 hrs</span>
-                  <span class="bullet">·</span>
-                  <svg class="privacy-icon" viewBox="0 0 16 16" width="12" height="12" fill="#65676b"><path d="M8 0a8 8 0 1 0 8 8A8 8 0 0 0 8 0zm0 1a6.97 6.97 0 0 1 4.93 2.05L11.5 4.5A5.5 5.5 0 0 0 8 3.5a5.45 5.45 0 0 0-2.48.59L4.2 3.16A6.97 6.97 0 0 1 8 1zm5.95 7a6.95 6.95 0 0 1-.52 2.65l-1.32-.76a5.53 5.53 0 0 0 .39-1.89c0-.43-.05-.85-.14-1.25l1.45-.44a6.83 6.83 0 0 1 .14 1.69zM8 15a6.97 6.97 0 0 1-4.93-2.05l1.43-1.45A5.5 5.5 0 0 0 8 12.5a5.45 5.45 0 0 0 2.48-.59l1.32.93A6.97 6.97 0 0 1 8 15z"/></svg>
-                </div>
-              </div>
-            </div>
-            <div class="post-menu-btn">•••</div>
-          </div>
-
-          <div class="post-text-body">
-            Assignment submitted. Brain battery: 1%. Going into strict hibernation mode until tomorrow's 8:30 AM lecture 🛌💤 Besties please don't wake me unless there's pizza or boba!
-          </div>
-
-          <div class="post-media-container">
-            <img src="img 6.jpg" alt="Sleeping Flork Meme" class="post-image">
-          </div>
-
-          <div class="post-engagement-stats">
-            <div class="reactions-summary">
-              <span class="reaction-bubble haha">😆</span>
-              <span class="reaction-bubble care">🥰</span>
-              <span class="reaction-bubble heart">❤️</span>
-              <span class="reactions-count-text">Insha Tariq, Roman Fatima and 182 others</span>
-            </div>
-            <div class="comments-shares-summary">
-              <span>27 comments</span>
-              <span class="bullet">·</span>
-              <span>5 shares</span>
-            </div>
-          </div>
-
-          <div class="post-actions-bar">
-            <button class="post-action-btn like-btn" onclick="toggleLike(this)">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3v11z"/></svg>
-              <span>Like</span>
-            </button>
-            <button class="post-action-btn">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>
-              <span>Comment</span>
-            </button>
-            <button class="post-action-btn">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
-              <span>Share</span>
-            </button>
-          </div>
-
-          <div class="post-comments-container">
-            <div class="comment-item">
-              <div class="comment-avatar aniqa-avatar">A</div>
-              <div class="comment-bubble">
-                <div class="comment-author-name">Aniqa Rehman</div>
-                <div class="comment-body-text">Sleep well queen, you earned the rest! 😴💕 See you in class!</div>
-              </div>
-            </div>
-            <div class="comment-item">
-              <img src="img2.jpg" class="comment-avatar" alt="Roman Fatima">
-              <div class="comment-bubble">
-                <div class="comment-author-name">Roman Fatima</div>
-                <div class="comment-body-text">See you at the campus tomorrow Sana! Rest up 🌸</div>
-              </div>
-            </div>
-            <div class="write-comment-row">
-              <img src="img2.jpg" class="write-comment-avatar" alt="Roman Fatima">
-              <div class="write-comment-box">
-                <input type="text" placeholder="Write a comment as Roman..." onkeydown="handleCommentSubmit(event, this, 'post-sana')">
-                <div class="comment-input-icons"><span>😊</span><span>📷</span><span>GIF</span></div>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- --------------------------------------------------------------
-             POST 5: WANIA KHAN (Golden Hour Aesthetic)
-             -------------------------------------------------------------- -->
-        <article class="fb-card post-card" id="post-wania">
-          <div class="post-header">
-            <div class="post-author-wrap">
-              <div class="avatar-ring-sm">
-                <div class="post-avatar wania-avatar">W</div>
-              </div>
-              <div class="post-author-details">
-                <div class="post-author-name">
-                  <a href="#">Wania Khan</a>
-                  <span class="post-tag-with">with <a href="#">Roman Fatima</a>, <a href="#">Insha Tariq</a>, <a href="#">Aniqa Rehman</a>, and <a href="#">Sana Malik</a></span>
-                </div>
-                <div class="post-timestamp-row">
-                  <span class="post-time">Yesterday at 6:45 PM</span>
-                  <span class="bullet">·</span>
-                  <svg class="privacy-icon" viewBox="0 0 16 16" width="12" height="12" fill="#65676b"><path d="M8 0a8 8 0 1 0 8 8A8 8 0 0 0 8 0zm0 1a6.97 6.97 0 0 1 4.93 2.05L11.5 4.5A5.5 5.5 0 0 0 8 3.5a5.45 5.45 0 0 0-2.48.59L4.2 3.16A6.97 6.97 0 0 1 8 1zm5.95 7a6.95 6.95 0 0 1-.52 2.65l-1.32-.76a5.53 5.53 0 0 0 .39-1.89c0-.43-.05-.85-.14-1.25l1.45-.44a6.83 6.83 0 0 1 .14 1.69zM8 15a6.97 6.97 0 0 1-4.93-2.05l1.43-1.45A5.5 5.5 0 0 0 8 12.5a5.45 5.45 0 0 0 2.48-.59l1.32.93A6.97 6.97 0 0 1 8 15z"/></svg>
-                </div>
-              </div>
-            </div>
-            <div class="post-menu-btn">•••</div>
-          </div>
-
-          <div class="post-text-body">
-            Golden hour study session with the besties! Grateful for this squad that turns stressful semester deadlines into pure laughs ✨🤍 Best team forever!
-          </div>
-
-          <div class="post-media-container">
-            <img src="images.jfif" alt="Golden Hour Squad" class="post-image">
-          </div>
-
-          <div class="post-engagement-stats">
-            <div class="reactions-summary">
-              <span class="reaction-bubble heart">❤️</span>
-              <span class="reaction-bubble like">👍</span>
-              <span class="reaction-bubble care">🥰</span>
-              <span class="reactions-count-text">Roman Fatima, Insha Tariq and 315 others</span>
-            </div>
-            <div class="comments-shares-summary">
-              <span>43 comments</span>
-              <span class="bullet">·</span>
-              <span>11 shares</span>
-            </div>
-          </div>
-
-          <div class="post-actions-bar">
-            <button class="post-action-btn like-btn" onclick="toggleLike(this)">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3v11z"/></svg>
-              <span>Like</span>
-            </button>
-            <button class="post-action-btn">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>
-              <span>Comment</span>
-            </button>
-            <button class="post-action-btn">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
-              <span>Share</span>
-            </button>
-          </div>
-
-          <div class="post-comments-container">
-            <div class="comment-item">
-              <div class="comment-avatar insha-avatar">I</div>
-              <div class="comment-bubble">
-                <div class="comment-author-name">Insha Tariq</div>
-                <div class="comment-body-text">Always the best study sessions with you all! 🥺💕</div>
-              </div>
-            </div>
-            <div class="comment-item">
-              <img src="img2.jpg" class="comment-avatar" alt="Roman Fatima">
-              <div class="comment-bubble">
-                <div class="comment-author-name">Roman Fatima</div>
-                <div class="comment-body-text">Best study group ever! Love you besties 💖</div>
-              </div>
-            </div>
-            <div class="comment-item">
-              <div class="comment-avatar aniqa-avatar">A</div>
-              <div class="comment-bubble">
-                <div class="comment-author-name">Aniqa Rehman</div>
-                <div class="comment-body-text">Next session: celebratory bubble tea! 🧋✨</div>
-              </div>
-            </div>
-            <div class="write-comment-row">
-              <img src="img2.jpg" class="write-comment-avatar" alt="Roman Fatima">
-              <div class="write-comment-box">
-                <input type="text" placeholder="Write a comment as Roman..." onkeydown="handleCommentSubmit(event, this, 'post-wania')">
-                <div class="comment-input-icons"><span>😊</span><span>📷</span><span>GIF</span></div>
-              </div>
-            </div>
-          </div>
-        </article>
-
-      </div>
-    </main>
-
-    <!-- ------------------------------------------------------------------
-         RIGHT SIDEBAR: Sponsored, Birthdays & Contacts
-         ------------------------------------------------------------------ -->
-    <aside class="fb-sidebar-right">
-      <div class="sidebar-scrollable">
-
-        <!-- Sponsored Section -->
-        <div class="right-section">
-          <div class="right-heading">Sponsored</div>
-          
-          <a href="#sponsor1" class="sponsored-item">
-            <img src="img1.jpg" alt="Aesthetic Keyboards" class="sponsored-thumbnail">
-            <div class="sponsored-info">
-              <span class="sponsored-title">Sparkle Pastel Mechanical Keyboards</span>
-              <span class="sponsored-domain">girlytechglam.shop</span>
-            </div>
-          </a>
-
-          <a href="#sponsor2" class="sponsored-item">
-            <img src="img4.jpg" alt="Cafe Latte" class="sponsored-thumbnail">
-            <div class="sponsored-info">
-              <span class="sponsored-title">Vanilla Latte Ceramic Mugs & Desk Sets</span>
-              <span class="sponsored-domain">cozybesties.cafe</span>
-            </div>
-          </a>
-        </div>
-
-        <div class="sidebar-divider"></div>
-
-        <!-- Birthdays Section -->
-        <div class="right-section">
-          <div class="right-heading">Birthdays</div>
-          <a href="#birthday" class="birthday-row">
-            <span class="birthday-gift-icon">🎁</span>
-            <span class="birthday-text"><strong>Insha Tariq</strong> and <strong>2 other friends</strong> have birthdays today.</span>
-          </a>
-        </div>
-
-        <div class="sidebar-divider"></div>
-
-        <!-- Contacts Section (Real Friends: Insha, Aniqa, Sana, Wania) -->
-        <div class="right-section">
-          <div class="contacts-header-row">
-            <span class="right-heading" style="margin-bottom: 0;">Contacts</span>
-            <div class="contacts-actions">
-              <span title="New Room">📹</span>
-              <span title="Search Contact">🔍</span>
-              <span title="Options">•••</span>
-            </div>
-          </div>
-
-          <div class="contacts-list">
-            
-            <!-- Insha Tariq -->
-            <div class="contact-item" onclick="openChat('Insha Tariq', 'avatar-insha')">
-              <div class="contact-avatar-wrap">
-                <div class="contact-avatar insha-avatar">I</div>
-                <div class="online-dot"></div>
-              </div>
-              <span class="contact-name">Insha Tariq</span>
-            </div>
-
-            <!-- Aniqa Rehman -->
-            <div class="contact-item" onclick="openChat('Aniqa Rehman', 'avatar-aniqa')">
-              <div class="contact-avatar-wrap">
-                <div class="contact-avatar aniqa-avatar">A</div>
-                <div class="online-dot"></div>
-              </div>
-              <span class="contact-name">Aniqa Rehman</span>
-            </div>
-
-            <!-- Sana Malik -->
-            <div class="contact-item" onclick="openChat('Sana Malik', 'avatar-sana')">
-              <div class="contact-avatar-wrap">
-                <div class="contact-avatar sana-avatar">S</div>
-                <div class="online-dot"></div>
-              </div>
-              <span class="contact-name">Sana Malik</span>
-            </div>
-
-            <!-- Wania Khan -->
-            <div class="contact-item" onclick="openChat('Wania Khan', 'avatar-wania')">
-              <div class="contact-avatar-wrap">
-                <div class="contact-avatar wania-avatar">W</div>
-                <div class="online-dot"></div>
-              </div>
-              <span class="contact-name">Wania Khan</span>
-            </div>
-
-            <!-- Other Classmates -->
-            <div class="contact-item">
-              <div class="contact-avatar-wrap">
-                <div class="contact-avatar default-avatar">H</div>
-                <div class="online-dot"></div>
-              </div>
-              <span class="contact-name">Hamza Ali</span>
-            </div>
-
-            <div class="contact-item">
-              <div class="contact-avatar-wrap">
-                <div class="contact-avatar default-avatar">A</div>
-                <div class="online-dot"></div>
-              </div>
-              <span class="contact-name">Areeba Khan</span>
-            </div>
-
-            <div class="contact-item">
-              <div class="contact-avatar-wrap">
-                <div class="contact-avatar default-avatar">B</div>
-                <div class="online-dot"></div>
-              </div>
-              <span class="contact-name">Bilal Ahmed</span>
-            </div>
-
-            <div class="contact-item">
-              <div class="contact-avatar-wrap">
-                <div class="contact-avatar default-avatar">M</div>
-                <div class="online-dot"></div>
-              </div>
-              <span class="contact-name">Mahnoor Shah</span>
-            </div>
-
+          <hr class="my-2">
+          <div class="d-flex justify-content-around">
+            <button class="post-action-btn"><i class="bi bi-camera-video-fill text-danger fs-5"></i> Live Video</button>
+            <button class="post-action-btn"><i class="bi bi-image-fill text-success fs-5"></i> Photo/Video</button>
+            <button class="post-action-btn"><i class="bi bi-emoji-smile-fill text-warning fs-5"></i> Feeling</button>
           </div>
         </div>
 
-        <div class="sidebar-divider"></div>
+        <!-- Feed Posts -->
 
-        <!-- Group Conversations -->
-        <div class="right-section">
-          <div class="right-heading">Group conversations</div>
-          
-          <div class="contact-item">
-            <div class="contact-avatar-wrap">
-              <div class="group-avatar-icon">🌸</div>
+        <!-- Post 1 -->
+        <div class="post-card">
+          <div class="d-flex align-items-start gap-2 p-3">
+            <div class="post-avatar" style="background:linear-gradient(135deg,#f093fb,#f5576c)">I</div>
+            <div class="flex-grow-1">
+              <div class="fw-bold" style="font-size:.95rem">Insha Mehmood</div>
+              <div class="text-muted small">2 hours ago · <i class="bi bi-globe2"></i></div>
             </div>
-            <span class="contact-name">BSCS 5A Girls Squad 🎀</span>
+            <button class="btn btn-sm text-muted"><i class="bi bi-three-dots"></i></button>
           </div>
-
-          <div class="contact-item">
-            <div class="contact-avatar-wrap">
-              <div class="group-avatar-icon">💻</div>
+          <p class="px-3 pb-2" style="font-size:.95rem">Finally submitted our Web Development Lab 2 assignments! 🎉 All 6 tasks done using Bootstrap 5. So proud of the team! 💻✨ <span class="text-primary">#BSCS5A #AirUniversity #WebDev</span></p>
+          <div class="fake-img" style="background:linear-gradient(135deg,#f093fb 0%,#f5576c 100%)">💻🎓</div>
+          <div class="px-3 py-2 d-flex justify-content-between align-items-center border-bottom" style="font-size:.85rem; color:#65676b">
+            <div class="post-reactions">
+              <span>👍</span><span>❤️</span><span>😂</span>
+              <span class="ms-1">247</span>
             </div>
-            <span class="contact-name">Web Technologies Lab 2</span>
+            <div>28 Comments · 12 Shares</div>
           </div>
-
+          <div class="post-action-bar d-flex p-1" role="group">
+            <button onclick="this.innerHTML='<i class=\'bi bi-hand-thumbs-up-fill text-primary\'></i> Like'"><i class="bi bi-hand-thumbs-up"></i> Like</button>
+            <button data-bs-toggle="modal" data-bs-target="#commentModal"><i class="bi bi-chat"></i> Comment</button>
+            <button><i class="bi bi-share"></i> Share</button>
+          </div>
         </div>
 
-      </div>
-    </aside>
+        <!-- Post 2 -->
+        <div class="post-card">
+          <div class="d-flex align-items-start gap-2 p-3">
+            <div class="post-avatar" style="background:linear-gradient(135deg,#4facfe,#00f2fe)">A</div>
+            <div class="flex-grow-1">
+              <div class="fw-bold" style="font-size:.95rem">Aniqa Zafar</div>
+              <div class="text-muted small">5 hours ago · <i class="bi bi-people-fill"></i> BSCS 5A</div>
+            </div>
+            <button class="btn btn-sm text-muted"><i class="bi bi-three-dots"></i></button>
+          </div>
+          <p class="px-3 pb-2" style="font-size:.95rem">Our CSS custom UI (Task 4) got the highest marks! The AetherOS theme switcher was a huge hit 🌌💜 Bootstrap version looks even better now!</p>
+          <div class="px-3 pb-2">
+            <div class="rounded-3 p-3" style="background:#f0f2f5">
+              <div class="fw-bold small">AetherOS — Advanced CSS Concept Showcase</div>
+              <div class="text-muted" style="font-size:.8rem">Interactive UI with 3D transforms, glassmorphism &amp; dynamic themes</div>
+            </div>
+          </div>
+          <div class="px-3 py-2 d-flex justify-content-between align-items-center border-bottom" style="font-size:.85rem; color:#65676b">
+            <div class="post-reactions"><span>👍</span><span>❤️</span><span class="ms-1">183</span></div>
+            <div>14 Comments</div>
+          </div>
+          <div class="post-action-bar d-flex p-1">
+            <button onclick="this.innerHTML='<i class=\'bi bi-hand-thumbs-up-fill text-primary\'></i> Like'"><i class="bi bi-hand-thumbs-up"></i> Like</button>
+            <button data-bs-toggle="modal" data-bs-target="#commentModal"><i class="bi bi-chat"></i> Comment</button>
+            <button><i class="bi bi-share"></i> Share</button>
+          </div>
+        </div>
 
+        <!-- Post 3 — Roman's Post -->
+        <div class="post-card border border-primary border-2">
+          <div class="d-flex align-items-start gap-2 p-3">
+            <div class="post-avatar">RF</div>
+            <div class="flex-grow-1">
+              <div class="fw-bold" style="font-size:.95rem">Roman Fatima <span class="badge bg-primary ms-1" style="font-size:.6rem">You</span></div>
+              <div class="text-muted small">Just now · <i class="bi bi-globe2"></i></div>
+            </div>
+          </div>
+          <p class="px-3 pb-2" style="font-size:.95rem">Lab 2 complete! 🚀 Built 6 Bootstrap 5 web projects for my Web Dev course. E-commerce store with cart, checkout, login &amp; signup — all done! 🛍️💻 <span class="text-primary">#Bootstrap5 #WebDev #Lab2 #241878</span></p>
+          <div class="fake-img" style="background:linear-gradient(135deg,#667eea 0%,#764ba2 100%)">🚀💻</div>
+          <div class="px-3 py-2 d-flex justify-content-between align-items-center border-bottom" style="font-size:.85rem; color:#65676b">
+            <div class="post-reactions"><span>👍</span><span>❤️</span><span>🎉</span><span class="ms-1">312</span></div>
+            <div>41 Comments · 27 Shares</div>
+          </div>
+          <div class="post-action-bar d-flex p-1">
+            <button onclick="this.innerHTML='<i class=\'bi bi-hand-thumbs-up-fill text-primary\'></i> Like'"><i class="bi bi-hand-thumbs-up"></i> Like</button>
+            <button data-bs-toggle="modal" data-bs-target="#commentModal"><i class="bi bi-chat"></i> Comment</button>
+            <button><i class="bi bi-share"></i> Share</button>
+          </div>
+        </div>
+
+        <!-- Post 4 -->
+        <div class="post-card">
+          <div class="d-flex align-items-start gap-2 p-3">
+            <div class="post-avatar" style="background:linear-gradient(135deg,#43e97b,#38f9d7)">S</div>
+            <div class="flex-grow-1">
+              <div class="fw-bold" style="font-size:.95rem">Sana Riaz</div>
+              <div class="text-muted small">Yesterday · <i class="bi bi-globe2"></i></div>
+            </div>
+            <button class="btn btn-sm text-muted"><i class="bi bi-three-dots"></i></button>
+          </div>
+          <p class="px-3 pb-2" style="font-size:.95rem">Finished the IEEE paper template (Task 5)! Two-column LaTeX-style layout in pure HTML &amp; CSS. Dr. Tariq was impressed! 📄✅</p>
+          <div class="px-3 py-2 d-flex justify-content-between align-items-center border-bottom" style="font-size:.85rem; color:#65676b">
+            <div class="post-reactions"><span>👍</span><span>❤️</span><span class="ms-1">96</span></div>
+            <div>8 Comments</div>
+          </div>
+          <div class="post-action-bar d-flex p-1">
+            <button onclick="this.innerHTML='<i class=\'bi bi-hand-thumbs-up-fill text-primary\'></i> Like'"><i class="bi bi-hand-thumbs-up"></i> Like</button>
+            <button data-bs-toggle="modal" data-bs-target="#commentModal"><i class="bi bi-chat"></i> Comment</button>
+            <button><i class="bi bi-share"></i> Share</button>
+          </div>
+        </div>
+
+      </main>
+
+      <!-- Right Sidebar -->
+      <aside class="col-lg-3 d-none d-lg-block p-3" style="position:sticky; top:56px; height:calc(100vh - 56px); overflow-y:auto">
+        <p class="fw-bold mb-2" style="font-size:.95rem; color:#050505">Birthdays</p>
+        <div class="d-flex align-items-center gap-2 mb-3">
+          <i class="bi bi-gift-fill text-danger fs-4"></i>
+          <span class="small"><strong>Wania Khan</strong> and <strong>2 others</strong> have birthdays today.</span>
+        </div>
+        <hr>
+        <p class="fw-bold mb-2" style="font-size:.95rem; color:#050505">Contacts</p>
+        <div class="friend-row mb-1">
+          <div class="friend-avatar" style="background:#f5576c">I<span class="online-dot"></span></div>
+          <span class="small fw-semibold">Insha Mehmood</span>
+        </div>
+        <div class="friend-row mb-1">
+          <div class="friend-avatar" style="background:#4facfe">A<span class="online-dot"></span></div>
+          <span class="small fw-semibold">Aniqa Zafar</span>
+        </div>
+        <div class="friend-row mb-1">
+          <div class="friend-avatar" style="background:#43e97b">S</div>
+          <span class="small fw-semibold text-muted">Sana Riaz</span>
+        </div>
+        <div class="friend-row mb-1">
+          <div class="friend-avatar" style="background:#fa709a">W<span class="online-dot"></span></div>
+          <span class="small fw-semibold">Wania Khan</span>
+        </div>
+        <div class="friend-row mb-1">
+          <div class="friend-avatar" style="background:#a18cd1">R</div>
+          <span class="small fw-semibold text-muted">Rida Alam</span>
+        </div>
+        <div class="friend-row mb-1">
+          <div class="friend-avatar" style="background:#fd7e14">Z<span class="online-dot"></span></div>
+          <span class="small fw-semibold">Zainab Shah</span>
+        </div>
+        <div class="friend-row mb-1">
+          <div class="friend-avatar" style="background:#0d6efd">M<span class="online-dot"></span></div>
+          <span class="small fw-semibold">Maryam Qasim</span>
+        </div>
+        <hr>
+        <p class="fw-bold mb-2" style="font-size:.95rem">Group Conversations</p>
+        <div class="friend-row mb-1">
+          <div class="friend-avatar" style="background:#198754; border-radius:8px">BC</div>
+          <div><div class="small fw-semibold">BSCS 5A Class Chat</div><div class="text-muted" style="font-size:.75rem">Roman: just pushed all 6 tasks...</div></div>
+        </div>
+        <div class="friend-row mb-1">
+          <div class="friend-avatar" style="background:#9c27b0; border-radius:8px">WD</div>
+          <div><div class="small fw-semibold">Web Dev Lab Group</div><div class="text-muted" style="font-size:.75rem">Insha: Task 6 looks amazing 🔥</div></div>
+        </div>
+      </aside>
+
+    </div>
   </div>
 
-  <!-- ======================================================================
-       INTERACTIVE STORY VIEWER MODAL
-       ====================================================================== -->
-  <div class="story-modal-overlay" id="storyModal" style="display: none;">
-    <div class="story-modal-box">
-      <button class="modal-close-btn" onclick="closeStoryModal()">✕</button>
-      
-      <!-- Progress Bar -->
-      <div class="story-progress-bar">
-        <div class="story-progress-fill" id="storyProgressFill"></div>
-      </div>
+  <!-- Messenger Dock -->
+  <div class="messenger-dock">
+    <button class="messenger-btn" title="Messenger"><i class="bi bi-messenger"></i></button>
+  </div>
 
-      <!-- Story Modal Header -->
-      <div class="story-modal-header">
-        <div class="story-modal-user">
-          <div class="contact-avatar insha-avatar" id="modalStoryAvatar">I</div>
-          <div>
-            <div class="modal-author-name" id="modalStoryAuthor">Insha Tariq</div>
-            <div class="modal-story-time">1 hr ago · Stories</div>
+  <!-- Create Post Modal -->
+  <div class="modal fade" id="createPostModal" tabindex="-1" aria-labelledby="createPostModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-bottom">
+          <h5 class="modal-title fw-bold" id="createPostModalLabel">Create Post</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <div class="post-avatar">RF</div>
+            <div>
+              <div class="fw-bold">Roman Fatima</div>
+              <select class="form-select form-select-sm" style="width:auto">
+                <option>🌐 Public</option>
+                <option>👫 Friends</option>
+                <option>🔒 Only Me</option>
+              </select>
+            </div>
+          </div>
+          <textarea class="form-control border-0 fs-5" rows="4" placeholder="What's on your mind, Roman?" style="resize:none"></textarea>
+          <div class="border rounded-3 p-2 d-flex justify-content-between align-items-center mt-3">
+            <span class="small fw-semibold">Add to your post</span>
+            <div class="d-flex gap-2">
+              <button class="btn btn-sm btn-light"><i class="bi bi-image-fill text-success"></i></button>
+              <button class="btn btn-sm btn-light"><i class="bi bi-person-fill-add text-primary"></i></button>
+              <button class="btn btn-sm btn-light"><i class="bi bi-emoji-smile-fill text-warning"></i></button>
+            </div>
           </div>
         </div>
-      </div>
-
-      <!-- Story Image -->
-      <div class="story-modal-media">
-        <img src="img1.jpg" id="modalStoryImg" alt="Story Media">
-      </div>
-
-      <!-- Story Caption -->
-      <div class="story-modal-caption" id="modalStoryCaption">
-        Enchanted Forest 🌸✨
+        <div class="modal-footer">
+          <button class="btn btn-primary w-100 fw-bold" data-bs-dismiss="modal">Post</button>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- ======================================================================
-       MINI MESSENGER CHAT DOCK (Bottom Right)
-       ====================================================================== -->
-  <div class="chat-dock" id="chatDock" style="display: none;">
-    <div class="chat-header">
-      <div class="chat-user-info">
-        <div class="online-dot" style="margin-right: 6px;"></div>
-        <span class="chat-name" id="chatTargetName">Insha Tariq</span>
+  <!-- Comment Modal -->
+  <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold" id="commentModalLabel">Comments</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" style="max-height:300px; overflow-y:auto">
+          <div class="d-flex gap-2 mb-3">
+            <div class="post-avatar" style="background:#f5576c; width:32px; height:32px; font-size:.8rem; flex-shrink:0">I</div>
+            <div class="bg-light rounded-3 p-2 flex-grow-1">
+              <div class="fw-semibold" style="font-size:.85rem">Insha Mehmood</div>
+              <div style="font-size:.9rem">Amazing work Roman! 🔥</div>
+            </div>
+          </div>
+          <div class="d-flex gap-2 mb-3">
+            <div class="post-avatar" style="background:#4facfe; width:32px; height:32px; font-size:.8rem; flex-shrink:0">A</div>
+            <div class="bg-light rounded-3 p-2 flex-grow-1">
+              <div class="fw-semibold" style="font-size:.85rem">Aniqa Zafar</div>
+              <div style="font-size:.9rem">Bootstrap 5 makes it so clean! 💅</div>
+            </div>
+          </div>
+          <div class="d-flex gap-2 mb-3">
+            <div class="post-avatar" style="background:#43e97b; width:32px; height:32px; font-size:.8rem; flex-shrink:0">S</div>
+            <div class="bg-light rounded-3 p-2 flex-grow-1">
+              <div class="fw-semibold" style="font-size:.85rem">Sana Riaz</div>
+              <div style="font-size:.9rem">Task 6 e-commerce store is 🔥🔥🔥</div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer p-2">
+          <div class="d-flex gap-2 w-100">
+            <div class="post-avatar" style="width:32px; height:32px; font-size:.8rem; flex-shrink:0">RF</div>
+            <input type="text" class="form-control rounded-pill" placeholder="Write a comment...">
+            <button class="btn btn-primary rounded-circle" style="width:36px; height:36px; padding:0"><i class="bi bi-send-fill"></i></button>
+          </div>
+        </div>
       </div>
-      <div class="chat-controls">
-        <span class="chat-btn" onclick="closeChat()">✕</span>
-      </div>
-    </div>
-    <div class="chat-messages" id="chatMessages">
-      <div class="chat-bubble received">Hey Roman!! ✨ How is the Web Dev assignment coming along?</div>
-      <div class="chat-bubble sent">Hey Insha! Just finalizing all 5 tasks! Everything looks amazing! 🌸</div>
-    </div>
-    <div class="chat-input-row">
-      <input type="text" id="chatInput" placeholder="Aa" onkeydown="handleChatSend(event)">
-      <button class="chat-send-btn" onclick="sendChatMessage()">➤</button>
     </div>
   </div>
 
-  <!-- JavaScript Interaction Logic -->
-  <script src="app.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
